@@ -1,0 +1,1 @@
+# hs-nix-shells
