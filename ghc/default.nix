@@ -11,12 +11,9 @@
 # git submodule update --init --recursive
 
 let
-  pkgs = import
-    (fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/545c7a31e5dedea4a6d372712a18e00ce097d462.tar.gz";
-    })
-    { };
-  compiler = pkgs.haskell.packages.ghc944;
+  ghcVers = "ghc944";
+  pkgs = (import ../lib.nix).getPkgs ghcVers;
+  compiler = pkgs.haskell.packages.${ghcVers};
 
   # https://gitlab.haskell.org/ghc/ghc/-/wikis/building/preparation/tools
   hsDeps = with compiler; [
