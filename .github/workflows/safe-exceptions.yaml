@@ -33,13 +33,13 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A safe-exceptions --run '
-            cd ./safe-exceptions-build
-              && cabal update
+          nix-shell . -A safe-exceptions --arg dev false --run '
+            cd ./safe-exceptions-build \
+              && cabal update \
               && cabal build'
 
       - name: HLS
         run: |
           nix-shell . -A safe-exceptions --run '
-            cd ./safe-exceptions-build
+            cd ./safe-exceptions-build \
               && haskell-language-server'

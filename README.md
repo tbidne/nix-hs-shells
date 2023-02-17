@@ -14,7 +14,7 @@
 # Usage
 
 ```
-nix-shell http://github.com/tbidne/hs-nix-shells/archive/master.tar.gz -A ghc
+nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A ghc
 
-nix-shell http://github.com/tbidne/hs-nix-shells/archive/master.tar.gz -A default --argstr ghcVers "ghc925" --arg dev false
+nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default --argstr ghcVers "ghc925" --arg dev false
 ```

@@ -34,19 +34,20 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A liquidhaskell --run '
-            cd ./liquidhaskell-build
-              && cabal update
+          nix-shell . -A liquidhaskell --arg dev false --run '
+            cd ./liquidhaskell-build \
+              && cabal update \
               && cabal build'
 
       - name: Test
         run: |
-          nix-shell . -A liquidhaskell --run '
-            cd ./liquidhaskell-build
-              && cabal update && cabal test'
+          nix-shell . -A liquidhaskell --arg dev false --run '
+            cd ./liquidhaskell-build \
+              && cabal update \
+              && cabal test'
 
       - name: HLS
         run: |
           nix-shell . -A liquidhaskell --run '
-            cd ./liquidhaskell-build
+            cd ./liquidhaskell-build \
               && haskell-language-server'

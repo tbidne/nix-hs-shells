@@ -34,6 +34,6 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A ghc --run '
-            cd ./ghc-build
+          nix-shell . -A ghc --arg dev false --run '
+            cd ./ghc-build \
               && ../ghc/build.sh'
