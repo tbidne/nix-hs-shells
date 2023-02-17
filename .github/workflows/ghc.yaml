@@ -36,4 +36,5 @@ jobs:
         run: |
           nix-shell . -A ghc --arg dev false --run '
             cd ./ghc-build \
+              && cabal update \
               && ../ghc/build.sh'
