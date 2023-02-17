@@ -26,8 +26,4 @@ in
 
   liquidhaskell = { dev ? true }:
     import ./cabal_template.nix { inherit dev; ghcVers = "ghc925"; };
-
-  # it is merely an impl detail that these happen to both work with the
-  # default shell for now.
-  safe-exceptions = defGhc944;
 }
