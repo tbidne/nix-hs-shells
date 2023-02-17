@@ -14,6 +14,14 @@ on:
 jobs:
   safe-exceptions:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ghc:
+        - "ghc8107"
+        - "ghc902"
+        - "ghc925"
+        - "ghc944"
     steps:
       - uses: actions/checkout@v3.0.2
 
@@ -33,7 +41,7 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A safe-exceptions --arg dev false --run '
+          nix-shell . -A safe-exceptions --argstr ghcVers ${{ matrix.ghc }} --arg dev false --run '
             cd ./safe-exceptions-build \
               && cabal update \
               && cabal build'
