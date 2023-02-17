@@ -5,9 +5,9 @@
 # nix-shell . -A ghc
 
 let
-  defGhc925 =
+  defGhc944 =
     { dev ? true
-    , ghcVers ? "ghc925"
+    , ghcVers ? "ghc944"
     }:
     import ./cabal_template.nix { inherit dev ghcVers; };
 in
@@ -17,17 +17,17 @@ in
   # default gives us a "default" haskell shell:
   #
   # * cabal
-  # * ghc (defaulting to 9.2.5, overriden by ghcVers)
+  # * ghc (defaulting to 9.4.4, overriden by ghcVers)
   # * hls
   # * ghcid
   #
-  # Hls and ghcid can be omitted with dev = false
-  default = defGhc925;
+  # Hls and ghcid can be omitted with --arg dev false
+  default = defGhc944;
 
   liquidhaskell = { dev ? true }:
     import ./cabal_template.nix { inherit dev; ghcVers = "ghc925"; };
 
   # it is merely an impl detail that these happen to both work with the
   # default shell for now.
-  safe-exceptions = defGhc925;
+  safe-exceptions = defGhc944;
 }
