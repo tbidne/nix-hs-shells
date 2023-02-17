@@ -33,13 +33,20 @@ jobs:
           submodules: recursive
 
       - name: Build
-        run:
-          nix-shell . -A liquidhaskell --run 'cd ./liquidhaskell-build && cabal build'
+        run: |
+          nix-shell . -A liquidhaskell --run '
+            cd ./liquidhaskell-build
+              && cabal update
+              && cabal build'
 
       - name: Test
-        run:
-          nix-shell . -A liquidhaskell --run 'cd ./liquidhaskell-build && cabal test'
+        run: |
+          nix-shell . -A liquidhaskell --run '
+            cd ./liquidhaskell-build
+              && cabal update && cabal test'
 
       - name: HLS
-        run:
-          nix-shell . -A liquidhaskell --run 'cd ./liquidhaskell-build && haskell-language-server'
+        run: |
+          nix-shell . -A liquidhaskell --run '
+            cd ./liquidhaskell-build
+              && haskell-language-server'

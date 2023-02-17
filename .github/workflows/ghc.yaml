@@ -32,18 +32,8 @@ jobs:
           path: ./ghc-build
           submodules: recursive
 
-      - name: Boot
-        run:
-          nix-shell . -A ghc --run 'cd ./ghc-build && ./boot'
-
-      - name: Configure
-        run:
-          nix-shell . -A ghc --run 'cd ./ghc-build && ./configure'
-
       - name: Build
-        run:
-          nix-shell . -A ghc --run 'cd ./ghc-build && ./hadrian/build -j --flavour=validate+werror'
-
-      - name: HLS
-        run:
-          nix-shell . -A ghc --run 'cd ./ghc-build && haskell-language-server'
+        run: |
+          nix-shell . -A ghc --run '
+            cd ./ghc-build
+              && ../ghc/build.sh'
