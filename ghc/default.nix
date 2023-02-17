@@ -12,35 +12,31 @@
 
 let
   ghcVers = "ghc944";
-  pkgs = (import ../lib.nix).getPkgs ghcVers;
+  lib = import ../lib.nix;
+
+  pkgs = lib.getPkgs ghcVers;
   compiler = pkgs.haskell.packages.${ghcVers};
 
   # https://gitlab.haskell.org/ghc/ghc/-/wikis/building/preparation/tools
-  hsDeps = with compiler; [
-    alex
-    ghc
-    happy
+  hsDeps = [
+    compiler.alex
+    compiler.ghc
+    compiler.happy
   ];
 
-  otherDeps = with pkgs; [
-    autoreconfHook
-    automake
-    cabal-install
-    gmp
-    gnumake
-    libffi
-    ncurses
-    perl
-    python3
-    sphinx
+  otherDeps = [
+    pkgs.autoreconfHook
+    pkgs.automake
+    pkgs.cabal-install
+    pkgs.gmp
+    pkgs.gnumake
+    pkgs.libffi
+    pkgs.ncurses
+    pkgs.perl
+    pkgs.python3
+    pkgs.sphinx
   ];
-
-  devTools =
-    if dev then [
-      compiler.ghcid
-      compiler.haskell-language-server
-    ] else [ ];
 in
 pkgs.mkShell {
-  buildInputs = hsDeps ++ otherDeps ++ devTools;
+  buildInputs = hsDeps ++ otherDeps ++ (lib.devTools dev compiler pkgs);
 }
