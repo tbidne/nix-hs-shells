@@ -24,8 +24,10 @@ in
   # Hls and ghcid can be omitted with dev = false
   default = defGhc925;
 
+  liquidhaskell = { dev ? true }:
+    import ./cabal_template.nix { inherit dev; ghcVers = "ghc925"; };
+
   # it is merely an impl detail that these happen to both work with the
   # default shell for now.
-  liquidhaskell = defGhc925;
   safe-exceptions = defGhc925;
 }
