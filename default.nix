@@ -1,3 +1,4 @@
 {
-  liquidhaskell = import ./liquidhaskell/cabal.nix;
+  ghc = import ./ghc/default.nix;
+  liquidhaskell = import ./liquidhaskell/default.nix;
 }

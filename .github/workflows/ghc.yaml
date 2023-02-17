@@ -1,0 +1,48 @@
+name: ghc
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  ghc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.0.2
+
+      - name: Setup nix
+        uses: cachix/install-nix-action@v17
+        with:
+          nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/b39924fc7764c08ae3b51beef9a3518c414cdb7d.tar.gz
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clone ghc
+        uses: actions/checkout@v3.0.2
+        with:
+          repository: ghc/ghc
+          ref: master
+          path: ./ghc-build
+
+      - name: Boot
+        run:
+          nix-shell . -A ghc --run 'cd ./ghc-build && ./boot'
+
+      - name: Configure
+        run:
+          nix-shell . -A ghc --run 'cd ./ghc-build && ./configure'
+
+      - name: Build
+        run:
+          nix-shell . -A ghc --run 'cd ./ghc-build && ./hadrian/build -j --flavour=validate+werror'
+
+      - name: HLS
+        run:
+          nix-shell . -A ghc --run 'cd ./ghc-build && haskell-language-server'
