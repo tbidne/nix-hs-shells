@@ -14,8 +14,14 @@ in
 {
   ghc = import ./ghc/default.nix;
 
-  # default gives us a "default" haskell shell: gives us cabal and ghc,
-  # and defaults to ghc925 and includes ghcid, haskell-language-server.
+  # default gives us a "default" haskell shell:
+  #
+  # * cabal
+  # * ghc (defaulting to 9.2.5, overriden by ghcVers)
+  # * hls
+  # * ghcid
+  #
+  # Hls and ghcid can be omitted with dev = false
   default = defGhc925;
 
   # it is merely an impl detail that these happen to both work with the

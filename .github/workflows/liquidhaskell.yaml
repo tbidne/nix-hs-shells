@@ -30,6 +30,7 @@ jobs:
           repository: ucsd-progsys/liquidhaskell
           ref: develop
           path: ./liquidhaskell-build
+          submodules: recursive
 
       - name: Build
         run:

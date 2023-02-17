@@ -30,6 +30,7 @@ jobs:
           repository: ghc/ghc
           ref: master
           path: ./ghc-build
+          submodules: recursive
 
       - name: Boot
         run:
