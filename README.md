@@ -2,6 +2,10 @@
 
 # nix-hs-shells
 
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/tbidne/nix-hs-shells?include_prereleases&sort=semver)](https://github.com/tbidne/shrun/releases/)
+![haskell](https://img.shields.io/static/v1?label=&message=9.4&logo=haskell&logoColor=655889&labelColor=2f353e&color=655889)
+[![MIT](https://img.shields.io/github/license/tbidne/nix-hs-shells?color=blue)](https://opensource.org/licenses/MIT)
+
 [![GHC](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/ghc.yaml?branch=main&label=GHC&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/ghc.yaml)
 [![LiquidHaskell](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/liquidhaskell.yaml?branch=main&label=LiquidHaskell&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/liquidhaskell.yaml)
 [![style](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/style.yaml?branch=main&label=style&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/style.yaml)
