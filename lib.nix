@@ -1,17 +1,16 @@
-# Includes common utilities
+# Provides common utilities
 
 let
-  ghcToNixpkgs = {
-    ghc8107 = "aa1d74709f5dac623adb4d48fdfb27cc2c92a4d4";
-    ghc902 = "b7d8c687782c8f9a1d425a7e486eb989654f6468";
-    ghc925 = "545c7a31e5dedea4a6d372712a18e00ce097d462";
-    ghc944 = "545c7a31e5dedea4a6d372712a18e00ce097d462";
-  };
-
   showKeys = attrs:
     let attrKeys = builtins.attrNames attrs;
     in builtins.concatStringsSep ", " attrKeys;
 
+  lookupOrDie = mp: key: keyName:
+    if mp ? ${key}
+    then mp.${key}
+    else throw "Invalid ${keyName}: '${key}'; valid keys are ${showKeys mp}.";
+
+  # Returns a list of dev tools, depending on the ghcid and hls arguments.
   mkDev = compiler: pkgs: ghcid: hls:
     let
       hlsMap = {
@@ -19,10 +18,7 @@ let
         "full" = mkHls compiler pkgs;
         "ormolu" = mkHlsOrmolu compiler pkgs;
       };
-      hlsTools =
-        if hlsMap ? ${hls}
-        then hlsMap.${hls}
-        else throw "Invalid hls: '${hls}; valid keys are ${showKeys hlsMap}.";
+      hlsTools = lookupOrDie hlsMap hls "hls";
       ghcidTools = if ghcid then mkGhcid compiler pkgs else [ ];
     in
     hlsTools ++ ghcidTools;
@@ -55,13 +51,13 @@ in
   # Retrieves nixpkgs corresponding to the given ghc version.
   getPkgs = ghcVers:
     let
-      hash =
-        if ghcToNixpkgs ? ${ghcVers}
-        then ghcToNixpkgs.${ghcVers}
-        else
-          throw
-            ''Invalid ghcVers: '${ghcVers}'; valid keys are: ${showKeys ghcToNixpkgs}.
-              '';
+      ghcToNixpkgs = {
+        ghc8107 = "aa1d74709f5dac623adb4d48fdfb27cc2c92a4d4";
+        ghc902 = "b7d8c687782c8f9a1d425a7e486eb989654f6468";
+        ghc925 = "545c7a31e5dedea4a6d372712a18e00ce097d462";
+        ghc944 = "545c7a31e5dedea4a6d372712a18e00ce097d462";
+      };
+      hash = lookupOrDie ghcToNixpkgs ghcVers "ghcVers";
     in
     import
       (fetchTarball {

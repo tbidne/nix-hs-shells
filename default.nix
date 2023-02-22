@@ -5,7 +5,7 @@
 # nix-shell . -A ghc
 
 let
-  defGhc944 =
+  defGhcLatest =
     { ghcVers ? "ghc944"
     , ghcid ? true
     , hls ? "ormolu"
@@ -13,7 +13,7 @@ let
     import ./cabal_template.nix { inherit ghcVers ghcid hls; };
 in
 {
-  default = defGhc944;
+  default = defGhcLatest;
 
   ghc = import ./ghc/default.nix;
 
