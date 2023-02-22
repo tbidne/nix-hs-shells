@@ -34,7 +34,7 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A ghc --arg ghcid false --argstr hls none none --run '
+          nix-shell . -A ghc --arg ghcid false --argstr hls none --run '
             cd ./ghc-build \
               && cabal update \
               && ../ghc/build.sh'

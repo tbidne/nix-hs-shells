@@ -30,7 +30,6 @@ let
   mkHls = compiler: pkgs:
     [
       (pkgs.haskell.lib.dontCheck compiler.haskell-language-server)
-      pkgs.ncurses
     ];
   mkHlsOrmolu = compiler: pkgs:
     [
@@ -44,7 +43,6 @@ let
               "-f -stylishhaskell"
             ];
         })))
-      pkgs.ncurses
     ];
   mkGhcid = compiler: pkgs:
     [
