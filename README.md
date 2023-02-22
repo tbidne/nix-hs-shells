@@ -26,7 +26,7 @@ This section lists the provided shells. For shells with arguments, the default v
 ### Common Args
 
 * `ghcid` (`true`)
-* `hls` (`"ormolu`). Can be:
+* `hls` (`"ormolu"`). Can be:
   * `"none"`
   * `"ormolu"` (only formatter is `ormolu`)
   * `"full"` (all plugins)
@@ -48,7 +48,10 @@ This section lists the provided shells. For shells with arguments, the default v
 ```
 nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default
 
-nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default --argstr ghcVers ghc925 --argstr hls full --arg ghcid false
+nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default \
+  --argstr ghcVers ghc925 \
+  --argstr hls full \
+  --arg ghcid false
 ```
 
 ## GHC
@@ -73,7 +76,7 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A ghc
 
 **Attr:** `liquidhaskell`
 
-**Description:** Nix shell for [`LiquidHaskell`](https://github.com/ucsd-progsys/liquidhaskell/). Includes `cabal` and `GHC 9.2.5`.
+**Description:** Nix shell for [`LiquidHaskell`](https://github.com/ucsd-progsys/liquidhaskell/). Includes `cabal`, `GHC 9.2.5`, and the `z3` smt solver.
 
 **Args:**
 

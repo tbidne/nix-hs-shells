@@ -18,5 +18,9 @@ in
   ghc = import ./ghc/default.nix;
 
   liquidhaskell = { ghcid ? true, hls ? "ormolu" }:
-    import ./cabal_template.nix { inherit ghcid hls; ghcVers = "ghc925"; };
+    import ./cabal_template.nix {
+      inherit ghcid hls;
+      ghcVers = "ghc925";
+      extraInputs = p: [ p.z3 ];
+    };
 }
