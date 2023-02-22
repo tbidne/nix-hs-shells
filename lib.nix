@@ -52,10 +52,11 @@ in
   getPkgs = ghcVers:
     let
       ghcToNixpkgs = {
-        ghc8107 = "aa1d74709f5dac623adb4d48fdfb27cc2c92a4d4";
-        ghc902 = "b7d8c687782c8f9a1d425a7e486eb989654f6468";
-        ghc925 = "545c7a31e5dedea4a6d372712a18e00ce097d462";
-        ghc944 = "545c7a31e5dedea4a6d372712a18e00ce097d462";
+        ghc8107 = "d0d55259081f0b97c828f38559cad899d351cad1";
+        ghc902 = "d0d55259081f0b97c828f38559cad899d351cad1";
+        ghc925 = "d0d55259081f0b97c828f38559cad899d351cad1";
+        ghc926 = "d0d55259081f0b97c828f38559cad899d351cad1";
+        ghc944 = "d0d55259081f0b97c828f38559cad899d351cad1";
       };
       hash = lookupOrDie ghcToNixpkgs ghcVers "ghcVers";
     in

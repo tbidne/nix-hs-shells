@@ -21,6 +21,7 @@ jobs:
         - "ghc8107"
         - "ghc902"
         - "ghc925"
+        - "ghc926"
         - "ghc944"
     steps:
       - uses: actions/checkout@v3.0.2

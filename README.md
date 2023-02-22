@@ -40,7 +40,12 @@ This section lists the provided shells. For shells with arguments, the default v
 **Args:**
 
 * `ghcid`
-* `ghcVers` (`ghc944`): Can be `ghc8107`, `ghc902`, `ghc925`, `ghc944`.
+* `ghcVers` (`ghc944`): Can be:
+  * `ghc8107`
+  * `ghc902`
+  * `ghc925`
+  * `ghc926`
+  * `ghc944`
 * `hls`
 
 **Usage:**
