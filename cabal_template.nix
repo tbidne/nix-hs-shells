@@ -1,7 +1,8 @@
 # Template for a typical cabal+ghc shell.
 
-{ dev
+{ ghcid
 , ghcVers
+, hls
 }:
 
 let
@@ -14,5 +15,5 @@ pkgs.mkShell {
     [
       pkgs.cabal-install
       compiler.ghc
-    ] ++ (lib.devTools dev compiler pkgs);
+    ] ++ (lib.mkDev compiler pkgs ghcid hls);
 }

@@ -1,4 +1,4 @@
-name: ghc
+name: default
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  ghc:
+  default:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.0.2
@@ -24,17 +24,17 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - name: Clone ghc
-        uses: actions/checkout@v3.0.2
-        with:
-          repository: ghc/ghc
-          ref: master
-          path: ./ghc-build
-          submodules: recursive
+      - name: ghcid = false
+        run: nix-shell . -A default --arg ghcid false --dry-run
 
-      - name: Build
-        run: |
-          nix-shell . -A ghc --arg ghcid false --argstr hls none none --run '
-            cd ./ghc-build \
-              && cabal update \
-              && ../ghc/build.sh'
+      - name: ghcid = false
+        run: nix-shell . -A default --arg ghcid false --dry-run
+
+      - name: hls = ormolu
+        run: nix-shell . -A default --argstr hls ormolu --dry-run
+
+      - name: hls = full
+        run: nix-shell . -A default --argstr hls full --dry-run
+
+      - name: hls = none
+        run: nix-shell . -A default --argstr hls none --dry-run

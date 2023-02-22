@@ -6,24 +6,17 @@
 
 let
   defGhc944 =
-    { dev ? true
-    , ghcVers ? "ghc944"
+    { ghcVers ? "ghc944"
+    , ghcid ? true
+    , hls ? "ormolu"
     }:
-    import ./cabal_template.nix { inherit dev ghcVers; };
+    import ./cabal_template.nix { inherit ghcVers ghcid hls; };
 in
 {
-  ghc = import ./ghc/default.nix;
-
-  # default gives us a "default" haskell shell:
-  #
-  # * cabal
-  # * ghc (defaulting to 9.4.4, overriden by ghcVers)
-  # * hls
-  # * ghcid
-  #
-  # Hls and ghcid can be omitted with --arg dev false
   default = defGhc944;
 
-  liquidhaskell = { dev ? true }:
-    import ./cabal_template.nix { inherit dev; ghcVers = "ghc925"; };
+  ghc = import ./ghc/default.nix;
+
+  liquidhaskell = { ghcid ? true, hls ? "ormolu" }:
+    import ./cabal_template.nix { inherit ghcid hls; ghcVers = "ghc925"; };
 }

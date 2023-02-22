@@ -41,7 +41,7 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A default --argstr ghcVers ${{ matrix.ghc }} --arg dev false --run '
+          nix-shell . -A default --argstr ghcVers ${{ matrix.ghc }} --arg ghcid false --argstr hls none --run '
             cd ./safe-exceptions-build \
               && cabal update \
               && cabal build'

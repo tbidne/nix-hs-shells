@@ -1,7 +1,7 @@
 # Includes common utilities
 
 let
-  ghc-to-nixpkgs = {
+  ghcToNixpkgs = {
     ghc8107 = "aa1d74709f5dac623adb4d48fdfb27cc2c92a4d4";
     ghc902 = "b7d8c687782c8f9a1d425a7e486eb989654f6468";
     ghc925 = "545c7a31e5dedea4a6d372712a18e00ce097d462";
@@ -12,33 +12,57 @@ let
     let attrKeys = builtins.attrNames attrs;
     in builtins.concatStringsSep ", " attrKeys;
 
-  hls = dev: compiler: pkgs:
-    if dev then [
-      compiler.haskell-language-server
-      # hls needs ncurses
+  mkDev = compiler: pkgs: ghcid: hls:
+    let
+      hlsMap = {
+        "none" = [ ];
+        "full" = mkHls compiler pkgs;
+        "ormolu" = mkHlsOrmolu compiler pkgs;
+      };
+      hlsTools =
+        if hlsMap ? ${hls}
+        then hlsMap.${hls}
+        else throw "Invalid hls: '${hls}; valid keys are ${showKeys hlsMap}.";
+      ghcidTools = if ghcid then mkGhcid compiler pkgs else [ ];
+    in
+    hlsTools ++ ghcidTools;
+
+  mkHls = compiler: pkgs:
+    [
+      (pkgs.haskell.lib.dontCheck compiler.haskell-language-server)
       pkgs.ncurses
-    ] else [ ];
+    ];
+  mkHlsOrmolu = compiler: pkgs:
+    [
+      (pkgs.haskell.lib.dontCheck
+        (pkgs.haskell.lib.overrideCabal compiler.haskell-language-server (old: {
+          configureFlags = (old.configureFlags or [ ]) ++
+            [
+              "-f -brittany"
+              "-f -floskell"
+              "-f -fourmolu"
+              "-f -stylishhaskell"
+            ];
+        })))
+      pkgs.ncurses
+    ];
+  mkGhcid = compiler: pkgs:
+    [
+      (pkgs.haskell.lib.dontCheck compiler.ghcid)
+    ];
 in
 {
-  inherit hls;
-
-  # Adds the compiler's haskell dev tools if dev is true.
-  devTools = dev: compiler: pkgs:
-    if dev then [
-      # ghcid's tests fail if stack is not present, so we need to disable
-      # them as we are using cabal
-      (pkgs.haskell.lib.dontCheck compiler.ghcid)
-    ] ++ (hls dev compiler pkgs) else [ ];
+  inherit mkDev;
 
   # Retrieves nixpkgs corresponding to the given ghc version.
   getPkgs = ghcVers:
     let
       hash =
-        if ghc-to-nixpkgs ? ${ghcVers}
-        then ghc-to-nixpkgs.${ghcVers}
+        if ghcToNixpkgs ? ${ghcVers}
+        then ghcToNixpkgs.${ghcVers}
         else
           throw
-            ''Invalid ghcVers: '${ghcVers}'; valid keys are: ${showKeys ghc-to-nixpkgs}.
+            ''Invalid ghcVers: '${ghcVers}'; valid keys are: ${showKeys ghcToNixpkgs}.
               '';
     in
     import

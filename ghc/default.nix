@@ -1,4 +1,5 @@
-{ dev ? true
+{ ghcid ? true
+, hls ? "ormolu"
 }:
 
 # https://gitlab.haskell.org/ghc/ghc/-/wikis/building/hadrian
@@ -38,5 +39,5 @@ let
   ];
 in
 pkgs.mkShell {
-  buildInputs = hsDeps ++ otherDeps ++ (lib.devTools dev compiler pkgs);
+  buildInputs = hsDeps ++ otherDeps ++ (lib.mkDev compiler pkgs ghcid hls);
 }

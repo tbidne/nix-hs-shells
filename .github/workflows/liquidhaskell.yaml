@@ -34,14 +34,14 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A liquidhaskell --arg dev false --run '
+          nix-shell . -A liquidhaskell --arg ghcid false --argstr hls none --run '
             cd ./liquidhaskell-build \
               && cabal update \
               && cabal build'
 
       - name: Test
         run: |
-          nix-shell . -A liquidhaskell --arg dev false --run '
+          nix-shell . -A liquidhaskell --arg ghcid false --argstr hls none --run '
             cd ./liquidhaskell-build \
               && cabal update \
               && cabal test'
