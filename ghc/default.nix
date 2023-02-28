@@ -40,4 +40,26 @@ let
 in
 pkgs.mkShell {
   buildInputs = hsDeps ++ otherDeps ++ (lib.mkDev compiler pkgs ghcid hls);
+
+  shellHook = ''
+    ghc_clean () {
+      rm -rf _build
+    }
+
+    ghc_build () {
+      ./hadrian/build -j --flavour=validate+werror
+    }
+
+    ghc_fbuild () {
+      set -e
+
+      clean
+
+      ./boot
+
+      ./configure
+
+      build
+    }
+  '';
 }

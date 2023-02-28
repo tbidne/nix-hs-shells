@@ -37,4 +37,4 @@ jobs:
           nix-shell . -A ghc --arg ghcid false --argstr hls none --run '
             cd ./ghc-build \
               && cabal update \
-              && ../ghc/build.sh'
+              && ghc_fbuild
