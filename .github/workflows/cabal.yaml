@@ -1,4 +1,4 @@
-name: ghc
+name: cabal
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  ghc:
+  cabal:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.0.2
@@ -24,17 +24,16 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - name: Clone ghc
+      - name: Clone cabal
         uses: actions/checkout@v3.0.2
         with:
-          repository: ghc/ghc
+          repository: haskell/cabal
           ref: master
-          path: ./ghc-build
-          submodules: recursive
+          path: ./cabal-build
 
       - name: Build
         run: |
-          nix-shell . -A ghc --arg ghcid false --argstr hls none --run '
-            cd ./ghc-build \
+          nix-shell . -A default --arg ghcid false --argstr hls none --run '
+            cd ./cabal-build \
               && cabal update \
-              && ghc_fbuild'
+              && cabal build cabal-install'

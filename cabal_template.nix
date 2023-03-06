@@ -14,8 +14,9 @@ in
 pkgs.mkShell {
   buildInputs =
     [
-      pkgs.cabal-install
       compiler.ghc
+      pkgs.cabal-install
+      pkgs.zlib
     ] ++ (lib.mkDev compiler pkgs ghcid hls)
     ++ (extraInputs pkgs);
 }

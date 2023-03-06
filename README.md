@@ -7,6 +7,7 @@
 [![MIT](https://img.shields.io/github/license/tbidne/nix-hs-shells?color=blue)](https://opensource.org/licenses/MIT)
 
 [![default](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/default.yaml?branch=main&label=default&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/default.yaml)
+[![cabal](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/cabal.yaml?branch=main&label=cabal&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/cabal.yaml)
 [![GHC](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/ghc.yaml?branch=main&label=GHC&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/ghc.yaml)
 [![LiquidHaskell](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/liquidhaskell.yaml?branch=main&label=LiquidHaskell&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/liquidhaskell.yaml)
 [![style](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/style.yaml?branch=main&label=style&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/style.yaml)

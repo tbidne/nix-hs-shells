@@ -53,13 +53,13 @@ pkgs.mkShell {
     ghc_fbuild () {
       set -e
 
-      clean
+      ghc_clean
 
       ./boot
 
       ./configure
 
-      build
+      ghc_build
     }
   '';
 }
