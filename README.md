@@ -48,6 +48,7 @@ This section lists the provided shells. For shells with arguments, the default v
   * `ghc902`
   * `ghc925`
   * `ghc926`
+  * `ghc927`
   * `ghc944`
 * `hls`
 
