@@ -1,6 +1,7 @@
 # Template for a typical cabal+ghc shell.
 
 { extraInputs ? _: [ ]
+, cabalPlan
 , ghcid
 , ghcVers
 , hls
@@ -17,6 +18,6 @@ pkgs.mkShell {
       compiler.ghc
       pkgs.cabal-install
       pkgs.zlib
-    ] ++ (lib.mkDev compiler pkgs ghcid hls)
+    ] ++ (lib.mkDev compiler pkgs cabalPlan ghcid hls)
     ++ (extraInputs pkgs);
 }

@@ -24,11 +24,32 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - name: ghcid = false
-        run: nix-shell . -A default --arg ghcid false --dry-run
+      - name: ghcVers = ghc8107
+        run: nix-shell . -A default --argstr ghcVers ghc8107 --dry-run
+
+      - name: ghcVers = ghc902
+        run: nix-shell . -A default --argstr ghcVers ghc902 --dry-run
+
+      - name: ghcVers = ghc925
+        run: nix-shell . -A default --argstr ghcVers ghc925 --dry-run
+
+      - name: ghcVers = ghc926
+        run: nix-shell . -A default --argstr ghcVers ghc926 --dry-run
+
+      - name: ghcVers = ghc944
+        run: nix-shell . -A default --argstr ghcVers ghc944 --dry-run
+
+      - name: cabalPlan = false
+        run: nix-shell . -A default --arg cabalPlan false --dry-run
+
+      - name: cabalPlan = true
+        run: nix-shell . -A default --arg cabalPlan true --dry-run
 
       - name: ghcid = false
         run: nix-shell . -A default --arg ghcid false --dry-run
+
+      - name: ghcid = true
+        run: nix-shell . -A default --arg ghcid true --dry-run
 
       - name: hls = ormolu
         run: nix-shell . -A default --argstr hls ormolu --dry-run
@@ -38,3 +59,4 @@ jobs:
 
       - name: hls = none
         run: nix-shell . -A default --argstr hls none --dry-run
+

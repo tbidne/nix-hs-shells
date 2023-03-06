@@ -26,6 +26,7 @@ This section lists the provided shells. For shells with arguments, the default v
 
 ### Common Args
 
+* `cabal-plan` (`false`)
 * `ghcid` (`true`)
 * `hls` (`"ormolu"`). Can be:
   * `"none"`
@@ -40,6 +41,7 @@ This section lists the provided shells. For shells with arguments, the default v
 
 **Args:**
 
+* `cabal-plan`
 * `ghcid`
 * `ghcVers` (`ghc944`): Can be:
   * `ghc8107`
@@ -86,6 +88,7 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A ghc
 
 **Args:**
 
+* `cabal-plan`
 * `ghcid`
 * `hls`
 

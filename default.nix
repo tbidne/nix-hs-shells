@@ -7,19 +7,20 @@
 let
   defGhcLatest =
     { ghcVers ? "ghc944"
+    , cabalPlan ? false
     , ghcid ? true
     , hls ? "ormolu"
     }:
-    import ./cabal_template.nix { inherit ghcVers ghcid hls; };
+    import ./cabal_template.nix { inherit ghcVers cabalPlan ghcid hls; };
 in
 {
   default = defGhcLatest;
 
   ghc = import ./ghc/default.nix;
 
-  liquidhaskell = { ghcid ? true, hls ? "ormolu" }:
+  liquidhaskell = { cabalPlan ? false, ghcid ? true, hls ? "ormolu" }:
     import ./cabal_template.nix {
-      inherit ghcid hls;
+      inherit cabalPlan ghcid hls;
       ghcVers = "ghc925";
       extraInputs = p: [ p.z3 ];
     };

@@ -37,9 +37,11 @@ let
     pkgs.python3
     pkgs.sphinx
   ];
+
+  cabalPlan = false;
 in
 pkgs.mkShell {
-  buildInputs = hsDeps ++ otherDeps ++ (lib.mkDev compiler pkgs ghcid hls);
+  buildInputs = hsDeps ++ otherDeps ++ (lib.mkDev compiler pkgs cabalPlan ghcid hls);
 
   shellHook = ''
     ghc_clean () {
