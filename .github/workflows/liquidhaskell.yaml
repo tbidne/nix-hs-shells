@@ -32,6 +32,15 @@ jobs:
           path: ./liquidhaskell-build
           submodules: recursive
 
+      - name: cabalPlan = true
+        run: nix-shell . -A liquidhaskell --arg cabalPlan true --dry-run
+
+      - name: ghcid = true
+        run: nix-shell . -A liquidhaskell --arg ghcid true --dry-run
+
+      - name: hls = full
+        run: nix-shell . -A liquidhaskell --argstr hls full --dry-run
+
       - name: Build
         run: |
           nix-shell . -A liquidhaskell --arg ghcid false --argstr hls none --run '

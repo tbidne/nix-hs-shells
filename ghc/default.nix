@@ -38,10 +38,13 @@ let
     pkgs.sphinx
   ];
 
-  cabalPlan = false;
+  devTools = {
+    inherit ghcid hls;
+    cabalPlan = false;
+  };
 in
 pkgs.mkShell {
-  buildInputs = hsDeps ++ otherDeps ++ (lib.mkDev compiler pkgs cabalPlan ghcid hls);
+  buildInputs = hsDeps ++ otherDeps ++ (lib.mkDev compiler devTools pkgs);
 
   shellHook = ''
     ghc_clean () {

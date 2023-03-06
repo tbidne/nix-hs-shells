@@ -10,17 +10,17 @@ let
     then mp.${key}
     else throw "Invalid ${keyName}: '${key}'; valid keys are ${showKeys mp}.";
 
-  # Returns a list of dev tools, depending on the ghcid and hls arguments.
-  mkDev = compiler: pkgs: cabalPlan: ghcid: hls:
+  # Returns a list of dev tools, depending on the arguments.
+  mkDev = compiler: devTools: pkgs:
     let
-      cabalPlanTools = if cabalPlan then mkCabalPlan compiler pkgs else [ ];
-      ghcidTools = if ghcid then mkGhcid compiler pkgs else [ ];
+      cabalPlanTools = if devTools.cabalPlan then mkCabalPlan compiler pkgs else [ ];
+      ghcidTools = if devTools.ghcid then mkGhcid compiler pkgs else [ ];
       hlsMap = {
         "none" = [ ];
         "full" = mkHls compiler pkgs;
         "ormolu" = mkHlsOrmolu compiler pkgs;
       };
-      hlsTools = lookupOrDie hlsMap hls "hls";
+      hlsTools = lookupOrDie hlsMap devTools.hls "hls";
     in
     cabalPlanTools ++ ghcidTools ++ hlsTools;
 
