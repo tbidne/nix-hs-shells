@@ -13,38 +13,32 @@
 
 let
   ghcVers = "ghc944";
-  lib = import ../lib.nix;
 
-  pkgs = lib.getPkgs ghcVers;
-  compiler = pkgs.haskell.packages.${ghcVers};
+  cabal_template = import ../cabal_template.nix;
 
   # https://gitlab.haskell.org/ghc/ghc/-/wikis/building/preparation/tools
-  hsDeps = [
-    compiler.alex
-    compiler.ghc
-    compiler.happy
+  extraGhcInputs = c: [
+    c.alex
+    c.ghc
+    c.happy
   ];
 
-  otherDeps = [
-    pkgs.autoreconfHook
-    pkgs.automake
-    pkgs.cabal-install
-    pkgs.gmp
-    pkgs.gnumake
-    pkgs.libffi
-    pkgs.ncurses
-    pkgs.perl
-    pkgs.python3
-    pkgs.sphinx
+  extraInputs = p: [
+    p.autoreconfHook
+    p.automake
+    p.gmp
+    p.gnumake
+    p.libffi
+    p.ncurses
+    p.perl
+    p.python3
+    p.sphinx
   ];
 
   devTools = {
     inherit ghcid hls;
     cabalPlan = false;
   };
-in
-pkgs.mkShell {
-  buildInputs = hsDeps ++ otherDeps ++ (lib.mkDev compiler devTools pkgs);
 
   shellHook = ''
     ghc_clean () {
@@ -67,4 +61,7 @@ pkgs.mkShell {
       ghc_build
     }
   '';
+in
+cabal_template {
+  inherit devTools extraInputs extraGhcInputs ghcVers shellHook;
 }

@@ -5,13 +5,14 @@
 # nix-shell . -A ghc
 
 let
+  cabal_template = import ./cabal_template.nix;
   defGhcLatest =
     { cabalPlan ? false
     , ghcid ? false
     , ghcVers ? "ghc944"
     , hls ? false
     }:
-    import ./cabal_template.nix {
+    cabal_template {
       inherit ghcVers;
       devTools = { inherit cabalPlan ghcid hls; };
     };
@@ -26,7 +27,7 @@ in
     , ghcid ? false
     , hls ? false
     }:
-    import ./cabal_template.nix {
+    cabal_template {
       devTools = { inherit cabalPlan ghcid hls; };
       ghcVers = "ghc925";
       extraInputs = p: [ p.z3 ];
