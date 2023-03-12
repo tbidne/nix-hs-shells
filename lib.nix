@@ -13,25 +13,20 @@ let
   # Returns a list of dev tools, depending on the arguments.
   mkDev = compiler: devTools: pkgs:
     let
-      cabalPlanTools = if devTools.cabalPlan then mkCabalPlan compiler pkgs else [ ];
-      ghcidTools = if devTools.ghcid then mkGhcid compiler pkgs else [ ];
-      hlsTools = if devTools.hls then mkHls compiler pkgs else [ ];
+      cabalPlanTools =
+        if devTools.cabalPlan
+        then [ (pkgs.haskell.lib.dontCheck compiler.cabal-plan) ]
+        else [ ];
+      ghcidTools =
+        if devTools.ghcid
+        then [ (pkgs.haskell.lib.dontCheck compiler.ghcid) ]
+        else [ ];
+      hlsTools =
+        if devTools.hls
+        then [ (pkgs.haskell.lib.dontCheck compiler.haskell-language-server) ]
+        else [ ];
     in
     cabalPlanTools ++ ghcidTools ++ hlsTools;
-
-  mkCabalPlan = compiler: pkgs:
-    [
-      (pkgs.haskell.lib.dontCheck compiler.cabal-plan)
-    ];
-
-  mkHls = compiler: pkgs:
-    [
-      (pkgs.haskell.lib.dontCheck compiler.haskell-language-server)
-    ];
-  mkGhcid = compiler: pkgs:
-    [
-      (pkgs.haskell.lib.dontCheck compiler.ghcid)
-    ];
 in
 {
   inherit mkDev;
