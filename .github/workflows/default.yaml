@@ -42,20 +42,11 @@ jobs:
       - name: ghcVers = ghc944
         run: nix-shell . -A default --argstr ghcVers ghc944 --dry-run
 
-      - name: cabalPlan = false
-        run: nix-shell . -A default --arg cabalPlan false --dry-run
-
       - name: cabalPlan = true
         run: nix-shell . -A default --arg cabalPlan true --dry-run
 
-      - name: ghcid = false
-        run: nix-shell . -A default --arg ghcid false --dry-run
-
       - name: ghcid = true
         run: nix-shell . -A default --arg ghcid true --dry-run
-
-      - name: hls = false
-        run: nix-shell . -A default --arg hls true --dry-run
 
       - name: hls = true
         run: nix-shell . -A default --arg hls false --dry-run
