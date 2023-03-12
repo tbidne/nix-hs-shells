@@ -27,8 +27,8 @@ jobs:
       - name: ghcid = true
         run: nix-shell . -A ghc --arg ghcid true --dry-run
 
-      - name: hls = full
-        run: nix-shell . -A ghc --argstr hls full --dry-run
+      - name: hls = true
+        run: nix-shell . -A ghc --arg hls true --dry-run
 
       - name: Clone ghc
         uses: actions/checkout@v3.0.2
@@ -40,7 +40,7 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A ghc --arg ghcid false --argstr hls none --run '
+          nix-shell . -A ghc --run '
             cd ./ghc-build \
               && cabal update \
               && ghc_fbuild'

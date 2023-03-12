@@ -33,7 +33,7 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A default --arg ghcid false --argstr hls none --run '
+          nix-shell . -A default --run '
             cd ./cabal-build \
               && cabal update \
               && cabal build cabal-install'

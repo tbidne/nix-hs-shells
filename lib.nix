@@ -15,12 +15,7 @@ let
     let
       cabalPlanTools = if devTools.cabalPlan then mkCabalPlan compiler pkgs else [ ];
       ghcidTools = if devTools.ghcid then mkGhcid compiler pkgs else [ ];
-      hlsMap = {
-        "none" = [ ];
-        "full" = mkHls compiler pkgs;
-        "ormolu" = mkHlsOrmolu compiler pkgs;
-      };
-      hlsTools = lookupOrDie hlsMap devTools.hls "hls";
+      hlsTools = if devTools.hls then mkHls compiler pkgs else [ ];
     in
     cabalPlanTools ++ ghcidTools ++ hlsTools;
 
@@ -32,19 +27,6 @@ let
   mkHls = compiler: pkgs:
     [
       (pkgs.haskell.lib.dontCheck compiler.haskell-language-server)
-    ];
-  mkHlsOrmolu = compiler: pkgs:
-    [
-      (pkgs.haskell.lib.dontCheck
-        (pkgs.haskell.lib.overrideCabal compiler.haskell-language-server (old: {
-          configureFlags = (old.configureFlags or [ ]) ++
-            [
-              "-f -brittany"
-              "-f -floskell"
-              "-f -fourmolu"
-              "-f -stylishhaskell"
-            ];
-        })))
     ];
   mkGhcid = compiler: pkgs:
     [

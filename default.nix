@@ -7,9 +7,9 @@
 let
   defGhcLatest =
     { cabalPlan ? false
-    , ghcid ? true
+    , ghcid ? false
     , ghcVers ? "ghc944"
-    , hls ? "ormolu"
+    , hls ? false
     }:
     import ./cabal_template.nix {
       inherit ghcVers;
@@ -21,7 +21,11 @@ in
 
   ghc = import ./ghc/default.nix;
 
-  liquidhaskell = { cabalPlan ? false, ghcid ? true, hls ? "ormolu" }:
+  liquidhaskell =
+    { cabalPlan ? false
+    , ghcid ? false
+    , hls ? false
+    }:
     import ./cabal_template.nix {
       devTools = { inherit cabalPlan ghcid hls; };
       ghcVers = "ghc925";

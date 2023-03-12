@@ -1,5 +1,5 @@
-{ ghcid ? true
-, hls ? "ormolu"
+{ ghcid ? false
+, hls ? false
 }:
 
 # https://gitlab.haskell.org/ghc/ghc/-/wikis/building/hadrian

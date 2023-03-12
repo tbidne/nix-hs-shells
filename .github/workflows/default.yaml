@@ -54,12 +54,8 @@ jobs:
       - name: ghcid = true
         run: nix-shell . -A default --arg ghcid true --dry-run
 
-      - name: hls = ormolu
-        run: nix-shell . -A default --argstr hls ormolu --dry-run
+      - name: hls = false
+        run: nix-shell . -A default --arg hls true --dry-run
 
-      - name: hls = full
-        run: nix-shell . -A default --argstr hls full --dry-run
-
-      - name: hls = none
-        run: nix-shell . -A default --argstr hls none --dry-run
-
+      - name: hls = true
+        run: nix-shell . -A default --arg hls false --dry-run

@@ -38,19 +38,19 @@ jobs:
       - name: ghcid = true
         run: nix-shell . -A liquidhaskell --arg ghcid true --dry-run
 
-      - name: hls = full
-        run: nix-shell . -A liquidhaskell --argstr hls full --dry-run
+      - name: hls = true
+        run: nix-shell . -A liquidhaskell --arg hls true --dry-run
 
       - name: Build
         run: |
-          nix-shell . -A liquidhaskell --arg ghcid false --argstr hls none --run '
+          nix-shell . -A liquidhaskell --run '
             cd ./liquidhaskell-build \
               && cabal update \
               && cabal build'
 
       - name: Test
         run: |
-          nix-shell . -A liquidhaskell --arg ghcid false --argstr hls none --run '
+          nix-shell . -A liquidhaskell --run '
             cd ./liquidhaskell-build \
               && cabal update \
               && cabal test'

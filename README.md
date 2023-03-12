@@ -27,11 +27,8 @@ This section lists the provided shells. For shells with arguments, the default v
 ### Common Args
 
 * `cabal-plan` (`false`)
-* `ghcid` (`true`)
-* `hls` (`"ormolu"`). Can be:
-  * `"none"`
-  * `"ormolu"` (only formatter is `ormolu`)
-  * `"full"` (all plugins)
+* `ghcid` (`false`)
+* `hls` (`false`)
 
 ## Default
 
@@ -59,7 +56,7 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default
 
 nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default \
   --argstr ghcVers ghc925 \
-  --argstr hls full \
+  --arg hls true \
   --arg ghcid false
 ```
 

@@ -33,9 +33,7 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A default \
-            --arg ghcid false \
-            --argstr hls none --run '
+          nix-shell . -A default --run '
               cd ./safe-exceptions-build \
                 && cabal update \
                 && cabal build'
