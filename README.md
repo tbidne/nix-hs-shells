@@ -70,6 +70,7 @@ other needed dependencies.
 **Args:**
 
 * `ghcid`
+* `ghcVers`
 * `hls`
 
 **Usage:**

@@ -1,4 +1,5 @@
 { ghcid ? false
+, ghcVers ? "ghc944"
 , hls ? false
 }:
 
@@ -12,8 +13,6 @@
 # git submodule update --init --recursive
 
 let
-  ghcVers = "ghc944";
-
   cabal_template = import ../cabal_template.nix;
 
   # https://gitlab.haskell.org/ghc/ghc/-/wikis/building/preparation/tools
