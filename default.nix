@@ -25,11 +25,12 @@ in
   liquidhaskell =
     { cabalPlan ? false
     , ghcid ? false
+    , ghcVers ? "ghc925"
     , hls ? false
     }:
     cabal_template {
+      inherit ghcVers;
       devTools = { inherit cabalPlan ghcid hls; };
-      ghcVers = "ghc925";
       extraInputs = p: [ p.z3 ];
     };
 }

@@ -83,12 +83,13 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A ghc
 
 **Attr:** `liquidhaskell`
 
-**Description:** Nix shell for [`LiquidHaskell`](https://github.com/ucsd-progsys/liquidhaskell/). Includes `cabal`, `GHC 9.2.5`, and the `z3` smt solver.
+**Description:** Nix shell for [`LiquidHaskell`](https://github.com/ucsd-progsys/liquidhaskell/). Includes `cabal`, `GHC 9.2.5` (default), and the `z3` smt solver.
 
 **Args:**
 
 * `cabalPlan`
 * `ghcid`
+* `ghcVers`
 * `hls`
 
 **Usage:**
