@@ -41,6 +41,7 @@ in
         ghc926 = "d0d55259081f0b97c828f38559cad899d351cad1";
         ghc927 = "3c5319ad3aa51551182ac82ea17ab1c6b0f0df89";
         ghc944 = "7c656856e9eb863c4d21c83e2601dd77f95f6941";
+        ghc961 = "7c656856e9eb863c4d21c83e2601dd77f95f6941";
       };
       hash = lookupOrDie ghcToNixpkgs ghcVers "ghcVers";
     in

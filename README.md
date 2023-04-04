@@ -3,7 +3,7 @@
 # nix-hs-shells
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/tbidne/nix-hs-shells?include_prereleases&sort=semver)](https://github.com/tbidne/shrun/releases/)
-![haskell](https://img.shields.io/static/v1?label=&message=9.4&logo=haskell&logoColor=655889&labelColor=2f353e&color=655889)
+![haskell](https://img.shields.io/static/v1?label=&message=9.6&logo=haskell&logoColor=655889&labelColor=2f353e&color=655889)
 [![MIT](https://img.shields.io/github/license/tbidne/nix-hs-shells?color=blue)](https://opensource.org/licenses/MIT)
 
 [![default](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/default.yaml?branch=main&label=default&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/default.yaml)
@@ -28,6 +28,14 @@ This section lists the provided shells. For shells with arguments, the default v
 
 * `cabalPlan` (`false`)
 * `ghcid` (`false`)
+* `ghcVers`
+  * `ghc8107`
+  * `ghc902`
+  * `ghc925`
+  * `ghc926`
+  * `ghc927`
+  * `ghc944`
+  * `ghc961`
 * `hls` (`false`)
 
 ## Default
@@ -40,13 +48,7 @@ This section lists the provided shells. For shells with arguments, the default v
 
 * `cabalPlan`
 * `ghcid`
-* `ghcVers` (`ghc944`): Can be:
-  * `ghc8107`
-  * `ghc902`
-  * `ghc925`
-  * `ghc926`
-  * `ghc927`
-  * `ghc944`
+* `ghcVers` (`ghc961`)
 * `hls`
 
 **Usage:**
@@ -64,13 +66,12 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default 
 
 **Attr:** `ghc`
 
-**Description:** Nix shell for [`GHC`](https://gitlab.haskell.org/ghc/ghc/) development. Includes `cabal`, `GHC 9.4.4`, and
-other needed dependencies.
+**Description:** Nix shell for [`GHC`](https://gitlab.haskell.org/ghc/ghc/) development. Includes `cabal`, `ghc`, and other needed dependencies.
 
 **Args:**
 
 * `ghcid`
-* `ghcVers`
+* `ghcVers` (`ghc961`)
 * `hls`
 
 **Usage:**
@@ -83,13 +84,13 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A ghc
 
 **Attr:** `liquidhaskell`
 
-**Description:** Nix shell for [`LiquidHaskell`](https://github.com/ucsd-progsys/liquidhaskell/). Includes `cabal`, `GHC 9.2.5` (default), and the `z3` smt solver.
+**Description:** Nix shell for [`LiquidHaskell`](https://github.com/ucsd-progsys/liquidhaskell/). Includes `cabal`, `ghc`, and the `z3` smt solver.
 
 **Args:**
 
 * `cabalPlan`
 * `ghcid`
-* `ghcVers`
+* `ghcVers` (`ghc925`)
 * `hls`
 
 **Usage:**

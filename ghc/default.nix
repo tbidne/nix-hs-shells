@@ -1,5 +1,5 @@
 { ghcid ? false
-, ghcVers ? "ghc944"
+, ghcVers ? "ghc961"
 , hls ? false
 }:
 

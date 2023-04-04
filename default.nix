@@ -9,7 +9,7 @@ let
   defGhcLatest =
     { cabalPlan ? false
     , ghcid ? false
-    , ghcVers ? "ghc944"
+    , ghcVers ? "ghc961"
     , hls ? false
     }:
     cabal_template {
