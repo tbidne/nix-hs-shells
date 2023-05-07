@@ -15,7 +15,7 @@ jobs:
   liquidhaskell:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.5.0
+      - uses: actions/checkout@v3
 
       - name: Setup nix
         uses: cachix/install-nix-action@v20
@@ -25,7 +25,7 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
       - name: Clone liquidhaskell
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v3
         with:
           repository: ucsd-progsys/liquidhaskell
           ref: develop

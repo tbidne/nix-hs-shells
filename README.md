@@ -16,6 +16,13 @@
 
 ---
 
+- [Introduction](#introduction)
+- [Shells](#shells)
+  - [Default](#default)
+  - [GHC](#ghc)
+  - [LiquidHaskell](#liquidhaskell)
+- [Development](#development)
+
 # Introduction
 
 This packages provides nix shells for general haskell development with `cabal`.
@@ -95,4 +102,12 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A ghc
 
 ```
 nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A liquidhaskell
+```
+
+# Development
+
+A formatter is provided via [./ci/flake.nix](./ci/flake.nix):
+
+```
+nix run ./ci#format
 ```

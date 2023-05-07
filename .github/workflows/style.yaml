@@ -15,7 +15,7 @@ jobs:
   check-style:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.5.0
+      - uses: actions/checkout@v3
 
       - name: Setup nix
         uses: cachix/install-nix-action@v20
@@ -25,4 +25,6 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
       - name: Format
-        run: nix run github:tbidne/nix-hs-tools/0.7#nixpkgs-fmt -- --check
+        run: |
+          nix run ./ci#format
+          git diff --exit-code --color=always

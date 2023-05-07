@@ -15,7 +15,7 @@ jobs:
   ghc:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.5.0
+      - uses: actions/checkout@v3
 
       - name: Setup nix
         uses: cachix/install-nix-action@v20
@@ -34,7 +34,7 @@ jobs:
         run: nix-shell . -A ghc --argstr ghcVers ghc927 --dry-run
 
       - name: Clone ghc
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v3
         with:
           repository: ghc/ghc
           ref: master
