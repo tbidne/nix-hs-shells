@@ -42,6 +42,9 @@ jobs:
       - name: ghcVers = ghc944
         run: nix-shell . -A default --argstr ghcVers ghc944 --dry-run
 
+      - name: ghcVers = ghc945
+        run: nix-shell . -A default --argstr ghcVers ghc945 --dry-run
+
       - name: ghcVers = ghc961
         run: nix-shell . -A default --argstr ghcVers ghc961 --dry-run
 
