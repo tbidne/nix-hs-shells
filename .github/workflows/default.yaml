@@ -25,28 +25,29 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
       - name: ghcVers = ghc8107
-        run: nix-shell . -A default --argstr ghcVers ghc8107 --dry-run
+        run: nix-shell . -A default --argstr ghcVers ghc8107
 
       - name: ghcVers = ghc902
-        run: nix-shell . -A default --argstr ghcVers ghc902 --dry-run
+        run: nix-shell . -A default --argstr ghcVers ghc902
 
       - name: ghcVers = ghc925
-        run: nix-shell . -A default --argstr ghcVers ghc925 --dry-run
+        run: nix-shell . -A default --argstr ghcVers ghc925
 
       - name: ghcVers = ghc926
-        run: nix-shell . -A default --argstr ghcVers ghc926 --dry-run
+        run: nix-shell . -A default --argstr ghcVers ghc926
 
       - name: ghcVers = ghc927
-        run: nix-shell . -A default --argstr ghcVers ghc927 --dry-run
+        run: nix-shell . -A default --argstr ghcVers ghc927
 
       - name: ghcVers = ghc944
-        run: nix-shell . -A default --argstr ghcVers ghc944 --dry-run
+        run: nix-shell . -A default --argstr ghcVers ghc944
 
       - name: ghcVers = ghc945
-        run: nix-shell . -A default --argstr ghcVers ghc945 --dry-run
+        run: nix-shell . -A default --argstr ghcVers ghc945
 
       - name: ghcVers = ghc961
-        run: nix-shell . -A default --argstr ghcVers ghc961 --dry-run
+        run: nix-shell . -A default --argstr ghcVers ghc961
 
+      # hls cannot build on ci as the storage requirements are too high
       - name: hls = true
         run: nix-shell . -A default --arg hls false --dry-run
