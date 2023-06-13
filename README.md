@@ -3,14 +3,8 @@
 # nix-hs-shells
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/tbidne/nix-hs-shells?include_prereleases&sort=semver)](https://github.com/tbidne/shrun/releases/)
-![haskell](https://img.shields.io/static/v1?label=&message=9.6&logo=haskell&logoColor=655889&labelColor=2f353e&color=655889)
+[![ci](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/ci.yaml?branch=main&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/ci.yaml)
 [![MIT](https://img.shields.io/github/license/tbidne/nix-hs-shells?color=blue)](https://opensource.org/licenses/MIT)
-
-[![default](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/default.yaml?branch=main&label=default&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/default.yaml)
-[![cabal](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/cabal.yaml?branch=main&label=cabal&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/cabal.yaml)
-[![GHC](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/ghc.yaml?branch=main&label=GHC&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/ghc.yaml)
-[![LiquidHaskell](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/liquidhaskell.yaml?branch=main&label=LiquidHaskell&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/liquidhaskell.yaml)
-[![style](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/style.yaml?branch=main&label=style&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/style.yaml)
 
 </div>
 
@@ -36,9 +30,9 @@ This section lists the provided shells. For shells with arguments, the default v
 * `ghcVers`:
   * `ghc8107`
   * `ghc902`
-  * `ghc925`, `ghc926`, `ghc927`
+  * `ghc925`, `ghc926`, `ghc927`, `ghc928`
   * `ghc944`, `ghc945`
-  * `ghc961`
+  * `ghc961`, `ghc962`
 * `hls` (`false`)
 
 ## Default
@@ -49,7 +43,7 @@ This section lists the provided shells. For shells with arguments, the default v
 
 **Args:**
 
-* `ghcVers` (`ghc961`)
+* `ghcVers` (`ghc962`)
 * `hls`
 
 **Usage:**
@@ -70,7 +64,7 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default 
 
 **Args:**
 
-* `ghcVers` (`ghc961`)
+* `ghcVers` (`ghc962`)
 * `hls`
 
 **Usage:**

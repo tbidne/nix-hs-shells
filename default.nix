@@ -7,7 +7,7 @@
 let
   cabal_template = import ./cabal_template.nix;
   defGhcLatest =
-    { ghcVers ? "ghc961"
+    { ghcVers ? "ghc962"
     , hls ? false
     }:
     cabal_template {
