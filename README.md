@@ -33,8 +33,6 @@ This section lists the provided shells. For shells with arguments, the default v
 
 ### Common Args
 
-* `cabalPlan` (`false`)
-* `ghcid` (`false`)
 * `ghcVers`:
   * `ghc8107`
   * `ghc902`
@@ -51,8 +49,6 @@ This section lists the provided shells. For shells with arguments, the default v
 
 **Args:**
 
-* `cabalPlan`
-* `ghcid`
 * `ghcVers` (`ghc961`)
 * `hls`
 
@@ -63,8 +59,7 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default
 
 nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default \
   --argstr ghcVers ghc925 \
-  --arg hls true \
-  --arg ghcid false
+  --arg hls true
 ```
 
 ## GHC
@@ -75,7 +70,6 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default 
 
 **Args:**
 
-* `ghcid`
 * `ghcVers` (`ghc961`)
 * `hls`
 
@@ -93,8 +87,6 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A ghc
 
 **Args:**
 
-* `cabalPlan`
-* `ghcid`
 * `ghcVers` (`ghc925`)
 * `hls`
 

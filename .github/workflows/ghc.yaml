@@ -24,9 +24,6 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - name: ghcid = true
-        run: nix-shell . -A ghc --arg ghcid true --dry-run
-
       - name: hls = true
         run: nix-shell . -A ghc --arg hls true --dry-run
 

@@ -1,5 +1,4 @@
-{ ghcid ? false
-, ghcVers ? "ghc961"
+{ ghcVers ? "ghc961"
 , hls ? false
 }:
 
@@ -34,10 +33,7 @@ let
     p.sphinx
   ];
 
-  devTools = {
-    inherit ghcid hls;
-    cabalPlan = false;
-  };
+  devTools = { inherit hls; };
 
   shellHook = ''
     ghc_clean () {

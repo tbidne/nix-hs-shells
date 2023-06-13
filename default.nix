@@ -7,14 +7,12 @@
 let
   cabal_template = import ./cabal_template.nix;
   defGhcLatest =
-    { cabalPlan ? false
-    , ghcid ? false
-    , ghcVers ? "ghc961"
+    { ghcVers ? "ghc961"
     , hls ? false
     }:
     cabal_template {
       inherit ghcVers;
-      devTools = { inherit cabalPlan ghcid hls; };
+      devTools = { inherit hls; };
     };
 in
 {
@@ -23,14 +21,12 @@ in
   ghc = import ./ghc/default.nix;
 
   liquidhaskell =
-    { cabalPlan ? false
-    , ghcid ? false
-    , ghcVers ? "ghc925"
+    { ghcVers ? "ghc925"
     , hls ? false
     }:
     cabal_template {
       inherit ghcVers;
-      devTools = { inherit cabalPlan ghcid hls; };
+      devTools = { inherit hls; };
       extraInputs = p: [ p.z3 ];
     };
 }
