@@ -13,6 +13,7 @@
 
 let
   cabal_template = import ../cabal_template.nix;
+  lib = import ../lib.nix;
 
   # https://gitlab.haskell.org/ghc/ghc/-/wikis/building/preparation/tools
   extraGhcInputs = c: [
@@ -33,7 +34,7 @@ let
     p.sphinx
   ];
 
-  devTools = { inherit hls; };
+  devTools = lib.emptyDevTools // { inherit hls; };
 
   shellHook = ''
     ghc_clean () {

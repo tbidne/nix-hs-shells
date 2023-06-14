@@ -27,24 +27,34 @@ This section lists the provided shells. For shells with arguments, the default v
 
 ### Common Args
 
+* `apply-refact` (`false`)
+* `fourmolu` (`false`)
 * `ghcVers`:
   * `ghc8107`
   * `ghc902`
   * `ghc925`, `ghc926`, `ghc927`, `ghc928`
   * `ghc944`, `ghc945`
   * `ghc961`, `ghc962`
+* `ormolu` (`false`)
+* `hlint` (`false`)
 * `hls` (`false`)
 
 ## Default
 
 **Attr:** `default`
 
-**Description:** Nix shell for general haskell development. Most packages can use this shell. Includes `cabal` and `GHC`.
+**Description:** Nix shell for general haskell development. Most packages can use this shell. Includes `cabal` and `GHC`. Note that there is no guarantee every dev tool will work with every `ghcVers`. In particular, there will often be a lag time before the latest GHCs are fully supported.
+
+The default ghc is the latest version that works with every tool and has decent nix caching.
 
 **Args:**
 
-* `ghcVers` (`ghc962`)
+* `apply-refact`
+* `fourmolu`
+* `ghcVers` (`ghc945`)
+* `hlint`
 * `hls`
+* `ormolu`
 
 **Usage:**
 
@@ -82,6 +92,7 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A ghc
 **Args:**
 
 * `ghcVers` (`ghc925`)
+* `hlint`
 * `hls`
 
 **Usage:**

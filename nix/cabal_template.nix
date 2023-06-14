@@ -9,8 +9,9 @@
 
 let
   lib = import ./lib.nix;
-  pkgs = lib.getPkgs ghcVers;
-  compiler = pkgs.haskell.packages."${ghcVers}";
+  ghcSet = lib.getGhcSet ghcVers;
+  pkgs = ghcSet.pkgs;
+  compiler = ghcSet.compiler;
 in
 pkgs.mkShell {
   inherit shellHook;
@@ -20,7 +21,7 @@ pkgs.mkShell {
       compiler.ghc
       pkgs.cabal-install
       pkgs.zlib
-    ] ++ (lib.mkDev compiler devTools pkgs)
+    ] ++ (lib.mkDev devTools ghcSet)
     ++ (extraInputs pkgs)
     ++ (extraGhcInputs compiler);
 }

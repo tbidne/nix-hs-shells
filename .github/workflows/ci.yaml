@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  default:
+  default_dry_run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,39 +24,40 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - name: ghcVers = ghc8107
-        run: nix-shell . -A default --argstr ghcVers ghc8107
+      - name: Dry run
+        run: ./test/load_default.sh --dry-run --verbose
 
-      - name: ghcVers = ghc902
-        run: nix-shell . -A default --argstr ghcVers ghc902
+  # Need to run these separately as there is not enough space to run them
+  # all on the same machine.
+  default_ghc_only:
+    strategy:
+      fail-fast: false
+      matrix:
+        ghc:
+          - "ghc8107"
+          - "ghc902"
+          - "ghc925"
+          - "ghc926"
+          - "ghc927"
+          - "ghc928"
+          - "ghc944"
+          - "ghc945"
+          - "ghc961"
+          - "ghc962"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-      - name: ghcVers = ghc925
-        run: nix-shell . -A default --argstr ghcVers ghc925
+      - name: Setup nix
+        uses: cachix/install-nix-action@v20
+        with:
+          nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/b39924fc7764c08ae3b51beef9a3518c414cdb7d.tar.gz
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - name: ghcVers = ghc926
-        run: nix-shell . -A default --argstr ghcVers ghc926
+      - name: Load basic shell
+        run: ./test/load_default.sh --ghc ${{ matrix.ghc }} --no-tools --verbose
 
-      - name: ghcVers = ghc927
-        run: nix-shell . -A default --argstr ghcVers ghc927
-
-      - name: ghcVers = ghc98
-        run: nix-shell . -A default --argstr ghcVers ghc928
-
-      - name: ghcVers = ghc944
-        run: nix-shell . -A default --argstr ghcVers ghc944
-
-      - name: ghcVers = ghc945
-        run: nix-shell . -A default --argstr ghcVers ghc945
-
-      - name: ghcVers = ghc961
-        run: nix-shell . -A default --argstr ghcVers ghc961
-
-      - name: ghcVers = ghc962
-        run: nix-shell . -A default --argstr ghcVers ghc962
-
-      # hls cannot build on ci as the storage requirements are too high
-      - name: hls = true
-        run: nix-shell . -A default --arg hls false --dry-run
   cabal:
     runs-on: ubuntu-latest
     steps:

@@ -5,28 +5,36 @@
 # nix-shell . -A ghc
 
 let
-  cabal_template = import ./cabal_template.nix;
+  cabal_template = import ./nix/cabal_template.nix;
+  lib = import ./nix/lib.nix;
+
   defGhcLatest =
-    { ghcVers ? "ghc962"
+    { applyRefact ? false
+    , fourmolu ? false
+    , ghcVers ? "ghc945"
+    , hlint ? false
     , hls ? false
+    , ormolu ? false
     }:
     cabal_template {
       inherit ghcVers;
-      devTools = { inherit hls; };
+      devTools = { inherit applyRefact fourmolu hlint hls ormolu; };
     };
 in
 {
   default = defGhcLatest;
 
-  ghc = import ./ghc/default.nix;
+  ghc = import ./nix/ghc/default.nix;
 
   liquidhaskell =
     { ghcVers ? "ghc925"
+    , hlint ? false
     , hls ? false
     }:
     cabal_template {
       inherit ghcVers;
-      devTools = { inherit hls; };
+      # no ormolu or fourmolu since LH is not formatted with either.
+      devTools = lib.emptyDevTools // { inherit hlint hls; };
       extraInputs = p: [ p.z3 ];
     };
 }
