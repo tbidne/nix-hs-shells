@@ -25,7 +25,7 @@ let
         if devTools."${flagName}"
         then
           if member flagName ghcSet.unsupported
-          then throw "${flagName} is currently unsupported for ${ghcSet.versName}."
+          then throw "${flagName} is unsupported for ${ghcSet.versName}."
           else [ (dontCheck tool) ]
         else [ ];
     in

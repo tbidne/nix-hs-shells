@@ -18,10 +18,25 @@ let
       compiler = pkgs.haskell.packages."${versName}".override { inherit overrides; };
     };
 
-  applyRefact_0_11 = _: prev: { apply-refact = prev.apply-refact_0_11_0_0; };
+  # NOTE: We do not always need to override tools even though the default is
+  # not what we want.
+  #
+  # For example, the current ghc 9.4 nixpkgs hash we use has the default
+  # hlint-3.4 (ghc 9.2) whereas we want hlint-3.5. We could explicitly
+  # override this, but in fact this is already done in nixpkgs in
+  # configuration-ghc-9.4.x.nix.
 
-  fourmolu_0_12-ormolu_0_7 = _: prev: {
+  # TODO: Verify that these overrides do not destroy the nice caching
+  overlay_9_4 = _: prev: {
+    apply-refact = prev.apply-refact_0_13_0_0;
     fourmolu = prev.fourmolu_0_12_0_0;
+    ormolu = prev.ormolu_0_7_0_0;
+  };
+
+  overlay_9_6 = _: prev: {
+    apply-refact = prev.apply-refact_0_13_0_0;
+    fourmolu = prev.fourmolu_0_12_0_0;
+    hlint = prev.hlint_3_6; # FIXME: Does not exist yet
     ormolu = prev.ormolu_0_7_0_0;
   };
 in
@@ -61,25 +76,23 @@ in
   # Both ghc961 and ghc962 build 55 vs. 627 fetched, which is reasonable.
 
   ghc944 = mkSet {
-    hash = "2c330a5d05a476b3340247c2e7c25cd00b669b81";
+    hash = "1c9db9710cb23d60570ad4d7ab829c2d34403de3";
     versName = "ghc944";
-    overrides = applyRefact_0_11;
+    overrides = overlay_9_4;
   };
   ghc945 = mkSet {
-    hash = "75a5ebf473cd60148ba9aec0d219f72e5cf52519";
+    hash = "1c9db9710cb23d60570ad4d7ab829c2d34403de3";
     versName = "ghc945";
-    overrides = applyRefact_0_11;
+    overrides = overlay_9_4;
   };
   ghc961 = mkSet {
-    hash = "75a5ebf473cd60148ba9aec0d219f72e5cf52519";
+    hash = "1c9db9710cb23d60570ad4d7ab829c2d34403de3";
     versName = "ghc961";
-    overrides = fourmolu_0_12-ormolu_0_7;
-    unsupported = [ "applyRefact" "hlint" ];
+    overrides = overlay_9_6;
   };
   ghc962 = mkSet {
-    hash = "75a5ebf473cd60148ba9aec0d219f72e5cf52519";
+    hash = "1c9db9710cb23d60570ad4d7ab829c2d34403de3";
     versName = "ghc962";
-    overrides = fourmolu_0_12-ormolu_0_7;
-    unsupported = [ "applyRefact" "hlint" ];
+    overrides = overlay_9_6;
   };
 }

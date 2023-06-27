@@ -120,23 +120,7 @@ any_failed=0
 for ghcVers in $ghcVersions; do
   echo "*** TESTING $ghcVers ***"
 
-  # TODO: Remove special case once hlint supported
-  if [[ $ghcVers == "ghc961" || $ghcVers == "ghc962" ]]; then
-    cmd_str="nix-shell -A default
-      --argstr ghcVers $ghcVers
-      $fourmolu
-      $hls
-      $ormolu
-      $cmd"
-
-    if [[ $verbose == 1 ]]; then
-      echo "Running: $cmd_str"
-    fi
-
-    $($cmd_str)
-  else
-    load_all $ghcVers
-  fi
+  load_all $ghcVers
 
   exit_code=$?
   if [[ $exit_code -ne 0 ]]; then

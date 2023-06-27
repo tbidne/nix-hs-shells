@@ -19,7 +19,7 @@
 
 # Introduction
 
-This packages provides nix shells for general haskell development with `cabal`.
+This packages provides lightweight nix shells for general haskell development with `cabal`.
 
 # Shells
 

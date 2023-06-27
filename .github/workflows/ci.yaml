@@ -103,9 +103,6 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - name: hls = true
-        run: nix-shell . -A ghc --arg hls true --dry-run
-
       - name: Clone ghc
         uses: actions/checkout@v3
         with:
