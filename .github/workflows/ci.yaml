@@ -55,8 +55,16 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - name: Load basic shell
-        run: ./test/load_shell.sh --ghc ${{ matrix.ghc }} --no-tools --verbose
+      # There is a tension here in that we would like to test loading each shell
+      # will all shells, but that can require more storage than our free runner
+      # allows. For now, we are able to load all tools except hls, so that is
+      # what we do. But we may need to further pare it down in the future.
+      - name: Load shell
+        run: |
+          ./test/load_shell.sh \
+            --ghc ${{ matrix.ghc }} \
+            --hls false \
+            --verbose
 
   cabal:
     runs-on: ubuntu-latest
