@@ -27,7 +27,7 @@ This section lists the provided shells. For shells with arguments, the default v
 
 ### Common Args
 
-* `apply-refact` (`false`)
+* `applyRefact` (`false`)
 * `fourmolu` (`false`)
 * `ghcVers`:
   * `ghc8107`
@@ -49,7 +49,7 @@ The default ghc is the latest version that works with every tool and has decent 
 
 **Args:**
 
-* `apply-refact`
+* `applyRefact`
 * `fourmolu`
 * `ghcVers` (`ghc945`)
 * `hlint`
