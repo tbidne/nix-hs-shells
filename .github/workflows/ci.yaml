@@ -25,11 +25,11 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
       - name: Dry run
-        run: ./test/load_default.sh --dry-run --verbose
+        run: ./test/load_shell.sh --dry-run --verbose
 
   # Need to run these separately as there is not enough space to run them
   # all on the same machine.
-  default_ghc_only:
+  default:
     strategy:
       fail-fast: false
       matrix:
@@ -56,7 +56,7 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
       - name: Load basic shell
-        run: ./test/load_default.sh --ghc ${{ matrix.ghc }} --no-tools --verbose
+        run: ./test/load_shell.sh --ghc ${{ matrix.ghc }} --no-tools --verbose
 
   cabal:
     runs-on: ubuntu-latest

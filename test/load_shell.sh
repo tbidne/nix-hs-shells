@@ -27,12 +27,12 @@ ormolu="--arg ormolu true"
 verbose=0
 while [ $# -gt 0 ]; do
     if [[ $1 == "--help" || $1 == "-h" ]]; then
-      echo -e "load_default: Loads default shells with all options enabled.\n"
-      echo "Usage: load_default [-d|--dry-run]"
-      echo "                    [--ghc GHC]"
-      echo "                    [--no-tools]"
-      echo "                    [-h|--help]"
-      echo "                    [-v|--verbose]"
+      echo -e "load_shell: Loads shells with all options enabled.\n"
+      echo "Usage: load_shell.sh [-d|--dry-run]"
+      echo "                     [--ghc GHC]"
+      echo "                     [--no-tools]"
+      echo "                     [-h|--help]"
+      echo "                     [-v|--verbose]"
       echo ""
       echo "Available options:"
       echo -e "  --d,--dry-run \tRuns with --dry-run.\n"
