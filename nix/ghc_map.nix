@@ -25,20 +25,6 @@ let
   # hlint-3.4 (ghc 9.2) whereas we want hlint-3.5. We could explicitly
   # override this, but in fact this is already done in nixpkgs in
   # configuration-ghc-9.4.x.nix.
-
-  # TODO: Verify that these overrides do not destroy the nice caching
-  overlay_9_4 = _: prev: {
-    apply-refact = prev.apply-refact_0_13_0_0;
-    fourmolu = prev.fourmolu_0_12_0_0;
-    ormolu = prev.ormolu_0_7_0_0;
-  };
-
-  overlay_9_6 = _: prev: {
-    apply-refact = prev.apply-refact_0_13_0_0;
-    fourmolu = prev.fourmolu_0_12_0_0;
-    hlint = prev.hlint_3_6; # FIXME: Does not exist yet
-    ormolu = prev.ormolu_0_7_0_0;
-  };
 in
 {
   # In general, the hash for ghc vers N should be the latest commit C where
@@ -76,23 +62,41 @@ in
   # Both ghc961 and ghc962 build 55 vs. 627 fetched, which is reasonable.
 
   ghc944 = mkSet {
-    hash = "1c9db9710cb23d60570ad4d7ab829c2d34403de3";
+    hash = "d680ded26da5cf104dd2735a51e88d2d8f487b4d";
     versName = "ghc944";
-    overrides = overlay_9_4;
   };
   ghc945 = mkSet {
-    hash = "1c9db9710cb23d60570ad4d7ab829c2d34403de3";
+    hash = "d680ded26da5cf104dd2735a51e88d2d8f487b4d";
     versName = "ghc945";
-    overrides = overlay_9_4;
   };
   ghc961 = mkSet {
+    # older hash as newer d680ded26da5cf104dd2735a51e88d2d8f487b4d does not
+    # contain ghc961. Sadly this means we cannot use hlint as this nixpkgs
+    # does not have hlint_3_6. We would need to overrride it manually e.g. with
+    # callHackage.
     hash = "1c9db9710cb23d60570ad4d7ab829c2d34403de3";
     versName = "ghc961";
-    overrides = overlay_9_6;
+    overrides = final: prev: {
+      fourmolu = prev.fourmolu_0_12_0_0;
+      ormolu = prev.ormolu_0_7_1_0;
+
+      hlint =
+        (final.callHackageDirect
+          {
+            pkg = "hlint";
+            ver = "3.6.1";
+            sha256 = "sha256-fH4RYnWeuBqJI5d3Ba+Xs0BxYr0IYFH1OWO3k2iHGlU=";
+          }
+          { });
+    };
   };
   ghc962 = mkSet {
-    hash = "1c9db9710cb23d60570ad4d7ab829c2d34403de3";
+    hash = "d680ded26da5cf104dd2735a51e88d2d8f487b4d";
     versName = "ghc962";
-    overrides = overlay_9_6;
+    overrides = _: prev: {
+      fourmolu = prev.fourmolu_0_13_1_0;
+      hlint = prev.hlint_3_6_1;
+      ormolu = prev.ormolu_0_7_1_0;
+    };
   };
 }
