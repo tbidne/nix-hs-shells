@@ -77,6 +77,7 @@ in
     hash = "1c9db9710cb23d60570ad4d7ab829c2d34403de3";
     versName = "ghc961";
     overrides = final: prev: {
+      apply-refact = prev.apply-refact_0_13_0_0;
       fourmolu = prev.fourmolu_0_12_0_0;
       ormolu = prev.ormolu_0_7_1_0;
 
