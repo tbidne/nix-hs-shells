@@ -42,7 +42,7 @@ let
     }
 
     ghc_build () {
-      ./hadrian/build -j
+      ./hadrian/build -j --flavour=validate+werror
     }
 
     ghc_fbuild () {
