@@ -119,9 +119,11 @@ jobs:
 
       - name: Build
         run: |
+          # The patch is necessary to get the validate job to build.
           nix-shell . -A ghc --run '
             cd ./ghc-build \
               && cabal update \
+              && git apply ../nix/ghc/wno-cpp.patch \
               && ghc_fbuild'
   liquidhaskell:
     runs-on: ubuntu-latest

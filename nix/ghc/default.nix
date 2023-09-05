@@ -57,7 +57,12 @@ let
       ghc_build
     }
   '';
+
+  warnMsg = ''
+    The GHC shell is deprecated in favor of https://github.com/alpmestan/ghc.nix. It can be used via 'nix develop github:alpmestan/ghc.nix'.
+  '';
 in
 cabal_template {
   inherit devTools extraInputs extraGhcInputs ghcVers shellHook;
+  wrapper = p: x: p.lib.warn warnMsg x;
 }

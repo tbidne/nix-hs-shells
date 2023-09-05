@@ -68,6 +68,9 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default 
 
 ## GHC
 
+> **Warning**
+> The GHC shell is deprecated in favor of [ghc.nix](https://www.github.com/alpmestan/ghc.nix). The latter is better maintained and behaves more predictably (e.g. this shell will fail the validate flavour due to unexpected cpp warnings).
+
 **Attr:** `ghc`
 
 **Description:** Nix shell for [`GHC`](https://gitlab.haskell.org/ghc/ghc/) development. Includes `cabal`, `ghc`, and other needed dependencies.
