@@ -2,7 +2,6 @@
 
 # nix-hs-shells
 
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/tbidne/nix-hs-shells?include_prereleases&sort=semver)](https://github.com/tbidne/shrun/releases/)
 [![ci](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/ci.yaml?branch=main&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/ci.yaml)
 [![MIT](https://img.shields.io/github/license/tbidne/nix-hs-shells?color=blue)](https://opensource.org/licenses/MIT)
 
@@ -33,7 +32,7 @@ This section lists the provided shells. For shells with arguments, the default v
   * `ghc8107`
   * `ghc902`
   * `ghc925`, `ghc926`, `ghc927`, `ghc928`
-  * `ghc944`, `ghc945`
+  * `ghc944`, `ghc945`, `ghc946`
   * `ghc961`, `ghc962`
 * `ormolu` (`false`)
 * `hlint` (`false`)
@@ -51,7 +50,7 @@ The default ghc is the latest version that works with every tool and has decent 
 
 * `applyRefact`
 * `fourmolu`
-* `ghcVers` (`ghc945`)
+* `ghcVers` (`ghc946`)
 * `hlint`
 * `hls`
 * `ormolu`

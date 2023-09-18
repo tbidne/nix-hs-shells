@@ -25,6 +25,7 @@ export ghcVersions="
    ghc928
    ghc944
    ghc945
+   ghc946
    ghc961
    ghc962
    "

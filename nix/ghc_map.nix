@@ -10,13 +10,24 @@ let
     , versName
     , overrides ? _: _: { }
     , unsupported ? [ ]
+    , warnMsg ? null
     }:
-    let pkgs = getPkgs hash;
+    let
+      pkgs = getPkgs hash;
+      wrapper =
+        if warnMsg == null
+        then x: x
+        else x: pkgs.lib.warn warnMsg x;
     in
     {
       inherit pkgs unsupported versName;
-      compiler = pkgs.haskell.packages."${versName}".override { inherit overrides; };
+      compiler =
+        wrapper (pkgs.haskell.packages."${versName}".override { inherit overrides; });
     };
+
+  # Var for the latest hash as there are several shells that will want it
+  # (e.g. most that are > the current default).
+  latest = "ace5093e36ab1e95cb9463863491bee90d5a4183";
 
   # NOTE: We do not always need to override tools even though the default is
   # not what we want.
@@ -64,16 +75,20 @@ in
   ghc944 = mkSet {
     hash = "d680ded26da5cf104dd2735a51e88d2d8f487b4d";
     versName = "ghc944";
+    warnMsg = "GHC 9.4.4 has poor caching. Switch to 9.4.5 or 9.4.6 if possible.";
   };
   ghc945 = mkSet {
     hash = "d680ded26da5cf104dd2735a51e88d2d8f487b4d";
     versName = "ghc945";
   };
+  ghc946 = mkSet {
+    hash = latest;
+    versName = "ghc946";
+  };
   ghc961 = mkSet {
-    # older hash as newer d680ded26da5cf104dd2735a51e88d2d8f487b4d does not
-    # contain ghc961. Sadly this means we cannot use hlint as this nixpkgs
-    # does not have hlint_3_6. We would need to overrride it manually e.g. with
-    # callHackage.
+    # Older hash as newer hash does not contain ghc961. Sadly this means we
+    # cannot use hlint as this nixpkgs does not have hlint_3_6. We need to
+    # overrride it manually e.g. with callHackage.
     hash = "1c9db9710cb23d60570ad4d7ab829c2d34403de3";
     versName = "ghc961";
     overrides = final: prev: {
@@ -90,6 +105,7 @@ in
           }
           { });
     };
+    warnMsg = "GHC 9.6.1 shell has poor caching with hlint. Switch to 9.6.2 if possible.";
   };
   ghc962 = mkSet {
     hash = "d680ded26da5cf104dd2735a51e88d2d8f487b4d";
@@ -99,5 +115,6 @@ in
       hlint = prev.hlint_3_6_1;
       ormolu = prev.ormolu_0_7_1_0;
     };
+    warnMsg = "GHC 9.6.* currently has poor caching. The latest release with good caching is 9.4.6.";
   };
 }
