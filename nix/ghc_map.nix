@@ -27,7 +27,7 @@ let
 
   # Var for the latest hash as there are several shells that will want it
   # (e.g. most that are > the current default).
-  latest = "ace5093e36ab1e95cb9463863491bee90d5a4183";
+  latest = "8a86b98f0ba1c405358f1b71ff8b5e1d317f5db2";
 
   # NOTE: We do not always need to override tools even though the default is
   # not what we want.
@@ -73,7 +73,7 @@ in
   # Both ghc961 and ghc962 build 55 vs. 627 fetched, which is reasonable.
 
   ghc944 = mkSet {
-    hash = "d680ded26da5cf104dd2735a51e88d2d8f487b4d";
+    hash = latest;
     versName = "ghc944";
     warnMsg = "GHC 9.4.4 has poor caching. Switch to 9.4.5 or 9.4.6 if possible.";
   };
