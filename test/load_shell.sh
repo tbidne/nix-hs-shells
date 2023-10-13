@@ -28,6 +28,7 @@ export ghcVersions="
    ghc946
    ghc961
    ghc962
+   ghc963
    "
 
 cmd="--command exit"

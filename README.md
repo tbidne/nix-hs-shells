@@ -33,7 +33,7 @@ This section lists the provided shells. For shells with arguments, the default v
   * `ghc902`
   * `ghc925`, `ghc926`, `ghc927`, `ghc928`
   * `ghc944`, `ghc945`, `ghc946`
-  * `ghc961`, `ghc962`
+  * `ghc961`, `ghc962`, `ghc963`
 * `ormolu` (`false`)
 * `hlint` (`false`)
 * `hls` (`false`)
@@ -50,7 +50,7 @@ The default ghc is the latest version that works with every tool and has decent 
 
 * `applyRefact`
 * `fourmolu`
-* `ghcVers` (`ghc946`)
+* `ghcVers` (`ghc963`)
 * `hlint`
 * `hls`
 * `ormolu`

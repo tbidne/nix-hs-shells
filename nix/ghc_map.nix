@@ -27,7 +27,7 @@ let
 
   # Var for the latest hash as there are several shells that will want it
   # (e.g. most that are > the current default).
-  latest = "8a86b98f0ba1c405358f1b71ff8b5e1d317f5db2";
+  latest = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
 
   # NOTE: We do not always need to override tools even though the default is
   # not what we want.
@@ -78,7 +78,7 @@ in
     warnMsg = "GHC 9.4.4 has poor caching. Switch to 9.4.5 or 9.4.6 if possible.";
   };
   ghc945 = mkSet {
-    hash = "d680ded26da5cf104dd2735a51e88d2d8f487b4d";
+    hash = latest;
     versName = "ghc945";
   };
   ghc946 = mkSet {
@@ -108,13 +108,21 @@ in
     warnMsg = "GHC 9.6.1 shell has poor caching with hlint. Switch to 9.6.2 if possible.";
   };
   ghc962 = mkSet {
-    hash = "d680ded26da5cf104dd2735a51e88d2d8f487b4d";
+    hash = latest;
     versName = "ghc962";
     overrides = _: prev: {
       fourmolu = prev.fourmolu_0_13_1_0;
       hlint = prev.hlint_3_6_1;
-      ormolu = prev.ormolu_0_7_1_0;
+      ormolu = prev.ormolu_0_7_2_0;
     };
-    warnMsg = "GHC 9.6.* currently has poor caching. The latest release with good caching is 9.4.6.";
+  };
+  ghc963 = mkSet {
+    hash = latest;
+    versName = "ghc963";
+    overrides = _: prev: {
+      fourmolu = prev.fourmolu_0_13_1_0;
+      hlint = prev.hlint_3_6_1;
+      ormolu = prev.ormolu_0_7_2_0;
+    };
   };
 }

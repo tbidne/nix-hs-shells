@@ -11,7 +11,7 @@ let
   defGhcLatest =
     { applyRefact ? false
     , fourmolu ? false
-    , ghcVers ? "ghc946"
+    , ghcVers ? "ghc963"
     , hlint ? false
     , hls ? false
     , ormolu ? false

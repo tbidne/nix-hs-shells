@@ -51,6 +51,7 @@ jobs:
           - "ghc946"
           - "ghc961"
           - "ghc962"
+          - "ghc963"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -94,7 +95,7 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A default --argstr ghcVers ghc945 --run '
+          nix-shell . -A default --argstr ghcVers ghc963 --run '
             cd ./cabal-build \
               && cabal update \
               && cabal build cabal-install'
