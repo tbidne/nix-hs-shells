@@ -12,7 +12,6 @@
 - [Introduction](#introduction)
 - [Shells](#shells)
   - [Default](#default)
-  - [GHC](#ghc)
   - [LiquidHaskell](#liquidhaskell)
 - [Development](#development)
 
@@ -42,7 +41,7 @@ This section lists the provided shells. For shells with arguments, the default v
 
 **Attr:** `default`
 
-**Description:** Nix shell for general haskell development. Most packages can use this shell. Includes `cabal` and `GHC`. Note that there is no guarantee every dev tool will work with every `ghcVers`. In particular, there will often be a lag time before the latest GHCs are fully supported.
+**Description:** Nix shell for general haskell development. Most packages can use this shell. Includes `cabal` and `ghc`. Note that there is no guarantee every dev tool will work with every `ghcVers`. In particular, there will often be a lag time before the latest GHCs are fully supported.
 
 The default ghc is the latest version that works with every tool and has decent nix caching.
 
@@ -63,26 +62,6 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default
 nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default \
   --argstr ghcVers ghc925 \
   --arg hls true
-```
-
-## GHC
-
-> **Warning**
-> The GHC shell is deprecated in favor of [ghc.nix](https://www.github.com/alpmestan/ghc.nix). The latter is better maintained and behaves more predictably (e.g. this shell will fail the validate flavour due to unexpected cpp warnings).
-
-**Attr:** `ghc`
-
-**Description:** Nix shell for [`GHC`](https://gitlab.haskell.org/ghc/ghc/) development. Includes `cabal`, `ghc`, and other needed dependencies.
-
-**Args:**
-
-* `ghcVers` (`ghc962`)
-* `hls`
-
-**Usage:**
-
-```
-nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A ghc
 ```
 
 ## LiquidHaskell

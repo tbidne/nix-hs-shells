@@ -2,7 +2,7 @@
 #
 # E.g.
 #
-# nix-shell . -A ghc
+# nix-shell . -A default
 
 let
   cabal_template = import ./nix/cabal_template.nix;
@@ -23,8 +23,6 @@ let
 in
 {
   default = defGhcLatest;
-
-  ghc = import ./nix/ghc/default.nix;
 
   liquidhaskell =
     { ghcVers ? "ghc925"
