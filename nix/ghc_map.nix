@@ -125,4 +125,17 @@ in
       ormolu = prev.ormolu_0_7_2_0;
     };
   };
+
+  ghc981 = mkSet {
+    hash = "8efd5d1e283604f75a808a20e6cde0ef313d07d4";
+    versName = "ghc981";
+    unsupported = [
+      "applyRefact"
+      "fourmolu"
+      "hlint"
+      "hls"
+      "ormolu"
+    ];
+    warnMsg = "GHC 9.8.1 does not currently support any extra tools.";
+  };
 }

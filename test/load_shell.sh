@@ -29,6 +29,7 @@ export ghcVersions="
    ghc961
    ghc962
    ghc963
+   ghc981
    "
 
 cmd="--command exit"
@@ -116,13 +117,34 @@ load_all () {
   $($cmd_str)
 }
 
+load_bare () {
+  cmd_str="nix-shell -A default
+    --argstr ghcVers $1
+    --arg applyRefact false
+    --arg fourmolu false
+    --arg hlint false
+    --arg hls false
+    --arg hlint false
+    $cmd"
+
+  if [[ $verbose == 1 ]]; then
+    echo "Running: $cmd_str"
+  fi
+
+  $($cmd_str)
+}
+
 succeeded_str="Succeeded:"
 failed_str="Failed:"
 any_failed=0
 for ghcVers in $ghcVersions; do
   echo "*** TESTING $ghcVers ***"
 
-  load_all $ghcVers
+  if [[ $ghcVers == "ghc981" ]]; then
+    load_bare $ghcVers
+  else
+    load_all $ghcVers
+  fi
 
   exit_code=$?
   if [[ $exit_code -ne 0 ]]; then
