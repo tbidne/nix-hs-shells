@@ -25,7 +25,7 @@ in
   default = defGhcLatest;
 
   liquidhaskell =
-    { ghcVers ? "ghc925"
+    { ghcVers ? "ghc928"
     , hlint ? false
     , hls ? false
     }:
