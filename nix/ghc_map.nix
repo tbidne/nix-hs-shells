@@ -27,7 +27,7 @@ let
 
   # Var for the latest hash as there are several shells that will want it
   # (e.g. most that are > the current default).
-  latest = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
+  latest = "85f1ba3e51676fa8cc604a3d863d729026a6b8eb";
 
   # NOTE: We do not always need to override tools even though the default is
   # not what we want.
@@ -75,15 +75,19 @@ in
   ghc944 = mkSet {
     hash = latest;
     versName = "ghc944";
-    warnMsg = "GHC 9.4.4 has poor caching. Switch to 9.4.5 or 9.4.6 if possible.";
+    warnMsg = "GHC 9.4.4 has poor caching with tools. Switch to a later version if possible.";
   };
   ghc945 = mkSet {
-    hash = latest;
+    hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc945";
   };
   ghc946 = mkSet {
-    hash = latest;
+    hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc946";
+  };
+  ghc947 = mkSet {
+    hash = latest;
+    versName = "ghc947";
   };
   ghc961 = mkSet {
     # Older hash as newer hash does not contain ghc961. Sadly this means we
@@ -108,26 +112,26 @@ in
     warnMsg = "GHC 9.6.1 shell has poor caching with hlint. Switch to 9.6.2 if possible.";
   };
   ghc962 = mkSet {
-    hash = latest;
+    hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc962";
     overrides = _: prev: {
-      fourmolu = prev.fourmolu_0_13_1_0;
+      fourmolu = prev.fourmolu_0_14_0_0;
       hlint = prev.hlint_3_6_1;
       ormolu = prev.ormolu_0_7_2_0;
     };
   };
   ghc963 = mkSet {
-    hash = latest;
+    hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc963";
     overrides = _: prev: {
-      fourmolu = prev.fourmolu_0_13_1_0;
+      fourmolu = prev.fourmolu_0_14_0_0;
       hlint = prev.hlint_3_6_1;
       ormolu = prev.ormolu_0_7_2_0;
     };
   };
 
   ghc981 = mkSet {
-    hash = "8efd5d1e283604f75a808a20e6cde0ef313d07d4";
+    hash = latest;
     versName = "ghc981";
     unsupported = [
       "applyRefact"
