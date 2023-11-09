@@ -7,8 +7,9 @@
 let
   cabal_template = import ./nix/cabal_template.nix;
   lib = import ./nix/lib.nix;
-
-  defGhcLatest =
+in
+{
+  default =
     { applyRefact ? false
     , fourmolu ? false
     , ghcVers ? "ghc963"
@@ -20,9 +21,6 @@ let
       inherit ghcVers;
       devTools = { inherit applyRefact fourmolu hlint hls ormolu; };
     };
-in
-{
-  default = defGhcLatest;
 
   liquidhaskell =
     { ghcVers ? "ghc928"
