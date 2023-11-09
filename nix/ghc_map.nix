@@ -62,33 +62,16 @@ in
   ghc927 = mkSet { hash = "3c5319ad3aa51551182ac82ea17ab1c6b0f0df89"; versName = "ghc927"; };
   ghc928 = mkSet { hash = "75a5ebf473cd60148ba9aec0d219f72e5cf52519"; versName = "ghc928"; };
 
-  # NOTE: GHCs below here non-defaults so hashes are subject to change.
-
-  # NOTE: ghc944 builds 338 packages vs. fetching 584. This is obviously
-  # not great, so it would be nice if we could find a better hash.
-  #
-  # Also, why does it require so many more packages (900!) compared to
-  # everything else (around 600-700)?
-  #
-  # Both ghc961 and ghc962 build 55 vs. 627 fetched, which is reasonable.
-
   ghc944 = mkSet {
-    hash = latest;
+    hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc944";
     warnMsg = "GHC 9.4.4 has poor caching with tools. Switch to a later version if possible.";
   };
-  ghc945 = mkSet {
-    hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
-    versName = "ghc945";
-  };
-  ghc946 = mkSet {
-    hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
-    versName = "ghc946";
-  };
-  ghc947 = mkSet {
-    hash = latest;
-    versName = "ghc947";
-  };
+
+  ghc945 = mkSet { hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593"; versName = "ghc945"; };
+  ghc946 = mkSet { hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593"; versName = "ghc946"; };
+  ghc947 = mkSet { hash = latest; versName = "ghc947"; };
+
   ghc961 = mkSet {
     # Older hash as newer hash does not contain ghc961. Sadly this means we
     # cannot use hlint as this nixpkgs does not have hlint_3_6. We need to
@@ -111,6 +94,7 @@ in
     };
     warnMsg = "GHC 9.6.1 shell has poor caching with hlint. Switch to a later version if possible.";
   };
+
   ghc962 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc962";
@@ -120,6 +104,7 @@ in
       ormolu = prev.ormolu_0_7_2_0;
     };
   };
+
   ghc963 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc963";
