@@ -21,19 +21,23 @@ let
     let
       dontCheck = ghcSet.pkgs.haskell.lib.dontCheck;
       compiler = ghcSet.compiler;
-      toolIfSet = flagName: tool:
+      addTool = acc: tool:
+        let flagName = tool.flagName;
+        in
         if devTools."${flagName}"
         then
           if member flagName ghcSet.unsupported
           then throw "${flagName} is unsupported for ${ghcSet.versName}."
-          else [ (dontCheck tool) ]
-        else [ ];
+          else acc ++ [ (dontCheck tool.pkg) ]
+        else acc;
+      allTools =
+        [{ flagName = "applyRefact"; pkg = compiler.apply-refact; }
+          { flagName = "fourmolu"; pkg = compiler.fourmolu; }
+          { flagName = "hls"; pkg = compiler.haskell-language-server; }
+          { flagName = "hlint"; pkg = compiler.hlint; }
+          { flagName = "ormolu"; pkg = compiler.ormolu; }];
     in
-    (toolIfSet "applyRefact" compiler.apply-refact)
-    ++ (toolIfSet "fourmolu" compiler.fourmolu)
-    ++ (toolIfSet "hls" compiler.haskell-language-server)
-    ++ (toolIfSet "hlint" compiler.hlint)
-    ++ (toolIfSet "ormolu" compiler.ormolu);
+    builtins.foldl' addTool [ ] allTools;
 in
 {
   inherit mkDev;
