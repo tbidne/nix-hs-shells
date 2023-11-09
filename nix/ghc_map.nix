@@ -109,7 +109,7 @@ in
           }
           { });
     };
-    warnMsg = "GHC 9.6.1 shell has poor caching with hlint. Switch to 9.6.2 if possible.";
+    warnMsg = "GHC 9.6.1 shell has poor caching with hlint. Switch to a later version if possible.";
   };
   ghc962 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
