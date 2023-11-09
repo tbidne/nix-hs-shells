@@ -40,8 +40,10 @@ hlint="--arg hlint true"
 hls="--arg hls true"
 ormolu="--arg ormolu true"
 verbose=0
+
 while [ $# -gt 0 ]; do
-    if [[ $1 == "--help" || $1 == "-h" ]]; then
+  case "$1" in
+    "-h" | "--help")
       echo -e "load_shell: Loads haskell shell.\n"
       echo "Usage: load_shell.sh [--apply-refact (true | false)]"
       echo "                     [-d|--dry-run]"
@@ -66,38 +68,48 @@ while [ $# -gt 0 ]; do
       echo -e "  --no-tools                     Disables all tools.\n"
       echo -e "  --ormolu (true | false)        Enables ormolu tool.\n"
       exit 0
-    elif [[ $1 == "--apply-refact" ]]; then
+      ;;
+    "--apply-refact")
       apply_refact=$(parse_bool "applyRefact" $2)
       shift
-    elif [[ $1 == "--dry-run" || $1 == "-d" ]]; then
+      ;;
+    "d" | "--dry-run")
       cmd="--dry-run"
-    elif [[ $1 == "--fourmolu" ]]; then
+      ;;
+    "--fourmolu")
       fourmolu=$(parse_bool "fourmolu" $2)
       shift
-    elif [[ $1 == "--ghc" ]]; then
+      ;;
+    "--ghc")
       ghcVersions=$2
       shift
-    elif [[ $1 == "--hlint" ]]; then
+      ;;
+    "--hlint")
       hlint=$(parse_bool "hlint" $2)
       shift
-    elif [[ $1 == "--hls" ]]; then
+      ;;
+    "--hls")
       hls=$(parse_bool "hls" $2)
       shift
-    elif [[ $1 == "--no-tools" ]]; then
+      ;;
+    "--no-tools")
       apply_refact="--arg applyRefact false"
       fourmolu="--arg fourmolu false"
       hlint="--arg hlint false"
       hls="--arg hls false"
       ormolu="--arg ormolu false"
-    elif [[ $1 == "--ormolu" ]]; then
+      ;;
+    "--ormolu")
       ormolu=$(parse_bool "ormolu" $2)
       shift
-    elif [[ $1 == "--verbose" || $1 == "-v" ]]; then
+      ;;
+    "-v" | "--verbose")
       verbose=1
-    else
+      ;;
+    *)
       echo "Unexpected arg: '$1'. Try --help."
       exit 1
-    fi
+    esac
     shift
   done
 
@@ -115,7 +127,7 @@ load_all () {
     echo "Running: $cmd_str"
   fi
 
-  $($cmd_str)
+  $cmd_str
 }
 
 load_bare () {
@@ -132,7 +144,7 @@ load_bare () {
     echo "Running: $cmd_str"
   fi
 
-  $($cmd_str)
+  $cmd_str
 }
 
 succeeded_str="Succeeded:"
