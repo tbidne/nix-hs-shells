@@ -27,7 +27,7 @@ let
 
   # Var for the latest hash as there are several shells that will want it
   # (e.g. most that are > the current default).
-  latest = "85f1ba3e51676fa8cc604a3d863d729026a6b8eb";
+  latest = "5a09cb4b393d58f9ed0d9ca1555016a8543c2ac8";
 
   # NOTE: We do not always need to override tools even though the default is
   # not what we want.
@@ -70,7 +70,8 @@ in
 
   ghc945 = mkSet { hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593"; versName = "ghc945"; };
   ghc946 = mkSet { hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593"; versName = "ghc946"; };
-  ghc947 = mkSet { hash = latest; versName = "ghc947"; };
+  ghc947 = mkSet { hash = "85f1ba3e51676fa8cc604a3d863d729026a6b8eb"; versName = "ghc947"; };
+  ghc948 = mkSet { hash = latest; versName = "ghc948"; };
 
   ghc961 = mkSet {
     # Older hash as newer hash does not contain ghc961. Sadly this means we
