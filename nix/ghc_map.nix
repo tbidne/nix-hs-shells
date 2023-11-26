@@ -99,7 +99,7 @@ in
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc962";
     overrides = _: prev: {
-      fourmolu = prev.fourmolu_0_14_0_0;
+      fourmolu = prev.fourmolu_0_13_1_0;
       hlint = prev.hlint_3_6_1;
       ormolu = prev.ormolu_0_7_2_0;
     };
@@ -109,7 +109,7 @@ in
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc963";
     overrides = _: prev: {
-      fourmolu = prev.fourmolu_0_14_0_0;
+      fourmolu = prev.fourmolu_0_13_1_0;
       hlint = prev.hlint_3_6_1;
       ormolu = prev.ormolu_0_7_2_0;
     };
