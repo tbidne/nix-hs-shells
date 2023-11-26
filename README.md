@@ -2,7 +2,8 @@
 
 # nix-hs-shells
 
-[![ci](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/ci.yaml?branch=main&labelColor=2f353c)](https://github.com/tbidne/hs-nix-shells/actions/workflows/ci.yaml)
+[![ci](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/ci.yaml?branch=main&labelColor=2f353c&label=ci)](https://github.com/tbidne/hs-nix-shells/actions/workflows/ci.yaml)
+[![libs](http://img.shields.io/github/actions/workflow/status/tbidne/hs-nix-shells/libs.yaml?branch=main&labelColor=2f353c&label=libs)](https://github.com/tbidne/hs-nix-shells/actions/workflows/libs.yaml)
 [![MIT](https://img.shields.io/github/license/tbidne/nix-hs-shells?color=blue)](https://opensource.org/licenses/MIT)
 
 </div>

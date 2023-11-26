@@ -9,11 +9,20 @@ on:
     branches:
       - main
 
+  # Originally we had this set to every day, as we wanted to test
+  # cabal/liquidhaskell builds frequently for upstream breaks. However, there
+  # really isn't a need to run these other jobs every day. So how often should
+  # we?
+  #
+  # Arguably we only need to run them on a change, as they __should't__
+  # rely on upstream changes, other than the jobs themselves. But it's
+  # possible something goes wrong with nix e.g. the cache, so it seems fine
+  # to leave them running weekly for now.
   schedule:
-    # Every day at 00:00 UTC.
+    # Every Sunday at 00:00 UTC.
     #
     # https://crontab.guru
-    - cron: '0 0 * * 0-6'
+    - cron: '0 0 * * 0'
 
   workflow_dispatch:
 
@@ -99,69 +108,6 @@ jobs:
             --no-tools \
             --hls true \
             --verbose
-
-  cabal:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup nix
-        uses: cachix/install-nix-action@v22
-        with:
-          nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/b39924fc7764c08ae3b51beef9a3518c414cdb7d.tar.gz
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-
-      - name: Clone cabal
-        uses: actions/checkout@v3
-        with:
-          repository: haskell/cabal
-          ref: master
-          path: ./cabal-build
-
-      - name: Build
-        run: |
-          nix-shell . -A default --argstr ghcVers ghc963 --run '
-            cd ./cabal-build \
-              && cabal update \
-              && cabal build cabal-install'
-
-  liquidhaskell:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup nix
-        uses: cachix/install-nix-action@v22
-        with:
-          nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/b39924fc7764c08ae3b51beef9a3518c414cdb7d.tar.gz
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-
-      - name: Clone liquidhaskell
-        uses: actions/checkout@v3
-        with:
-          repository: ucsd-progsys/liquidhaskell
-          ref: develop
-          path: ./liquidhaskell-build
-          submodules: recursive
-
-      - name: hls = true
-        run: nix-shell . -A liquidhaskell --arg hls true --dry-run
-
-      - name: Build
-        run: |
-          nix-shell . -A liquidhaskell --run '
-            cd ./liquidhaskell-build \
-              && cabal update \
-              && cabal build'
-
-      - name: Test
-        run: |
-          nix-shell . -A liquidhaskell --run '
-            cd ./liquidhaskell-build \
-              && cabal update \
-              && cabal test'
 
   style:
     runs-on: ubuntu-latest
