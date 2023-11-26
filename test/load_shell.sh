@@ -46,7 +46,7 @@ while [ $# -gt 0 ]; do
     "-h" | "--help")
       echo -e "load_shell: Loads haskell shell.\n"
       echo "Usage: load_shell.sh [--apply-refact (true | false)]"
-      echo "                     [-d|--dry-run]"
+      echo "                     [--check]"
       echo "                     [--fourmolu (true | false)]"
       echo "                     [--ghc GHC]"
       echo "                     [--hlint (true | false)]"
@@ -58,7 +58,7 @@ while [ $# -gt 0 ]; do
       echo ""
       echo "Available options:"
       echo -e "  --apply-refact (true | false)  Enables apply-refact tool.\n"
-      echo -e "  --d,--dry-run                  Runs with --dry-run i.e. does not build"
+      echo -e "  --check                        Runs with --check i.e. does not build"
       echo -e "                                 anything.\n"
       echo -e "  --fourmolu (true | false)      Enables fourmolu tool.\n"
       echo -e "  --ghc                          Runs with a specific ghc e.g. ghc902. Otherwise"
@@ -73,8 +73,8 @@ while [ $# -gt 0 ]; do
       apply_refact=$(parse_bool "applyRefact" $2)
       shift
       ;;
-    "d" | "--dry-run")
-      cmd="--dry-run"
+    "--check")
+      cmd="--check"
       ;;
     "--fourmolu")
       fourmolu=$(parse_bool "fourmolu" $2)

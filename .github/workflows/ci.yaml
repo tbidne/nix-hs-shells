@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - check
 
   pull_request:
     branches:
@@ -18,7 +19,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  default_dry_run:
+  default_check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -30,8 +31,8 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - name: Dry run
-        run: ./test/load_shell.sh --dry-run --verbose
+      - name: Check
+        run: ./test/load_shell.sh --check --verbose
 
   # Need to run these separately as there is not enough space to run them
   # all on the same machine.
