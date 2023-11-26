@@ -18,21 +18,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  default_dry_run:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup nix
-        uses: cachix/install-nix-action@v22
-        with:
-          nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/b39924fc7764c08ae3b51beef9a3518c414cdb7d.tar.gz
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-
-      - name: Dry run
-        run: ./test/load_shell.sh --dry-run --verbose
-
   # Need to run these separately as there is not enough space to run them
   # all on the same machine.
   default:
@@ -74,6 +59,45 @@ jobs:
           ./test/load_shell.sh \
             --ghc ${{ matrix.ghc }} \
             --hls false \
+            --verbose
+
+  # It turns out we _do_ have enough storage to load hls by itself.
+  hls:
+    strategy:
+      fail-fast: false
+      matrix:
+        ghc:
+          - "ghc8107"
+          - "ghc902"
+          - "ghc925"
+          - "ghc926"
+          - "ghc927"
+          - "ghc928"
+          - "ghc944"
+          - "ghc945"
+          - "ghc946"
+          - "ghc947"
+          - "ghc961"
+          - "ghc962"
+          - "ghc963"
+          - "ghc981"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup nix
+        uses: cachix/install-nix-action@v22
+        with:
+          nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/b39924fc7764c08ae3b51beef9a3518c414cdb7d.tar.gz
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Load shell with hls
+        run: |
+          ./test/load_shell.sh \
+            --ghc ${{ matrix.ghc }} \
+            --no-tools \
+            --hls true \
             --verbose
 
   cabal:
