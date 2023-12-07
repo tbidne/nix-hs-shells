@@ -74,7 +74,7 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default 
 
 **Args:**
 
-* `ghcVers` (`ghc947`)
+* `ghcVers`
 * `hlint`
 * `hls`
 
