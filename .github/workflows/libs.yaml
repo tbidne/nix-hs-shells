@@ -82,4 +82,4 @@ jobs:
           nix-shell . -A liquidhaskell --run '
             cd ./liquidhaskell-build \
               && cabal update \
-              && cabal test'
+              && ./scripts/test/test_plugin.sh'
