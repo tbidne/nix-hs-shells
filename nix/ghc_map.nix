@@ -93,7 +93,7 @@ in
           }
           { });
     };
-    warnMsg = "GHC 9.6.1 shell has poor caching with hlint. Switch to a later version if possible.";
+    warnMsg = "GHC 9.6.1 shell has poor caching. Switch to a later version if possible.";
   };
 
   ghc962 = mkSet {
@@ -109,6 +109,16 @@ in
   ghc963 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc963";
+    overrides = _: prev: {
+      fourmolu = prev.fourmolu_0_13_1_0;
+      hlint = prev.hlint_3_6_1;
+      ormolu = prev.ormolu_0_7_2_0;
+    };
+  };
+
+  ghc964 = mkSet {
+    hash = "<none>";
+    versName = "ghc964";
     overrides = _: prev: {
       fourmolu = prev.fourmolu_0_13_1_0;
       hlint = prev.hlint_3_6_1;
