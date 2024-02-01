@@ -131,13 +131,10 @@ load_all () {
   $cmd_str
 }
 
-load_bare () {
+load_some () {
   cmd_str="nix-shell -A default
     --argstr ghcVers $1
     --arg applyRefact false
-    --arg fourmolu false
-    --arg hlint false
-    --arg hls false
     --arg hlint false
     $cmd"
 
@@ -155,7 +152,7 @@ for ghcVers in $ghcVersions; do
   echo "*** TESTING $ghcVers ***"
 
   if [[ $ghcVers == "ghc981" ]]; then
-    load_bare $ghcVers
+    load_some $ghcVers
   else
     load_all $ghcVers
   fi
