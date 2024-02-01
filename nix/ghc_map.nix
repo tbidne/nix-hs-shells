@@ -25,10 +25,6 @@ let
         wrapper (pkgs.haskell.packages."${versName}".override { inherit overrides; });
     };
 
-  # Var for the latest hash as there are several shells that will want it
-  # (e.g. most that are > the current default).
-  latest = "5a09cb4b393d58f9ed0d9ca1555016a8543c2ac8";
-
   # NOTE: We do not always need to override tools even though the default is
   # not what we want.
   #
@@ -71,7 +67,7 @@ in
   ghc945 = mkSet { hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593"; versName = "ghc945"; };
   ghc946 = mkSet { hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593"; versName = "ghc946"; };
   ghc947 = mkSet { hash = "85f1ba3e51676fa8cc604a3d863d729026a6b8eb"; versName = "ghc947"; };
-  ghc948 = mkSet { hash = latest; versName = "ghc948"; };
+  ghc948 = mkSet { hash = "5a09cb4b393d58f9ed0d9ca1555016a8543c2ac8"; versName = "ghc948"; };
 
   ghc961 = mkSet {
     # Older hash as newer hash does not contain ghc961. Sadly this means we
@@ -117,15 +113,19 @@ in
   };
 
   ghc981 = mkSet {
-    hash = latest;
+    hash = "97b17f32362e475016f942bbdfda4a4a72a8a652";
     versName = "ghc981";
+    overrides = _: prev: {
+      # after the next haskell-updates -> nixos-unstable merge
+      #apply-refact = prev.apply-refact_0_14_0_0;
+      fourmolu = prev.fourmolu_0_14_1_0;
+      #hlint = prev.hlint_3_8;
+      ormolu = prev.ormolu_0_7_3_0;
+    };
     unsupported = [
       "applyRefact"
-      "fourmolu"
       "hlint"
-      "hls"
-      "ormolu"
     ];
-    warnMsg = "GHC 9.8.1 does not currently support any extra tools.";
+    warnMsg = "GHC 9.8.1 does not currently support applyRefact or hlint.";
   };
 }
