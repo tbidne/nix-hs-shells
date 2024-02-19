@@ -18,6 +18,11 @@ let
         if warnMsg == null
         then x: x
         else x: pkgs.lib.warn warnMsg x;
+
+      warnPoorToolCache = vers:
+        "GHC "
+        + vers
+        + " shell has poor caching with tools. Switch to a later version if possible.";
     in
     {
       inherit pkgs unsupported versName;
@@ -61,7 +66,7 @@ in
   ghc944 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc944";
-    warnMsg = "GHC 9.4.4 has poor caching with tools. Switch to a later version if possible.";
+    warnMsg = warnPoorToolCache "9.4.4";
   };
 
   ghc945 = mkSet { hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593"; versName = "ghc945"; };
@@ -89,7 +94,7 @@ in
           }
           { });
     };
-    warnMsg = "GHC 9.6.1 shell has poor caching with hlint. Switch to a later version if possible.";
+    warnMsg = warnPoorToolCache "9.6.1";
   };
 
   ghc962 = mkSet {
