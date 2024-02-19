@@ -13,22 +13,41 @@ let
     , warnMsg ? null
     }:
     let
+      hlib = pkgs.haskell.lib;
       pkgs = getPkgs hash;
       wrapper =
         if warnMsg == null
         then x: x
         else x: pkgs.lib.warn warnMsg x;
-
-      warnPoorToolCache = vers:
-        "GHC "
-        + vers
-        + " shell has poor caching with tools. Switch to a later version if possible.";
     in
     {
       inherit pkgs unsupported versName;
       compiler =
-        wrapper (pkgs.haskell.packages."${versName}".override { inherit overrides; });
+        wrapper (pkgs.haskell.packages."${versName}".override {
+          # compose inherited overrides w/ custom set below
+          overrides = final: prev: (overrides final prev) // {
+            # Conundrum: This package had failing tests on CI for GHC 9.4.4.
+            # On the one hand, GHC 9.4.4 is not a priority as its caching is
+            # poor and there are better, more recent versions.
+            #
+            # On the other hand, this could happen to a version we care about,
+            # so we should probably do something about it.
+            #
+            # We could override hls to disable floskell as it is not a package
+            # I personally care about. But that feels like a sticky situation,
+            # providing hls w/ some plugins randomly disabled.
+            #
+            # Probably the best compromise is to simply disable tests suites as
+            # needed.
+            hls-floskell-plugin = hlib.dontCheck prev.hls-floskell-plugin;
+          };
+        });
     };
+
+  warnPoorToolCache = vers:
+    "GHC "
+    + vers
+    + " shell has poor caching with tools. Switch to a later version if possible.";
 
   # NOTE: We do not always need to override tools even though the default is
   # not what we want.
