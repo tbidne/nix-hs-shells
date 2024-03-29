@@ -136,20 +136,44 @@ in
     };
   };
 
+  ghc964 = mkSet {
+    hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
+    versName = "ghc964";
+  };
+
   ghc981 = mkSet {
-    hash = "97b17f32362e475016f942bbdfda4a4a72a8a652";
+    hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
     versName = "ghc981";
     overrides = _: prev: {
-      # after the next haskell-updates -> nixos-unstable merge
       #apply-refact = prev.apply-refact_0_14_0_0;
       fourmolu = prev.fourmolu_0_14_1_0;
-      #hlint = prev.hlint_3_8;
+      hlint = prev.hlint_3_8;
       ormolu = prev.ormolu_0_7_3_0;
     };
+    # NOTE: [GHC 9.8 apply-refact]
+    #
+    # Building ghc-exactprint-1.8.0.0 (required for apply-refact) fails due
+    # to missing dependencies. We probably need to wait until
+    # ghc-exactprint-1.8.0.0 is the default before we can enable applyRefact.
     unsupported = [
       "applyRefact"
-      "hlint"
     ];
-    warnMsg = "GHC 9.8.1 does not currently support applyRefact or hlint.";
+    warnMsg = "GHC 9.8.1 does not currently support applyRefact.";
+  };
+
+  ghc982 = mkSet {
+    hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
+    versName = "ghc982";
+    overrides = _: prev: {
+      #apply-refact = prev.apply-refact_0_14_0_0;
+      fourmolu = prev.fourmolu_0_14_1_0;
+      hlint = prev.hlint_3_8;
+      ormolu = prev.ormolu_0_7_3_0;
+    };
+    # see NOTE: [GHC 9.8 apply-refact]
+    unsupported = [
+      "applyRefact"
+    ];
+    warnMsg = "GHC 9.8.2 does not currently support applyRefact.";
   };
 }

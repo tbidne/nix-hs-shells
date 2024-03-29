@@ -31,7 +31,9 @@ export ghcVersions="
    ghc961
    ghc962
    ghc963
+   ghc964
    ghc981
+   ghc982
    "
 
 cmd="--command exit"
@@ -135,7 +137,6 @@ load_some () {
   cmd_str="nix-shell -A default
     --argstr ghcVers $1
     --arg applyRefact false
-    --arg hlint false
     $cmd"
 
   if [[ $verbose == 1 ]]; then
@@ -151,7 +152,7 @@ any_failed=0
 for ghcVers in $ghcVersions; do
   echo "*** TESTING $ghcVers ***"
 
-  if [[ $ghcVers == "ghc981" ]]; then
+  if [[ $ghcVers == "ghc981" || $ghcVers == "ghc982" ]]; then
     load_some $ghcVers
   else
     load_all $ghcVers

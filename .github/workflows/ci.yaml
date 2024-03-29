@@ -48,7 +48,9 @@ jobs:
           - "ghc961"
           - "ghc962"
           - "ghc963"
+          - "ghc964"
           - "ghc981"
+          - "ghc982"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
