@@ -33,7 +33,7 @@ This section lists the provided shells. For shells with arguments, the default v
   * `ghc902`
   * `ghc925`, `ghc926`, `ghc927`, `ghc928`
   * `ghc944`, `ghc945`, `ghc946`, `ghc947`, `ghc948`
-  * `ghc961`, `ghc962`, `ghc963`, `ghc964`
+  * `ghc961`, `ghc962`, `ghc963`, `ghc964`, `ghc965`
   * `ghc981`, `ghc982`
 * `ormolu` (`false`)
 * `hlint` (`false`)

@@ -49,6 +49,7 @@ jobs:
           - "ghc962"
           - "ghc963"
           - "ghc964"
+          - "ghc965"
           - "ghc981"
           - "ghc982"
     runs-on: ubuntu-latest
@@ -92,6 +93,8 @@ jobs:
           - "ghc961"
           - "ghc962"
           - "ghc963"
+          - "ghc964"
+          #- "ghc965"
           - "ghc981"
     runs-on: ubuntu-latest
     steps:

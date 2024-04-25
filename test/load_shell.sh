@@ -3,7 +3,7 @@ set +e
 # Test every ghc version w/ all optional tools. Obviously this can take a very
 # long time.
 
-parse_bool (){
+parse_bool () {
   if [[ $2 == "true" ]]; then
     echo "--arg $1 true"
   elif [[ $2 == "false" ]]; then
@@ -32,6 +32,7 @@ export ghcVersions="
    ghc962
    ghc963
    ghc964
+   ghc965
    ghc981
    ghc982
    "
@@ -133,10 +134,23 @@ load_all () {
   $cmd_str
 }
 
-load_some () {
+load_ghc98 () {
   cmd_str="nix-shell -A default
     --argstr ghcVers $1
     --arg applyRefact false
+    $cmd"
+
+  if [[ $verbose == 1 ]]; then
+    echo "Running: $cmd_str"
+  fi
+
+  $cmd_str
+}
+
+load_ghc965 () {
+  cmd_str="nix-shell -A default
+    --argstr ghcVers $1
+    --arg hls false
     $cmd"
 
   if [[ $verbose == 1 ]]; then
@@ -153,7 +167,9 @@ for ghcVers in $ghcVersions; do
   echo "*** TESTING $ghcVers ***"
 
   if [[ $ghcVers == "ghc981" || $ghcVers == "ghc982" ]]; then
-    load_some $ghcVers
+    load_ghc98 $ghcVers
+  elif [[ $ghcVers == "ghc965" ]]; then
+    load_ghc965 $ghcVers
   else
     load_all $ghcVers
   fi

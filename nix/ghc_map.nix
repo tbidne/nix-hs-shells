@@ -141,6 +141,17 @@ in
     versName = "ghc964";
   };
 
+  ghc965 = mkSet {
+    hash = "572af610f6151fd41c212f897c71f7056e3fb518";
+    versName = "ghc965";
+
+    unsupported = [
+      "hls"
+    ];
+
+    warnMsg = "GHC 9.6.5 does not have great caching, and does not work with hls.";
+  };
+
   ghc981 = mkSet {
     hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
     versName = "ghc981";
