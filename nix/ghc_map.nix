@@ -142,16 +142,14 @@ in
   };
 
   ghc965 = mkSet {
-    hash = "572af610f6151fd41c212f897c71f7056e3fb518";
+    hash = "25865a40d14b3f9cf19f19b924e2ab4069b09588";
     versName = "ghc965";
-
-    unsupported = [
-      "hls"
-    ];
-
-    warnMsg = "GHC 9.6.5 does not have great caching, and does not work with hls.";
   };
 
+  # NOTE: We could upgrade this hash to 25865a40d14b3f9cf19f19b924e2ab4069b09588
+  # -- what ghc982 currently uses -- and then we'd get apply-refact.
+  # However ghc981's caching is terrible with that hash, so we judge that the
+  # better caching is worth giving up apply-refact.
   ghc981 = mkSet {
     hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
     versName = "ghc981";
@@ -161,30 +159,21 @@ in
       hlint = prev.hlint_3_8;
       ormolu = prev.ormolu_0_7_3_0;
     };
-    # NOTE: [GHC 9.8 apply-refact]
-    #
-    # Building ghc-exactprint-1.8.0.0 (required for apply-refact) fails due
-    # to missing dependencies. We probably need to wait until
-    # ghc-exactprint-1.8.0.0 is the default before we can enable applyRefact.
+
     unsupported = [
       "applyRefact"
     ];
-    warnMsg = "GHC 9.8.1 does not currently support applyRefact.";
+    warnMsg = "GHC 9.8.1 shell does not support applyRefact.";
   };
 
   ghc982 = mkSet {
-    hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
+    hash = "25865a40d14b3f9cf19f19b924e2ab4069b09588";
     versName = "ghc982";
     overrides = _: prev: {
-      #apply-refact = prev.apply-refact_0_14_0_0;
-      fourmolu = prev.fourmolu_0_14_1_0;
+      apply-refact = prev.apply-refact_0_14_0_0;
+      fourmolu = prev.fourmolu_0_15_0_0;
       hlint = prev.hlint_3_8;
-      ormolu = prev.ormolu_0_7_3_0;
+      ormolu = prev.ormolu_0_7_4_0;
     };
-    # see NOTE: [GHC 9.8 apply-refact]
-    unsupported = [
-      "applyRefact"
-    ];
-    warnMsg = "GHC 9.8.2 does not currently support applyRefact.";
   };
 }

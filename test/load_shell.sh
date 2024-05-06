@@ -138,23 +138,10 @@ load_all () {
   $cmd_str
 }
 
-load_ghc98 () {
+load_ghc981 () {
   cmd_str="nix-shell -A default
     --argstr ghcVers $1
     --arg applyRefact false
-    $cmd"
-
-  if [[ $verbose == 1 ]]; then
-    echo "Running: $cmd_str"
-  fi
-
-  $cmd_str
-}
-
-load_ghc965 () {
-  cmd_str="nix-shell -A default
-    --argstr ghcVers $1
-    --arg hls false
     $cmd"
 
   if [[ $verbose == 1 ]]; then
@@ -170,10 +157,8 @@ any_failed=0
 for ghcVers in $ghcVersions; do
   echo "*** TESTING $ghcVers ***"
 
-  if [[ $ghcVers == "ghc981" || $ghcVers == "ghc982" ]]; then
-    load_ghc98 $ghcVers
-  elif [[ $ghcVers == "ghc965" ]]; then
-    load_ghc965 $ghcVers
+  if [[ $ghcVers == "ghc981" ]]; then
+    load_ghc981 $ghcVers
   else
     load_all $ghcVers
   fi

@@ -12,7 +12,7 @@ in
   default =
     { applyRefact ? false
     , fourmolu ? false
-    , ghcVers ? "ghc964"
+    , ghcVers ? "ghc965"
     , hlint ? false
     , hls ? false
     , ormolu ? false
