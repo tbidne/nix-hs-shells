@@ -16,6 +16,12 @@ parse_bool () {
 
 export LANG="C.UTF-8"
 
+# NOTE: [Manageable CI]
+#
+# Not included due to poor caching + not important:
+#   - ghc944
+#   - ghc961
+
 export ghcVersions="
    ghc8107
    ghc902
@@ -23,12 +29,10 @@ export ghcVersions="
    ghc926
    ghc927
    ghc928
-   ghc944
    ghc945
    ghc946
    ghc947
    ghc948
-   ghc961
    ghc962
    ghc963
    ghc964

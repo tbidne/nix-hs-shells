@@ -26,6 +26,8 @@ on:
 
   workflow_dispatch:
 
+# see NOTE: [Manageable CI]
+
 jobs:
   # Need to run these separately as there is not enough space to run them
   # all on the same machine.
@@ -40,12 +42,10 @@ jobs:
           - "ghc926"
           - "ghc927"
           - "ghc928"
-          - "ghc944"
           - "ghc945"
           - "ghc946"
           - "ghc947"
           - "ghc948"
-          - "ghc961"
           - "ghc962"
           - "ghc963"
           - "ghc964"
@@ -85,12 +85,10 @@ jobs:
           - "ghc926"
           - "ghc927"
           - "ghc928"
-          - "ghc944"
           - "ghc945"
           - "ghc946"
           - "ghc947"
           - "ghc948"
-          - "ghc961"
           - "ghc962"
           - "ghc963"
           - "ghc964"
