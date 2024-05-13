@@ -30,13 +30,10 @@ The below matrix shows how well a particular GHC version is supported. In partic
 
 GHC versions that support all tools and have fast caching are bolded. Precise information can be found in the source: [nix/ghc_map.nix](./nix/ghc_map.nix)
 
+In the interest of brevity, only the latest 3 major versions are listed. Older versions are listed in the collapsed table below.
+
 | GHC        | Caching | HLS | All Tools|
 |:-----------|--------:|----:|---------:|
-| **8.10.7** |       ✔️ |   ✔️ |        ✔️ |
-| **9.0.2**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.2.5**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.2.7**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.2.8**  |       ✔️ |   ✔️ |        ✔️ |
 | 9.4.4      |      ❌ |   ✔️ |        ✔️ |
 | **9.4.5**  |       ✔️ |   ✔️ |        ✔️ |
 | **9.4.6**  |       ✔️ |   ✔️ |        ✔️ |
@@ -49,6 +46,19 @@ GHC versions that support all tools and have fast caching are bolded. Precise in
 | **9.6.5**  |       ✔️ |   ✔️ |        ✔️ |
 | 9.8.1      |       ✔️ |   ✔️ |       ❌ |
 | **9.8.2**  |       ✔️ |   ✔️ |        ✔️ |
+
+<details>
+<summary>Click to expand legacy versions</summary>
+
+| GHC        | Caching | HLS | All Tools|
+|:-----------|--------:|----:|---------:|
+| **8.10.7** |       ✔️ |   ✔️ |        ✔️ |
+| **9.0.2**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.2.5**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.2.7**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.2.8**  |       ✔️ |   ✔️ |        ✔️ |
+
+</details>
 
 # Shells
 
