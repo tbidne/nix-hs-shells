@@ -56,7 +56,7 @@ while [ $# -gt 0 ]; do
       echo "Usage: load_shell.sh [--apply-refact (true | false)]"
       echo "                     [-d|--dry-run]"
       echo "                     [--fourmolu (true | false)]"
-      echo "                     [--ghc GHC]"
+      echo "                     [-g|--ghc GHC]"
       echo "                     [--hlint (true | false)]"
       echo "                     [--hls (true | false)]"
       echo "                     [--no-tools]"
@@ -69,7 +69,7 @@ while [ $# -gt 0 ]; do
       echo -e "  --d,--dry-run                  Runs with --dry-run i.e. does not build"
       echo -e "                                 anything.\n"
       echo -e "  --fourmolu (true | false)      Enables fourmolu tool.\n"
-      echo -e "  --ghc                          Runs with a specific ghc e.g. ghc902. Otherwise"
+      echo -e "  -g,--ghc                       Runs with a specific ghc e.g. ghc902. Otherwise"
       echo -e "                                 tries all versions.\n"
       echo -e "  --hlint (true | false)         Enables hlint tool.\n"
       echo -e "  --hls (true | false)           Enables hls tool.\n"
@@ -81,14 +81,14 @@ while [ $# -gt 0 ]; do
       apply_refact=$(parse_bool "applyRefact" $2)
       shift
       ;;
-    "d" | "--dry-run")
+    "-d" | "--dry-run")
       cmd="--dry-run"
       ;;
     "--fourmolu")
       fourmolu=$(parse_bool "fourmolu" $2)
       shift
       ;;
-    "--ghc")
+    "-g" | "--ghc")
       ghcVersions=$2
       shift
       ;;
