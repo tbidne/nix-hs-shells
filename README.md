@@ -22,11 +22,15 @@ This packages provides lightweight nix shells for general haskell development wi
 
 # GHC Support Matrix
 
-The below matrix shows how well a particular GHC version is supported. In particular:
+The below matrix shows how well a particular GHC version is supported. Legend:
 
-- **Caching:** A ✔️ means that the GHC shell has fast caching for itself and all supported tools. A ❌ means that either the bare GHC shell itself or at least one supported tool has poor caching.
-- **HLS:** If the **haskell-language-supported** in particular is supported.
-- **All Tools:** If every tool is supported.
+- 🌕: Support exists with good caching.
+- 🌓: Support exists with poor caching.
+- 🌑: Support does not exist.
+
+- **Caching:** A 🌕 means that the GHC shell has fast caching for itself. A 🌓 means that either the bare GHC shell itself or at least one supported tool has poor caching.
+- **HLS:** If the **haskell-language-server** in particular is supported.
+- **All Tools:** A 🌕 means that all tools are supported with good caching. A 🌓 means that at least one tool has poor caching, and 🌑 means that at least one tool is not supported.
 
 GHC versions that support all tools and have fast caching are bolded. Precise information can be found in the source: [nix/ghc_map.nix](./nix/ghc_map.nix)
 
@@ -34,29 +38,29 @@ In the interest of brevity, only the latest 3 major versions are listed. Older v
 
 | GHC        | Caching | HLS | All Tools|
 |:-----------|--------:|----:|---------:|
-| 9.4.4      |      ❌ |   ✔️ |        ✔️ |
-| **9.4.5**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.4.6**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.4.7**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.4.8**  |       ✔️ |   ✔️ |        ✔️ |
-| 9.6.1      |      ❌ |   ✔️ |        ✔️ |
-| **9.6.2**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.6.3**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.6.4**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.6.5**  |       ✔️ |   ✔️ |        ✔️ |
-| 9.8.1      |       ✔️ |   ✔️ |       ❌ |
-| **9.8.2**  |       ✔️ |   ✔️ |        ✔️ |
+| 9.4.4      |      🌓 |  🌕 |       🌕 |
+| **9.4.5**  |      🌕 |  🌕 |       🌕 |
+| **9.4.6**  |      🌕 |  🌕 |       🌕 |
+| **9.4.7**  |      🌕 |  🌕 |       🌕 |
+| **9.4.8**  |      🌕 |  🌕 |       🌕 |
+| 9.6.1      |      🌓 |  🌕 |       🌕 |
+| **9.6.2**  |      🌕 |  🌕 |       🌕 |
+| **9.6.3**  |      🌕 |  🌕 |       🌕 |
+| **9.6.4**  |      🌕 |  🌕 |       🌕 |
+| **9.6.5**  |      🌕 |  🌕 |       🌕 |
+| 9.8.1      |      🌕 |  🌕 |       🌑 |
+| **9.8.2**  |      🌕 |  🌕 |       🌕 |
 
 <details>
 <summary>Click to expand legacy versions</summary>
 
 | GHC        | Caching | HLS | All Tools|
 |:-----------|--------:|----:|---------:|
-| **8.10.7** |       ✔️ |   ✔️ |        ✔️ |
-| **9.0.2**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.2.5**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.2.7**  |       ✔️ |   ✔️ |        ✔️ |
-| **9.2.8**  |       ✔️ |   ✔️ |        ✔️ |
+| **8.10.7** |      🌕 |  🌕 |       🌕 |
+| **9.0.2**  |      🌕 |  🌕 |       🌕 |
+| **9.2.5**  |      🌕 |  🌕 |       🌕 |
+| **9.2.7**  |      🌕 |  🌕 |       🌕 |
+| **9.2.8**  |      🌕 |  🌕 |       🌕 |
 
 </details>
 
