@@ -22,7 +22,7 @@ export LANG="C.UTF-8"
 #   - ghc944
 #   - ghc961
 
-export ghcVersions="
+export allGhcVersions="
    ghc8107
    ghc902
    ghc925
@@ -41,9 +41,23 @@ export ghcVersions="
    ghc982
    "
 
+export currentGhcVersions="
+   ghc945
+   ghc946
+   ghc947
+   ghc948
+   ghc962
+   ghc963
+   ghc964
+   ghc965
+   ghc981
+   ghc982
+   "
+
 cmd="--command exit"
 apply_refact="--arg applyRefact true"
 fourmolu="--arg fourmolu true"
+ghcVersions=$currentGhcVersions
 hlint="--arg hlint true"
 hls="--arg hls true"
 ormolu="--arg ormolu true"
@@ -53,7 +67,8 @@ while [ $# -gt 0 ]; do
   case "$1" in
     "-h" | "--help")
       echo -e "load_shell: Loads haskell shell.\n"
-      echo "Usage: load_shell.sh [--apply-refact (true | false)]"
+      echo "Usage: load_shell.sh [-a|--all]"
+      echo "                     [--apply-refact (true | false)]"
       echo "                     [-d|--dry-run]"
       echo "                     [--fourmolu (true | false)]"
       echo "                     [-g|--ghc GHC]"
@@ -65,8 +80,9 @@ while [ $# -gt 0 ]; do
       echo "                     [-v|--verbose]"
       echo ""
       echo "Available options:"
+      echo -e "  -a,--all                       Runs all ghc versions.\n"
       echo -e "  --apply-refact (true | false)  Enables apply-refact tool.\n"
-      echo -e "  --d,--dry-run                  Runs with --dry-run i.e. does not build"
+      echo -e "  -d,--dry-run                   Runs with --dry-run i.e. does not build"
       echo -e "                                 anything.\n"
       echo -e "  --fourmolu (true | false)      Enables fourmolu tool.\n"
       echo -e "  -g,--ghc                       Runs with a specific ghc e.g. ghc902. Otherwise"
@@ -76,6 +92,9 @@ while [ $# -gt 0 ]; do
       echo -e "  --no-tools                     Disables all tools.\n"
       echo -e "  --ormolu (true | false)        Enables ormolu tool.\n"
       exit 0
+      ;;
+    "-a" | "--all")
+      ghcVersions=$allGhcVersions
       ;;
     "--apply-refact")
       apply_refact=$(parse_bool "applyRefact" $2)

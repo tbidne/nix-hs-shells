@@ -36,12 +36,6 @@ jobs:
       fail-fast: false
       matrix:
         ghc:
-          - "ghc8107"
-          - "ghc902"
-          - "ghc925"
-          - "ghc926"
-          - "ghc927"
-          - "ghc928"
           - "ghc945"
           - "ghc946"
           - "ghc947"
@@ -79,12 +73,6 @@ jobs:
       fail-fast: false
       matrix:
         ghc:
-          - "ghc8107"
-          - "ghc902"
-          - "ghc925"
-          - "ghc926"
-          - "ghc927"
-          - "ghc928"
           - "ghc945"
           - "ghc946"
           - "ghc947"
