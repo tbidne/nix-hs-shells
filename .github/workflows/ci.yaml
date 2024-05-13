@@ -92,7 +92,7 @@ jobs:
           - "ghc962"
           - "ghc963"
           - "ghc964"
-          #- "ghc965"
+          - "ghc965"
           - "ghc981"
           - "ghc982"
     runs-on: ubuntu-latest
