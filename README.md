@@ -11,14 +11,44 @@
 ---
 
 - [Introduction](#introduction)
+- [GHC Support Matrix](#ghc-support-matrix)
 - [Shells](#shells)
   - [Default](#default)
   - [LiquidHaskell](#liquidhaskell)
-- [Development](#development)
 
 # Introduction
 
 This packages provides lightweight nix shells for general haskell development with `cabal`.
+
+# GHC Support Matrix
+
+The below matrix shows how well a particular GHC version is supported. In particular:
+
+- **Caching:** A ✔️ means that the GHC shell has fast caching for itself and all supported tools. A ❌ means that either the bare GHC shell itself or at least one supported tool has poor caching.
+- **HLS:** If the **haskell-language-supported** in particular is supported.
+- **All Tools:** If every tool is supported.
+
+GHC versions that support all tools and have fast caching are bolded. Precise information can be found in the source: [nix/ghc_map.nix](./nix/ghc_map.nix)
+
+| GHC        | Caching | HLS | All Tools|
+|:-----------|--------:|----:|---------:|
+| **8.10.7** |       ✔️ |   ✔️ |        ✔️ |
+| **9.0.2**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.2.5**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.2.7**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.2.8**  |       ✔️ |   ✔️ |        ✔️ |
+| 9.4.4      |      ❌ |   ✔️ |        ✔️ |
+| **9.4.5**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.4.6**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.4.7**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.4.8**  |       ✔️ |   ✔️ |        ✔️ |
+| 9.6.1      |      ❌ |   ✔️ |        ✔️ |
+| **9.6.2**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.6.3**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.6.4**  |       ✔️ |   ✔️ |        ✔️ |
+| **9.6.5**  |       ✔️ |   ✔️ |        ✔️ |
+| 9.8.1      |       ✔️ |   ✔️ |       ❌ |
+| **9.8.2**  |       ✔️ |   ✔️ |        ✔️ |
 
 # Shells
 
@@ -82,12 +112,4 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default 
 
 ```
 nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A liquidhaskell
-```
-
-# Development
-
-A formatter is provided via [./ci/flake.nix](./ci/flake.nix):
-
-```
-nix run ./ci#format
 ```
