@@ -48,7 +48,7 @@ GHC versions that support all tools and have fast caching are bolded. Precise in
 | **9.6.3**  |      🌕 |  🌕 |          🌕 |
 | **9.6.4**  |      🌕 |  🌕 |          🌕 |
 | **9.6.5**  |      🌕 |  🌕 |          🌕 |
-| 9.8.1      |      🌕 |  🌕 |          🌑 |
+| 9.8.1      |      🌕 |  🌓 |          🌑 |
 | **9.8.2**  |      🌕 |  🌕 |          🌕 |
 
 <details>

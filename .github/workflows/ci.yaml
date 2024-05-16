@@ -81,7 +81,7 @@ jobs:
           - "ghc963"
           - "ghc964"
           - "ghc965"
-          - "ghc981"
+          #- "ghc981" disabled because caching is poor
           - "ghc982"
     runs-on: ubuntu-latest
     steps:

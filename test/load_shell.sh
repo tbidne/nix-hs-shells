@@ -21,6 +21,11 @@ export LANG="C.UTF-8"
 # Not included due to poor caching + not important:
 #   - ghc944
 #   - ghc961
+#   - ghc981
+#
+# Note that these exclusions only make manual testing w/ allGhcVersions or
+# currentGhcVersions easier, since CI always supplies an individual --ghc
+# arg (thus can avoid poor versions itself).
 
 export allGhcVersions="
    ghc8107
@@ -37,7 +42,6 @@ export allGhcVersions="
    ghc963
    ghc964
    ghc965
-   ghc981
    ghc982
    "
 
@@ -50,7 +54,6 @@ export currentGhcVersions="
    ghc963
    ghc964
    ghc965
-   ghc981
    ghc982
    "
 
@@ -147,7 +150,7 @@ load_all () {
     $fourmolu
     $hlint
     $hls
-    $hlint
+    $ormolu
     $cmd"
 
   if [[ $verbose == 1 ]]; then
@@ -158,9 +161,15 @@ load_all () {
 }
 
 load_ghc981 () {
+  # applyRefact disabled because it is unsupported. Others disabled due to
+  # poor caching.
   cmd_str="nix-shell -A default
     --argstr ghcVers $1
     --arg applyRefact false
+    --arg fourmolu false
+    --arg hlint false
+    $hls
+    --arg ormolu false
     $cmd"
 
   if [[ $verbose == 1 ]]; then

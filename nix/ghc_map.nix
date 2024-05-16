@@ -154,7 +154,6 @@ in
     hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
     versName = "ghc981";
     overrides = _: prev: {
-      #apply-refact = prev.apply-refact_0_14_0_0;
       fourmolu = prev.fourmolu_0_14_1_0;
       hlint = prev.hlint_3_8;
       ormolu = prev.ormolu_0_7_3_0;
@@ -163,7 +162,7 @@ in
     unsupported = [
       "applyRefact"
     ];
-    warnMsg = "GHC 9.8.1 shell does not support applyRefact.";
+    warnMsg = "GHC 9.8.1 shell has poor tool caching and does not support applyRefact.";
   };
 
   ghc982 = mkSet {
