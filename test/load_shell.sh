@@ -43,6 +43,7 @@ export allGhcVersions="
    ghc964
    ghc965
    ghc982
+   ghc9101
    "
 
 export currentGhcVersions="
@@ -55,6 +56,7 @@ export currentGhcVersions="
    ghc964
    ghc965
    ghc982
+   ghc9101
    "
 
 cmd="--command exit"
@@ -164,11 +166,28 @@ load_ghc981 () {
   # applyRefact disabled because it is unsupported. Others disabled due to
   # poor caching.
   cmd_str="nix-shell -A default
-    --argstr ghcVers $1
+    --argstr ghcVers ghc981
     --arg applyRefact false
     --arg fourmolu false
     --arg hlint false
     $hls
+    --arg ormolu false
+    $cmd"
+
+  if [[ $verbose == 1 ]]; then
+    echo "Running: $cmd_str"
+  fi
+
+  $cmd_str
+}
+
+load_ghc9101 () {
+  cmd_str="nix-shell -A default
+    --argstr ghcVers ghc9101
+    --arg applyRefact false
+    --arg fourmolu false
+    --arg hlint false
+    --arg hls false
     --arg ormolu false
     $cmd"
 
@@ -186,7 +205,9 @@ for ghcVers in $ghcVersions; do
   echo "*** TESTING $ghcVers ***"
 
   if [[ $ghcVers == "ghc981" ]]; then
-    load_ghc981 $ghcVers
+    load_ghc981
+  elif [[ $ghcVers == "ghc9101" ]]; then
+    load_ghc9101
   else
     load_all $ghcVers
   fi

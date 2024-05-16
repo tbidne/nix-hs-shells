@@ -136,15 +136,8 @@ in
     };
   };
 
-  ghc964 = mkSet {
-    hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
-    versName = "ghc964";
-  };
-
-  ghc965 = mkSet {
-    hash = "25865a40d14b3f9cf19f19b924e2ab4069b09588";
-    versName = "ghc965";
-  };
+  ghc964 = mkSet { hash = "2726f127c15a4cc9810843b96cad73c7eb39e443"; versName = "ghc964"; };
+  ghc965 = mkSet { hash = "25865a40d14b3f9cf19f19b924e2ab4069b09588"; versName = "ghc965"; };
 
   # NOTE: We could upgrade this hash to 25865a40d14b3f9cf19f19b924e2ab4069b09588
   # -- what ghc982 currently uses -- and then we'd get apply-refact.
@@ -174,5 +167,19 @@ in
       hlint = prev.hlint_3_8;
       ormolu = prev.ormolu_0_7_4_0;
     };
+  };
+
+  ghc9101 = mkSet {
+    hash = "33d1e753c82ffc557b4a585c77de43d4c922ebb5";
+    versName = "ghc9101";
+
+    unsupported = [
+      "applyRefact"
+      "fourmolu"
+      "hlint"
+      "hls"
+      "ormolu"
+    ];
+    warnMsg = "GHC 9.10.1 shell does not support any tools.";
   };
 }

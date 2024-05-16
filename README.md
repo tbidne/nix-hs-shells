@@ -50,6 +50,7 @@ GHC versions that support all tools and have fast caching are bolded. Precise in
 | **9.6.5**  |      🌕 |  🌕 |          🌕 |
 | 9.8.1      |      🌕 |  🌓 |          🌑 |
 | **9.8.2**  |      🌕 |  🌕 |          🌕 |
+| 9.10.1     |      🌕 |  🌑 |          🌑 |
 
 <details>
 <summary>Click to expand legacy versions</summary>

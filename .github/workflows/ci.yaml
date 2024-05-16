@@ -46,6 +46,7 @@ jobs:
           - "ghc965"
           - "ghc981"
           - "ghc982"
+          - "ghc9101"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -83,6 +84,7 @@ jobs:
           - "ghc965"
           #- "ghc981" disabled because caching is poor
           - "ghc982"
+          #- "ghc9101" enable once hls is working (and caching is good)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
