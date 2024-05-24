@@ -23,7 +23,7 @@ in
     };
 
   liquidhaskell =
-    { ghcVers ? "ghc981"
+    { ghcVers ? "ghc982"
     , hlint ? false
     , hls ? false
     }:
