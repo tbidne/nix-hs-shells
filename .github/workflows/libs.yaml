@@ -21,6 +21,22 @@ on:
   workflow_dispatch:
 
 jobs:
+  # FIXME: This currently fails on CI for a strange reason:
+  #
+  #     Failed to build zlib-0.7.1.0 (which is required by test:unit-tests from cabal-install-3.13.0.0, test:mem-use-tests from cabal-install-3.13.0.0 and others). See the build log above for details.
+  #
+  #     error: In file included from dist/build/Codec/Compression/Zlib/Stream_hsc_utils.c:6:
+  #     /usr/include/stdio.h:205:27: error: ‘L_tmpnam’ undeclared here (not in a function)
+  #       205 | extern char *tmpnam (char[L_tmpnam]) __THROW __wur;
+  #           |                           ^~~~~~~~
+  #     /usr/include/stdio.h:210:33: error: ‘L_tmpnam’ undeclared here (not in a function); did you mean ‘tmpnam’?
+  #       210 | extern char *tmpnam_r (char __s[L_tmpnam]) __THROW __wur;
+  #           |                                 ^~~~~~~~
+  #           |                                 tmpnam
+  #     Failed to remove file dist/build/Codec/Compression/Zlib/Stream_hsc_utils.o; error= dist/build/Codec/Compression/Zlib/Stream_hsc_utils.o: removeLink: does not exist (No such file or directory)
+  #
+  # But this currently works locally i.e. I can load a 9.10.1 shell and build
+  # the lastest cabal. Not sure what that's about.
   cabal:
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +57,7 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A default --argstr ghcVers ghc963 --run '
+          nix-shell . -A default --argstr ghcVers ghc9101 --run '
             cd ./cabal-build \
               && cabal update \
               && cabal build cabal-install'
