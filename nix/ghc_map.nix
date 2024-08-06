@@ -3,18 +3,32 @@ let
     hash:
     import (fetchTarball { url = "https://github.com/NixOS/nixpkgs/archive/${hash}.tar.gz"; }) { };
 
+  composeGo = acc: m: if m != null then acc + "\n - " + m else acc;
+
+  composeWarnings = msgs: builtins.foldl' composeGo "" msgs;
+
   mkSet =
     {
       hash,
       versName,
       overrides ? _: _: { },
+      unstableHash ? false,
       unsupported ? [ ],
       warnMsg ? null,
     }:
     let
+      allWarnings = composeWarnings [
+        unstableHashWarning
+        warnMsg
+      ];
       hlib = pkgs.haskell.lib;
       pkgs = getPkgs hash;
-      wrapper = if warnMsg == null then x: x else x: pkgs.lib.warn warnMsg x;
+      unstableHashWarning =
+        if unstableHash then
+          versName + " shell has an unstable hash i.e. this is expected to change in the future."
+        else
+          null;
+      wrapper = if allWarnings == "" then x: x else x: pkgs.lib.warn allWarnings x;
     in
     {
       inherit pkgs unsupported versName;
@@ -45,7 +59,7 @@ let
     };
 
   warnPoorToolCache =
-    vers: "GHC " + vers + " shell has poor caching with tools. Switch to a later version if possible.";
+    ghcVers: ghcVers + " shell has poor caching with tools. Switch to a later version if possible.";
 in
 # NOTE: We do not always need to override tools even though the default is
 # not what we want.
@@ -55,20 +69,22 @@ in
 # override this, but in fact this is already done in nixpkgs in
 # configuration-ghc-9.4.x.nix.
 {
-  # In general, the hash for ghc vers N should be the latest commit C where
-  # N was still the default ghc, since this is the point where the most
-  # packages in nixpkgs will be compatible with N by default.
+  # In general, the hash for ghc vers N should be a commit C where N has
+  # good caching for every tool.
+  #
+  # There are often many such candidate hashes, so we are incentivized
+  # to take the latest C where N is still the default ghc, since this is the
+  # point where the most packages in nixpkgs will be compatible with N by
+  # default.
   #
   # However, some versions will not have any such C as they were never a
   # default e.g. ghc928 was released after 9.4.X was already the default.
   # For those, just take the earliest hash when they were added.
   #
-  # Notice this means we sometimes _update_ an existing hash e.g.
-  #
-  #   1. The default ghc N has not changed. In this case, we can update
-  #      N and any newer GHCs to the latest hash.
-  #   2. The default ghc N _has_ changed. In this case we will not change
-  #      N, but any newer GHC hashes should be updated.
+  # When we have a choice, in practice just taking the first hash that gives
+  # us good caching and tool compatibility is good enough. Thus we generally
+  # only update an existing hash when the newer hash offers better caching
+  # / fixes some tool.
   #
   # These hashes should come from nixos-unstable for caching purposes.
 
@@ -100,7 +116,7 @@ in
   ghc944 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc944";
-    warnMsg = warnPoorToolCache "9.4.4";
+    warnMsg = warnPoorToolCache "ghc944";
   };
 
   ghc945 = mkSet {
@@ -139,7 +155,7 @@ in
         } { }
       );
     };
-    warnMsg = warnPoorToolCache "9.6.1";
+    warnMsg = warnPoorToolCache "ghc961";
   };
 
   ghc962 = mkSet {
@@ -189,7 +205,7 @@ in
     };
 
     unsupported = [ "applyRefact" ];
-    warnMsg = "GHC 9.8.1 shell has poor tool caching and does not support applyRefact.";
+    warnMsg = "ghc981 shell has poor tool caching and does not support applyRefact.";
   };
 
   ghc982 = mkSet {
@@ -214,6 +230,7 @@ in
       "hls"
       "ormolu"
     ];
-    warnMsg = "GHC 9.10.1 shell does not support any tools.";
+    unstableHash = true;
+    warnMsg = "ghc9101 shell does not support any tools.";
   };
 }
