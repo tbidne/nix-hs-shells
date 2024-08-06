@@ -138,6 +138,7 @@ in
 
   ghc964 = mkSet { hash = "2726f127c15a4cc9810843b96cad73c7eb39e443"; versName = "ghc964"; };
   ghc965 = mkSet { hash = "25865a40d14b3f9cf19f19b924e2ab4069b09588"; versName = "ghc965"; };
+  ghc966 = mkSet { hash = "d04953086551086b44b6f3c6b7eeb26294f207da"; versName = "ghc966"; };
 
   # NOTE: We could upgrade this hash to 25865a40d14b3f9cf19f19b924e2ab4069b09588
   # -- what ghc982 currently uses -- and then we'd get apply-refact.

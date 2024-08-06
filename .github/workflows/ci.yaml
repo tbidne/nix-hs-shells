@@ -44,6 +44,7 @@ jobs:
           - "ghc963"
           - "ghc964"
           - "ghc965"
+          - "ghc966"
           - "ghc981"
           - "ghc982"
           - "ghc9101"
@@ -82,6 +83,7 @@ jobs:
           - "ghc963"
           - "ghc964"
           - "ghc965"
+          - "ghc966"
           #- "ghc981" disabled because caching is poor
           - "ghc982"
           #- "ghc9101" enable once hls is working (and caching is good)

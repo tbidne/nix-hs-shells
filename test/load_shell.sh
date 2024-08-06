@@ -42,6 +42,7 @@ export allGhcVersions="
    ghc963
    ghc964
    ghc965
+   ghc966
    ghc982
    ghc9101
    "
@@ -55,6 +56,7 @@ export currentGhcVersions="
    ghc963
    ghc964
    ghc965
+   ghc966
    ghc982
    ghc9101
    "

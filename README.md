@@ -43,6 +43,7 @@ GHC versions that support all tools and have fast caching are bolded. Precise in
 | **9.6.3**  |      🌕 |  🌕 |          🌕 |
 | **9.6.4**  |      🌕 |  🌕 |          🌕 |
 | **9.6.5**  |      🌕 |  🌕 |          🌕 |
+| **9.6.6**  |      🌕 |  🌕 |          🌕 |
 | 9.8.1      |      🌕 |  🌓 |          🌑 |
 | **9.8.2**  |      🌕 |  🌕 |          🌕 |
 | 9.10.1     |      🌕 |  🌑 |          🌑 |
@@ -73,13 +74,7 @@ This section lists the provided shells. For shells with arguments, the default v
 
 * `applyRefact` (`false`)
 * `fourmolu` (`false`)
-* `ghcVers`:
-  * `ghc8107`
-  * `ghc902`
-  * `ghc925`, `ghc926`, `ghc927`, `ghc928`
-  * `ghc944`, `ghc945`, `ghc946`, `ghc947`, `ghc948`
-  * `ghc961`, `ghc962`, `ghc963`, `ghc964`, `ghc965`
-  * `ghc981`, `ghc982`
+* `ghcVers`
 * `ormolu` (`false`)
 * `hlint` (`false`)
 * `hls` (`false`)
