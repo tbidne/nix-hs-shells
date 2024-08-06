@@ -28,6 +28,9 @@ on:
 
 # see NOTE: [Manageable CI]
 
+# Ideally, we want to test all versions in the last 3 major releases.
+# We only exclude versions when the caching is poor.
+
 jobs:
   # Need to run these separately as there is not enough space to run them
   # all on the same machine.
@@ -36,10 +39,6 @@ jobs:
       fail-fast: false
       matrix:
         ghc:
-          - "ghc945"
-          - "ghc946"
-          - "ghc947"
-          - "ghc948"
           - "ghc962"
           - "ghc963"
           - "ghc964"
@@ -75,10 +74,6 @@ jobs:
       fail-fast: false
       matrix:
         ghc:
-          - "ghc945"
-          - "ghc946"
-          - "ghc947"
-          - "ghc948"
           - "ghc962"
           - "ghc963"
           - "ghc964"

@@ -21,13 +21,15 @@ export LANG="C.UTF-8"
 # Not included due to poor caching + not important:
 #   - ghc944
 #   - ghc961
-#   - ghc981
 #
-# Note that these exclusions only make manual testing w/ allGhcVersions or
-# currentGhcVersions easier, since CI always supplies an individual --ghc
+# Note that these exclusions only make manual testing w/ allCachedGhcVersions or
+# currentCachedGhcVersions easier, since CI always supplies an individual --ghc
 # arg (thus can avoid poor versions itself).
+#
+# The 'Cached' descripters refers to just GHC i.e. all of the following have
+# good caching w.r.t GHC but not necessarily all tools.
 
-export allGhcVersions="
+export allCachedGhcVersions="
    ghc8107
    ghc902
    ghc925
@@ -43,20 +45,20 @@ export allGhcVersions="
    ghc964
    ghc965
    ghc966
+   ghc981
    ghc982
    ghc9101
    "
 
-export currentGhcVersions="
-   ghc945
-   ghc946
-   ghc947
-   ghc948
+# This is a subset of allCachedGhcVersions i.e. the last 3 major releases that
+# we do not exclude for other reasons e.g. poor caching.
+export currentCachedGhcVersions="
    ghc962
    ghc963
    ghc964
    ghc965
    ghc966
+   ghc981
    ghc982
    ghc9101
    "
@@ -64,7 +66,7 @@ export currentGhcVersions="
 cmd="--command exit"
 apply_refact="--arg applyRefact true"
 fourmolu="--arg fourmolu true"
-ghcVersions=$currentGhcVersions
+ghcVersions=$currentCachedGhcVersions
 hlint="--arg hlint true"
 hls="--arg hls true"
 ormolu="--arg ormolu true"
@@ -101,7 +103,7 @@ while [ $# -gt 0 ]; do
       exit 0
       ;;
     "-a" | "--all")
-      ghcVersions=$allGhcVersions
+      ghcVersions=$allCachedGhcVersions
       ;;
     "--apply-refact")
       apply_refact=$(parse_bool "applyRefact" $2)
