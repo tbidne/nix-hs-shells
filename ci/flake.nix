@@ -5,27 +5,25 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
   outputs =
-    inputs@{ flake-parts
-    , nixpkgs
-    , self
+    inputs@{
+      flake-parts,
+      nixpkgs,
+      self,
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      perSystem = { pkgs, ... }:
+      perSystem =
+        { pkgs, ... }:
         let
-          devTools = [
-            pkgs.nixpkgs-fmt
-          ];
+          devTools = [ pkgs.nixpkgs-fmt ];
         in
         {
           apps.format =
             let
-              name = "nixpkgs-fmt";
+              name = "nixfmt";
               drv = pkgs.writeShellApplication {
                 inherit name;
-                text = "nixpkgs-fmt .";
-                runtimeInputs = [
-                  pkgs.nixpkgs-fmt
-                ];
+                text = "nixfmt .";
+                runtimeInputs = [ pkgs.nixfmt-rfc-style ];
               };
             in
             {
@@ -33,11 +31,11 @@
               program = "${drv}/bin/${name}";
             };
 
-          devShells.default = pkgs.mkShell {
-            buildInputs = devTools;
-          };
+          devShells.default = pkgs.mkShell { buildInputs = devTools; };
         };
       systems = [
+        "aarch64-darwin"
+        "aarch64-linux"
         "x86_64-darwin"
         "x86_64-linux"
       ];

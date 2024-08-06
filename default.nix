@@ -10,27 +10,39 @@ let
 in
 {
   default =
-    { applyRefact ? false
-    , fourmolu ? false
-    , ghcVers ? "ghc982"
-    , hlint ? false
-    , hls ? false
-    , ormolu ? false
+    {
+      applyRefact ? false,
+      fourmolu ? false,
+      ghcVers ? "ghc982",
+      hlint ? false,
+      hls ? false,
+      ormolu ? false,
     }:
     cabal_template {
       inherit ghcVers;
-      devTools = { inherit applyRefact fourmolu hlint hls ormolu; };
+      devTools = {
+        inherit
+          applyRefact
+          fourmolu
+          hlint
+          hls
+          ormolu
+          ;
+      };
     };
 
   liquidhaskell =
-    { ghcVers ? "ghc982"
-    , hlint ? false
-    , hls ? false
+    {
+      ghcVers ? "ghc982",
+      hlint ? false,
+      hls ? false,
     }:
     cabal_template {
       inherit ghcVers;
       # no ormolu or fourmolu since LH is not formatted with either.
-      devTools = lib.emptyDevTools // { inherit hlint hls; };
+      devTools = lib.emptyDevTools // {
+        inherit hlint hls;
+      };
       extraInputs = p: [ p.z3 ];
     };
 }
