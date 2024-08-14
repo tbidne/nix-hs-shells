@@ -3,31 +3,46 @@ let
     hash:
     import (fetchTarball { url = "https://github.com/NixOS/nixpkgs/archive/${hash}.tar.gz"; }) { };
 
-  composeGo = acc: m: if m != null then acc + "\n - " + m else acc;
-
-  composeWarnings = msgs: builtins.foldl' composeGo "" msgs;
-
   mkSet =
     {
       hash,
       versName,
       overrides ? _: _: { },
+      poorToolCache ? false,
       unstableHash ? false,
       unsupported ? [ ],
       warnMsg ? null,
     }:
     let
-      allWarnings = composeWarnings [
-        unstableHashWarning
-        warnMsg
-      ];
       hlib = pkgs.haskell.lib;
       pkgs = getPkgs hash;
-      unstableHashWarning =
-        if unstableHash then
-          versName + " shell has an unstable hash i.e. this is expected to change in the future."
-        else
-          null;
+
+      # Combines fixed warnings with general custom warning into a bulleted
+      # list of warnings.
+      allWarnings =
+        let
+          poorToolCacheWarnMsg =
+            if poorToolCache then
+              versName + " shell has poor caching with tools. Switch to a later version if possible."
+            else
+              null;
+          unstableHashWarnMsg =
+            if unstableHash then
+              versName + " shell has an unstable hash i.e. this is expected to change in the future."
+            else
+              null;
+          composeWarnings =
+            msgs:
+            let
+              go = acc: m: if m != null then acc + "\n - " + m else acc;
+            in
+            builtins.foldl' go "" msgs;
+        in
+        composeWarnings [
+          poorToolCacheWarnMsg
+          unstableHashWarnMsg
+          warnMsg
+        ];
       wrapper = if allWarnings == "" then x: x else x: pkgs.lib.warn allWarnings x;
     in
     {
@@ -57,9 +72,6 @@ let
         }
       );
     };
-
-  warnPoorToolCache =
-    ghcVers: ghcVers + " shell has poor caching with tools. Switch to a later version if possible.";
 in
 # NOTE: We do not always need to override tools even though the default is
 # not what we want.
@@ -70,21 +82,23 @@ in
 # configuration-ghc-9.4.x.nix.
 {
   # In general, the hash for ghc vers N should be a commit C where N has
-  # good caching for every tool.
-  #
-  # There are often many such candidate hashes, so we are incentivized
-  # to take the latest C where N is still the default ghc, since this is the
-  # point where the most packages in nixpkgs will be compatible with N by
-  # default.
+  # good caching for every tool. The best candidates are commits where N is
+  # the default ghc.
   #
   # However, some versions will not have any such C as they were never a
   # default e.g. ghc928 was released after 9.4.X was already the default.
   # For those, just take the earliest hash when they were added.
   #
-  # When we have a choice, in practice just taking the first hash that gives
-  # us good caching and tool compatibility is good enough. Thus we generally
-  # only update an existing hash when the newer hash offers better caching
-  # / fixes some tool.
+  # When we have a choice, in theory it makes sense to take the latest commit
+  # possible, since it is more likely that later hashes will be compatible
+  # with more packages (because maintainers will have had more time to make
+  # their packages compatible).
+  #
+  # In practice, simply taking the first hash that gives us good caching and
+  # tool compatibility is good enough and means we don't have to keep updating
+  # hashes just in case a later one is "better". Thus we generally only
+  # update an existing hash when the newer hash offers better caching / fixes
+  # some tool.
   #
   # These hashes should come from nixos-unstable for caching purposes.
 
@@ -92,22 +106,27 @@ in
     hash = "6d28139e80dd2976650c6356269db942202e7c90";
     versName = "ghc8107";
   };
+
   ghc902 = mkSet {
     hash = "a7855f2235a1876f97473a76151fec2afa02b287";
     versName = "ghc902";
   };
+
   ghc925 = mkSet {
     hash = "d0d55259081f0b97c828f38559cad899d351cad1";
     versName = "ghc925";
   };
+
   ghc926 = mkSet {
     hash = "d0d55259081f0b97c828f38559cad899d351cad1";
     versName = "ghc926";
   };
+
   ghc927 = mkSet {
     hash = "3c5319ad3aa51551182ac82ea17ab1c6b0f0df89";
     versName = "ghc927";
   };
+
   ghc928 = mkSet {
     hash = "75a5ebf473cd60148ba9aec0d219f72e5cf52519";
     versName = "ghc928";
@@ -116,21 +135,24 @@ in
   ghc944 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc944";
-    warnMsg = warnPoorToolCache "ghc944";
+    poorToolCache = true;
   };
 
   ghc945 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc945";
   };
+
   ghc946 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc946";
   };
+
   ghc947 = mkSet {
     hash = "85f1ba3e51676fa8cc604a3d863d729026a6b8eb";
     versName = "ghc947";
   };
+
   ghc948 = mkSet {
     hash = "5a09cb4b393d58f9ed0d9ca1555016a8543c2ac8";
     versName = "ghc948";
@@ -155,7 +177,7 @@ in
         } { }
       );
     };
-    warnMsg = warnPoorToolCache "ghc961";
+    poorToolCache = true;
   };
 
   ghc962 = mkSet {
@@ -182,10 +204,12 @@ in
     hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
     versName = "ghc964";
   };
+
   ghc965 = mkSet {
     hash = "25865a40d14b3f9cf19f19b924e2ab4069b09588";
     versName = "ghc965";
   };
+
   ghc966 = mkSet {
     hash = "d04953086551086b44b6f3c6b7eeb26294f207da";
     versName = "ghc966";
