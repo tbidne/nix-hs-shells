@@ -81,7 +81,7 @@ jobs:
           - "ghc966"
           #- "ghc981" disabled because caching is poor
           - "ghc982"
-          #- "ghc9101" enable once hls is working (and caching is good)
+          - "ghc9101"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

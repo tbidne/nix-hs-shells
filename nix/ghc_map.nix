@@ -28,7 +28,7 @@ let
               null;
           unstableHashWarnMsg =
             if unstableHash then
-              versName + " shell has an unstable hash i.e. this is expected to change in the future."
+              versName + " shell has an unstable hash i.e. this may change in the future."
             else
               null;
           composeWarnings =
@@ -244,17 +244,16 @@ in
   };
 
   ghc9101 = mkSet {
-    hash = "d04953086551086b44b6f3c6b7eeb26294f207da";
+    hash = "8a3354191c0d7144db9756a74755672387b702ba";
     versName = "ghc9101";
 
     unsupported = [
       "applyRefact"
       "fourmolu"
       "hlint"
-      "hls"
       "ormolu"
     ];
     unstableHash = true;
-    warnMsg = "ghc9101 shell does not support any tools.";
+    warnMsg = "ghc9101 shell does not support most tools.";
   };
 }

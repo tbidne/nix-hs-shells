@@ -191,7 +191,6 @@ load_ghc9101 () {
     --arg applyRefact false
     --arg fourmolu false
     --arg hlint false
-    --arg hls false
     --arg ormolu false
     $cmd"
 
