@@ -33,7 +33,7 @@ in
 
   liquidhaskell =
     {
-      ghcVers ? "ghc982",
+      ghcVers ? "ghc9101",
       hlint ? false,
       hls ? false,
     }:
