@@ -244,16 +244,14 @@ in
   };
 
   ghc9101 = mkSet {
-    hash = "8a3354191c0d7144db9756a74755672387b702ba";
+    hash = "345c263f2f53a3710abe117f28a5cb86d0ba4059";
     versName = "ghc9101";
 
     unsupported = [
       "applyRefact"
-      "fourmolu"
       "hlint"
-      "ormolu"
     ];
     unstableHash = true;
-    warnMsg = "ghc9101 shell does not support most tools.";
+    warnMsg = "ghc9101 shell does not support all tools.";
   };
 }
