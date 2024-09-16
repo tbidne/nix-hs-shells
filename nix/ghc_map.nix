@@ -22,10 +22,7 @@ let
       allWarnings =
         let
           poorToolCacheWarnMsg =
-            if poorToolCache then
-              versName + " shell has poor caching with tools."
-            else
-              null;
+            if poorToolCache then versName + " shell has poor caching with tools." else null;
           unstableHashWarnMsg =
             if unstableHash then
               versName + " shell has an unstable hash i.e. this may change in the future."
