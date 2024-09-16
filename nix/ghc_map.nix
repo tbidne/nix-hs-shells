@@ -11,7 +11,7 @@ let
       poorToolCache ? false,
       unstableHash ? false,
       unsupported ? [ ],
-      warnMsg ? null,
+      warnings ? [ ],
     }:
     let
       hlib = pkgs.haskell.lib;
@@ -38,11 +38,13 @@ let
             in
             builtins.foldl' go "" msgs;
         in
-        composeWarnings [
-          poorToolCacheWarnMsg
-          unstableHashWarnMsg
-          warnMsg
-        ];
+        composeWarnings (
+          [
+            poorToolCacheWarnMsg
+            unstableHashWarnMsg
+          ]
+          ++ warnings
+        );
       wrapper = if allWarnings == "" then x: x else x: pkgs.lib.warn allWarnings x;
     in
     {
@@ -229,7 +231,7 @@ in
     };
 
     unsupported = [ "applyRefact" ];
-    warnMsg = "ghc981 shell has poor tool caching and does not support applyRefact.";
+    warnings = [ "ghc981 shell has poor tool caching and does not support applyRefact." ];
   };
 
   ghc982 = mkSet {
@@ -252,6 +254,9 @@ in
       "hlint"
     ];
     unstableHash = true;
-    warnMsg = "ghc9101 shell does not support all tools.";
+    warnings = [
+      "ghc9101 shell does not support hlint or apply-refact."
+      "ghc9101 shell ormolu/fourmolu has poor caching."
+    ];
   };
 }
