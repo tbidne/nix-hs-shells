@@ -23,7 +23,7 @@ let
         let
           poorToolCacheWarnMsg =
             if poorToolCache then
-              versName + " shell has poor caching with tools. Switch to a later version if possible."
+              versName + " shell has poor caching with tools."
             else
               null;
           unstableHashWarnMsg =
@@ -231,7 +231,8 @@ in
     };
 
     unsupported = [ "applyRefact" ];
-    warnings = [ "ghc981 shell has poor tool caching and does not support applyRefact." ];
+    poorToolCache = true;
+    warnings = [ "ghc981 shell does not support applyRefact." ];
   };
 
   ghc982 = mkSet {
