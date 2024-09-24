@@ -244,7 +244,7 @@ in
   };
 
   ghc9101 = mkSet {
-    hash = "345c263f2f53a3710abe117f28a5cb86d0ba4059";
+    hash = "9357f4f23713673f310988025d9dc261c20e70c6";
     versName = "ghc9101";
 
     unsupported = [

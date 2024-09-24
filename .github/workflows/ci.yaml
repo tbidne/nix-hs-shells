@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - cabal-ci
 
   pull_request:
     branches:
