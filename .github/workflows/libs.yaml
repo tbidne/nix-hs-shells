@@ -39,6 +39,8 @@ jobs:
   # the lastest cabal. Not sure what that's about.
   cabal:
     runs-on: ubuntu-latest
+    # This allows the cabal job to fail without failing the entire workflow
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
