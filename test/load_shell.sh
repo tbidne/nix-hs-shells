@@ -186,12 +186,13 @@ load_ghc981 () {
 }
 
 load_ghc9101 () {
+  # ormolu and fourmolu work, but they're disabled due to poor caching.
   cmd_str="nix-shell -A default
     --argstr ghcVers ghc9101
     --arg applyRefact false
-    $fourmolu
+    --arg fourmolu false
     --arg hlint false
-    $ormolu
+    --arg ormolu false
     $cmd"
 
   if [[ $verbose == 1 ]]; then
