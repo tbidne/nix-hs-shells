@@ -21,13 +21,9 @@ let
       # list of warnings.
       allWarnings =
         let
-          poorToolCacheWarnMsg =
-            if poorToolCache then versName + " shell has poor caching with tools." else null;
+          poorToolCacheWarnMsg = if poorToolCache then "Tools have poor caching." else null;
           unstableHashWarnMsg =
-            if unstableHash then
-              versName + " shell has an unstable hash i.e. this may change in the future."
-            else
-              null;
+            if unstableHash then "The hash is unstable i.e. this may change in the future." else null;
           composeWarnings =
             msgs:
             let
@@ -229,7 +225,7 @@ in
 
     unsupported = [ "applyRefact" ];
     poorToolCache = true;
-    warnings = [ "ghc981 shell does not support applyRefact." ];
+    warnings = [ "ApplyRefact is unsupported." ];
   };
 
   ghc982 = mkSet {
@@ -253,8 +249,8 @@ in
     ];
     unstableHash = true;
     warnings = [
-      "ghc9101 shell does not support hlint or apply-refact."
-      "ghc9101 shell ormolu/fourmolu has poor caching."
+      "HLint and apply-refact are unsupported."
+      "Ormolu and fourmolu have poor caching."
     ];
   };
 }
