@@ -4,14 +4,14 @@
   devTools,
   extraInputs ? _: [ ],
   extraGhcInputs ? _: [ ],
-  ghcVers,
+  ghc-vers,
   shellHook ? "",
   wrapper ? _: x: x,
 }:
 
 let
   lib = import ./lib.nix;
-  ghcSet = lib.getGhcSet ghcVers;
+  ghcSet = lib.getGhcSet ghc-vers;
   pkgs = ghcSet.pkgs;
   compiler = ghcSet.compiler;
   shell = pkgs.mkShell {

@@ -72,9 +72,9 @@ This section lists the provided shells. For shells with arguments, the default v
 
 ### Common Args
 
-* `applyRefact` (`false`)
+* `apply-refact` (`false`)
 * `fourmolu` (`false`)
-* `ghcVers`
+* `ghc-vers`
 * `ormolu` (`false`)
 * `hlint` (`false`)
 * `hls` (`false`)
@@ -83,15 +83,15 @@ This section lists the provided shells. For shells with arguments, the default v
 
 **Attr:** `default`
 
-**Description:** Nix shell for general haskell development. Most packages can use this shell. Includes `cabal` and `ghc`. Note that there is no guarantee every dev tool will work with every `ghcVers`. In particular, there will often be a lag time before the latest GHCs are fully supported.
+**Description:** Nix shell for general haskell development. Most packages can use this shell. Includes `cabal` and `ghc`. Note that there is no guarantee every dev tool will work with every `ghc-vers`. In particular, there will often be a lag time before the latest GHCs are fully supported.
 
 The default ghc is the latest version that works with every tool and has decent nix caching.
 
 **Args:**
 
-* `applyRefact`
+* `apply-refact`
 * `fourmolu`
-* `ghcVers` (`ghc982`)
+* `ghc-vers` (`ghc982`)
 * `hlint`
 * `hls`
 * `ormolu`
@@ -102,7 +102,7 @@ The default ghc is the latest version that works with every tool and has decent 
 nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default
 
 nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default \
-  --argstr ghcVers ghc925 \
+  --argstr ghc-vers ghc925 \
   --arg hls true
 ```
 
@@ -114,7 +114,7 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default 
 
 **Args:**
 
-* `ghcVers`
+* `ghc-vers`
 * `hlint`
 * `hls`
 

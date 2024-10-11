@@ -22,14 +22,14 @@ export LANG="C.UTF-8"
 #   - ghc944
 #   - ghc961
 #
-# Note that these exclusions only make manual testing w/ allCachedGhcVersions or
-# currentCachedGhcVersions easier, since CI always supplies an individual --ghc
+# Note that these exclusions only make manual testing w/ all_cached_ghc_versions or
+# current_cached_ghc_versions easier, since CI always supplies an individual --ghc
 # arg (thus can avoid poor versions itself).
 #
 # The 'Cached' descripters refers to just GHC i.e. all of the following have
 # good caching w.r.t GHC but not necessarily all tools.
 
-export allCachedGhcVersions="
+export all_cached_ghc_versions="
    ghc8107
    ghc902
    ghc925
@@ -50,9 +50,9 @@ export allCachedGhcVersions="
    ghc9101
    "
 
-# This is a subset of allCachedGhcVersions i.e. the last 3 major releases that
+# This is a subset of all_cached_ghc_versions i.e. the last 3 major releases that
 # we do not exclude for other reasons e.g. poor caching.
-export currentCachedGhcVersions="
+export current_cached_ghc_versions="
    ghc962
    ghc963
    ghc964
@@ -64,9 +64,9 @@ export currentCachedGhcVersions="
    "
 
 cmd="--command exit"
-apply_refact="--arg applyRefact true"
+apply_refact="--arg apply-refact true"
 fourmolu="--arg fourmolu true"
-ghcVersions=$currentCachedGhcVersions
+ghc_versions=$current_cached_ghc_versions
 hlint="--arg hlint true"
 hls="--arg hls true"
 ormolu="--arg ormolu true"
@@ -103,10 +103,10 @@ while [ $# -gt 0 ]; do
       exit 0
       ;;
     "-a" | "--all")
-      ghcVersions=$allCachedGhcVersions
+      ghc_versions=$all_cached_ghc_versions
       ;;
     "--apply-refact")
-      apply_refact=$(parse_bool "applyRefact" $2)
+      apply_refact=$(parse_bool "apply-refact" $2)
       shift
       ;;
     "-d" | "--dry-run")
@@ -117,7 +117,7 @@ while [ $# -gt 0 ]; do
       shift
       ;;
     "-g" | "--ghc")
-      ghcVersions=$2
+      ghc_versions=$2
       shift
       ;;
     "--hlint")
@@ -129,7 +129,7 @@ while [ $# -gt 0 ]; do
       shift
       ;;
     "--no-tools")
-      apply_refact="--arg applyRefact false"
+      apply_refact="--arg apply-refact false"
       fourmolu="--arg fourmolu false"
       hlint="--arg hlint false"
       hls="--arg hls false"
@@ -151,7 +151,7 @@ while [ $# -gt 0 ]; do
 
 load_all () {
   cmd_str="nix-shell -A default
-    --argstr ghcVers $1
+    --argstr ghc-vers $1
     $apply_refact
     $fourmolu
     $hlint
@@ -167,11 +167,11 @@ load_all () {
 }
 
 load_ghc981 () {
-  # applyRefact disabled because it is unsupported. Others disabled due to
+  # apply-refact disabled because it is unsupported. Others disabled due to
   # poor caching.
   cmd_str="nix-shell -A default
-    --argstr ghcVers ghc981
-    --arg applyRefact false
+    --argstr ghc-vers ghc981
+    --arg apply-refact false
     --arg fourmolu false
     --arg hlint false
     $hls
@@ -187,8 +187,8 @@ load_ghc981 () {
 
 load_ghc9101 () {
   cmd_str="nix-shell -A default
-    --argstr ghcVers ghc9101
-    --arg applyRefact false
+    --argstr ghc-vers ghc9101
+    --arg apply-refact false
     $fourmolu
     --arg hlint false
     $ormolu
@@ -204,25 +204,25 @@ load_ghc9101 () {
 succeeded_str="Succeeded:"
 failed_str="Failed:"
 any_failed=0
-for ghcVers in $ghcVersions; do
-  echo "*** TESTING $ghcVers ***"
+for ghc_vers in $ghc_versions; do
+  echo "*** TESTING $ghc_vers ***"
 
-  if [[ $ghcVers == "ghc981" ]]; then
+  if [[ $ghc_vers == "ghc981" ]]; then
     load_ghc981
-  elif [[ $ghcVers == "ghc9101" ]]; then
+  elif [[ $ghc_vers == "ghc9101" ]]; then
     load_ghc9101
   else
-    load_all $ghcVers
+    load_all $ghc_vers
   fi
 
   exit_code=$?
   if [[ $exit_code -ne 0 ]]; then
-    echo "*** $ghcVers FAILED ***"
-    failed_str+=" $ghcVers"
+    echo "*** $ghc_vers FAILED ***"
+    failed_str+=" $ghc_vers"
     any_failed=1
   else
-    echo "*** $ghcVers SUCCEEDED ***"
-    succeeded_str+=" $ghcVers"
+    echo "*** $ghc_vers SUCCEEDED ***"
+    succeeded_str+=" $ghc_vers"
   fi
 
 done

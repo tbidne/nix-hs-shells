@@ -37,7 +37,7 @@ let
           acc;
       allTools = [
         {
-          flagName = "applyRefact";
+          flagName = "apply-refact";
           pkg = compiler.apply-refact;
         }
         {
@@ -63,10 +63,10 @@ in
 {
   inherit mkDev;
 
-  getGhcSet = ghcVers: lookupOrDie ghcMap ghcVers "ghcVers";
+  getGhcSet = ghc-vers: lookupOrDie ghcMap ghc-vers "ghc-vers";
 
   emptyDevTools = {
-    applyRefact = false;
+    apply-refact = false;
     fourmolu = false;
     hlint = false;
     hls = false;

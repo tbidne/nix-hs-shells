@@ -11,18 +11,18 @@ in
 {
   default =
     {
-      applyRefact ? false,
+      apply-refact ? false,
       fourmolu ? false,
-      ghcVers ? "ghc982",
+      ghc-vers ? "ghc982",
       hlint ? false,
       hls ? false,
       ormolu ? false,
     }:
     cabal_template {
-      inherit ghcVers;
+      inherit ghc-vers;
       devTools = {
         inherit
-          applyRefact
+          apply-refact
           fourmolu
           hlint
           hls
@@ -33,12 +33,12 @@ in
 
   liquidhaskell =
     {
-      ghcVers ? "ghc9101",
+      ghc-vers ? "ghc9101",
       hlint ? false,
       hls ? false,
     }:
     cabal_template {
-      inherit ghcVers;
+      inherit ghc-vers;
       # no ormolu or fourmolu since LH is not formatted with either.
       devTools = lib.emptyDevTools // {
         inherit hlint hls;

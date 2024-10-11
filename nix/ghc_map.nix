@@ -223,9 +223,9 @@ in
       ormolu = prev.ormolu_0_7_3_0;
     };
 
-    unsupported = [ "applyRefact" ];
+    unsupported = [ "apply-refact" ];
     poorToolCache = true;
-    warnings = [ "ApplyRefact is unsupported." ];
+    warnings = [ "apply-refact is unsupported." ];
   };
 
   ghc982 = mkSet {
@@ -244,10 +244,10 @@ in
     versName = "ghc9101";
 
     unsupported = [
-      "applyRefact"
+      "apply-refact"
       "hlint"
     ];
     unstableHash = true;
-    warnings = [ "HLint and apply-refact are unsupported." ];
+    warnings = [ "hlint and apply-refact are unsupported." ];
   };
 }
