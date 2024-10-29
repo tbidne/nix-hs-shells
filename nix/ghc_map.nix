@@ -24,6 +24,13 @@ let
           poorToolCacheWarnMsg = if poorToolCache then "Tools have poor caching." else null;
           unstableHashWarnMsg =
             if unstableHash then "The hash is unstable i.e. this may change in the future." else null;
+
+          unsupportedWarnings =
+            if unsupported == [ ] then
+              null
+            else
+              "Unsupported tool(s): " + builtins.concatStringsSep ", " unsupported;
+
           composeWarnings =
             msgs:
             let
@@ -35,6 +42,7 @@ let
           [
             poorToolCacheWarnMsg
             unstableHashWarnMsg
+            unsupportedWarnings
           ]
           ++ warnings
         );
@@ -225,7 +233,6 @@ in
 
     unsupported = [ "apply-refact" ];
     poorToolCache = true;
-    warnings = [ "apply-refact is unsupported." ];
   };
 
   ghc982 = mkSet {
@@ -248,6 +255,5 @@ in
       "hlint"
     ];
     unstableHash = true;
-    warnings = [ "hlint and apply-refact are unsupported." ];
   };
 }
