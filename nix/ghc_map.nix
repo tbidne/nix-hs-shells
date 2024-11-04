@@ -246,6 +246,37 @@ in
     };
   };
 
+  ghc983 = mkSet {
+    hash = "76612b17c0ce71689921ca12d9ffdc9c23ce40b2";
+    versName = "ghc983";
+    overrides = _: prev: {
+      apply-refact = prev.apply-refact_0_14_0_0;
+      fourmolu = prev.fourmolu_0_15_0_0;
+      hlint = prev.hlint_3_8;
+      ormolu = prev.ormolu_0_7_4_0;
+    };
+
+    # NOTE: [GHC 9.8.3 Tools]
+    #
+    # GHC 9.8.3 currently does not work with any tools. For whatever reason,
+    # libs like ghc-lib-parser are not cached, and CI tries building them
+    # itself. This leads to an ambiguity error between Control.DeepSeq.Unit
+    # and GHC.Unit.Types.Unit.
+    #
+    # Also note that we're trying to build ghc-lib-parser-9.8.2 rather than
+    # ghc-lib-parser-9.8.3, but that's not necessarily fatal in and of itself.
+    #
+    # In any case, these tools do not currently work, so they are disabled.
+    unsupported = [
+      "apply-refact"
+      "fourmolu"
+      "hlint"
+      "hls"
+      "ormolu"
+    ];
+    unstableHash = true;
+  };
+
   ghc9101 = mkSet {
     hash = "5633bcff0c6162b9e4b5f1264264611e950c8ec7";
     versName = "ghc9101";

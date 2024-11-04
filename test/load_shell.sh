@@ -47,6 +47,7 @@ export all_cached_ghc_versions="
    ghc966
    ghc981
    ghc982
+   ghc983
    ghc9101
    "
 
@@ -60,6 +61,7 @@ export current_cached_ghc_versions="
    ghc966
    ghc981
    ghc982
+   ghc983
    ghc9101
    "
 
@@ -170,7 +172,7 @@ load_ghc981 () {
   # apply-refact disabled because it is unsupported. Others disabled due to
   # poor caching.
   cmd_str="nix-shell -A default
-    --argstr ghc-vers ghc981
+    --argstr ghc-vers $1
     --arg apply-refact false
     --arg fourmolu false
     --arg hlint false
@@ -185,9 +187,27 @@ load_ghc981 () {
   $cmd_str
 }
 
+# See NOTE: [GHC 9.8.3 Tools]
+load_ghc983 () {
+  cmd_str="nix-shell -A default
+    --argstr ghc-vers $1
+    --arg apply-refact false
+    --arg fourmolu false
+    --arg hlint false
+    --arg hls false
+    --arg ormolu false
+    $cmd"
+
+  if [[ $verbose == 1 ]]; then
+    echo "Running: $cmd_str"
+  fi
+
+  $cmd_str
+}
+
 load_ghc9101 () {
   cmd_str="nix-shell -A default
-    --argstr ghc-vers ghc9101
+    --argstr ghc-vers $1
     --arg apply-refact false
     $fourmolu
     --arg hlint false
@@ -208,9 +228,11 @@ for ghc_vers in $ghc_versions; do
   echo "*** TESTING $ghc_vers ***"
 
   if [[ $ghc_vers == "ghc981" ]]; then
-    load_ghc981
+    load_ghc981 $ghc_vers
+  elif [[ $ghc_vers == "ghc983" ]]; then
+    load_ghc983 $ghc_vers
   elif [[ $ghc_vers == "ghc9101" ]]; then
-    load_ghc9101
+    load_ghc9101 $ghc_vers
   else
     load_all $ghc_vers
   fi

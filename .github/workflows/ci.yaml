@@ -46,6 +46,7 @@ jobs:
           - "ghc966"
           - "ghc981"
           - "ghc982"
+          - "ghc983"
           - "ghc9101"
     runs-on: ubuntu-latest
     steps:
@@ -79,8 +80,9 @@ jobs:
           - "ghc964"
           - "ghc965"
           - "ghc966"
-          #- "ghc981" disabled because caching is poor
+          # - "ghc981" # disabled because caching is poor
           - "ghc982"
+          - "ghc983"
           - "ghc9101"
     runs-on: ubuntu-latest
     steps:
