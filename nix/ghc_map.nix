@@ -277,6 +277,8 @@ in
       "hlint"
       "ormolu"
     ];
+
+    unstableHash = true;
   };
 
   ghc9101 = mkSet {
