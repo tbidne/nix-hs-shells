@@ -77,7 +77,7 @@ for tool in $tool_list; do
   fi
 
   if [[ -z $map ]]; then
-    echo "*** ci.sh: Error finding map for tool ${$tool}, ghc ${ghc_version} ***"
+    echo "*** ci.sh: Error finding map for tool ($ghc_version, $tool) ***"
     exit 1
   fi
 
@@ -106,7 +106,7 @@ for tool in $tool_list; do
     exit_code=$?
 
   elif [[ $switch == "false" ]]; then
-    echo "*** ci.sh: Skipping $tool ***"
+    echo "*** ci.sh: Skipping ($ghc_version, $tool) ***"
     exit_code=0
   else
     echo "*** ci.sh: Error, unexpected switch value: $switch ***"
