@@ -69,22 +69,20 @@ if [[ -z $ghc_version ]]; then
 fi
 
 for tool in $tool_list; do
-  map=${tool_map[$ghc_version,$tool]}
+  val=${tool_map[$ghc_version,$tool]}
 
   # Didn't find an entry for ghc_version, try the default.
-  if [[ -z $map ]]; then
-    map=${tool_map[default,$tool]}
+  if [[ -z $val ]]; then
+    val=${tool_map[default,$tool]}
   fi
 
-  if [[ -z $map ]]; then
+  if [[ -z $val ]]; then
     echo "*** ci.sh: Error finding map for tool ($ghc_version, $tool) ***"
     exit 1
   fi
 
-  switch=${map[$ghc_version]}
-
   exit_code=0
-  if [[ $switch == "bare" ]]; then
+  if [[ $val == "bare" ]]; then
     echo "*** ci.sh: Testing ($ghc_version, $tool) ***"
 
     ./test/load_shell.sh \
@@ -94,7 +92,7 @@ for tool in $tool_list; do
 
     exit_code=$?
 
-  elif [[ $switch == "true" ]]; then
+  elif [[ $val == "true" ]]; then
     echo "*** ci.sh: Testing tool ($ghc_version, $tool) ***"
 
     ./test/load_shell.sh \
@@ -105,11 +103,11 @@ for tool in $tool_list; do
 
     exit_code=$?
 
-  elif [[ $switch == "false" ]]; then
+  elif [[ $val == "false" ]]; then
     echo "*** ci.sh: Skipping ($ghc_version, $tool) ***"
     exit_code=0
   else
-    echo "*** ci.sh: Error, unexpected switch value: $switch ***"
+    echo "*** ci.sh: Error, unexpected value: $val ***"
     exit 1
   fi
 
