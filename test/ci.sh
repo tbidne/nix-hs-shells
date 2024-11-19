@@ -4,13 +4,19 @@ set -e
 
 export LANG="C.UTF-8"
 
+# NOTE: [CI exclusions]
+#
 # Used for CI. Runs the given version and each tool individually, so we can
 # see how long each tool takes to load. Note that some ghc+tool combinations
 # are skipped due to e.g. poor caching or lack of support.
 #
-# See NOTE: [GHC 9.8.3 Tools]
+# In general, this should be consistent with the table in the README and
+# ghc_map.nix.
 declare -A tool_map
 tool_map[default,bare]="bare"
+tool_map[default,hls]="true"
+tool_map[ghc981,hls]="false" # poor caching
+tool_map[ghc983,hls]="false" # poor caching
 tool_map[default,ormolu]="true"
 tool_map[ghc981,ormolu]="false" # poor caching
 tool_map[ghc983,ormolu]="false" # poor caching
@@ -27,7 +33,7 @@ tool_map[ghc983,hlint]="false" # poor caching
 tool_map[ghc9101,hlint]="false" # unsupported
 
 ghc_version=""
-tool_list="bare ormolu fourmolu hlint apply-refact"
+tool_list="bare hls ormolu fourmolu hlint apply-refact"
 
 while [ $# -gt 0 ]; do
   case "$1" in

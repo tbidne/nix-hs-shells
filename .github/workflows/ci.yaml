@@ -34,6 +34,13 @@ on:
 jobs:
   # Need to run these separately as there is not enough space to run them
   # all on the same machine.
+  #
+  # Note: We originally had a separate hls job since having everything
+  # together was hitting the storage limits. But that was when we were
+  # including jobs with poor caching i.e. much had to be built here.
+  #
+  # Now that we are restricting ourselves to good caching only, we can
+  # have everything in the same job. See NOTE: [CI exclusions].
   default:
     strategy:
       fail-fast: false
@@ -64,44 +71,6 @@ jobs:
       # what we do. But we may need to further pare it down in the future.
       - name: Load shell
         run: ./test/ci.sh --ghc ${{ matrix.ghc }}
-
-  # It turns out we _do_ have enough storage to load hls by itself. This has
-  # to be separate from the other CI job, however.
-  #
-  # TODO: Actually, it would be nice to investigate that i.e. try to combine
-  # the two jobs. Now that we're removing all jobs that are not cached,
-  # running hls with everything else might be feasible.
-  hls:
-    strategy:
-      fail-fast: false
-      matrix:
-        ghc:
-          - "ghc962"
-          - "ghc963"
-          - "ghc964"
-          - "ghc965"
-          - "ghc966"
-          # - "ghc981" # poor caching
-          - "ghc982"
-          # - "ghc983" # poor caching
-          - "ghc9101"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup nix
-        uses: cachix/install-nix-action@v25
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-          nix_path: nixpkgs=channel:nixos-unstable
-
-      - name: Load shell with hls
-        run: |
-          ./test/load_shell.sh \
-            --ghc ${{ matrix.ghc }} \
-            --no-tools \
-            --hls true \
-            --verbose
 
   style:
     runs-on: ubuntu-latest
