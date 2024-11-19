@@ -1,4 +1,10 @@
+#!/usr/bin/env bash
+
 set +e
+
+curr_timestamp () {
+  date '+%s'
+}
 
 # Test every ghc version w/ all optional tools. Obviously this can take a very
 # long time.
@@ -151,7 +157,7 @@ while [ $# -gt 0 ]; do
     shift
   done
 
-load_all () {
+load () {
   cmd_str="nix-shell -A default
     --argstr ghc-vers $1
     $apply_refact
@@ -168,82 +174,27 @@ load_all () {
   $cmd_str
 }
 
-load_ghc981 () {
-  # apply-refact disabled because it is unsupported. Others disabled due to
-  # poor caching.
-  cmd_str="nix-shell -A default
-    --argstr ghc-vers $1
-    --arg apply-refact false
-    --arg fourmolu false
-    --arg hlint false
-    $hls
-    --arg ormolu false
-    $cmd"
-
-  if [[ $verbose == 1 ]]; then
-    echo "Running: $cmd_str"
-  fi
-
-  $cmd_str
-}
-
-# See NOTE: [GHC 9.8.3 Tools]
-load_ghc983 () {
-  cmd_str="nix-shell -A default
-    --argstr ghc-vers $1
-    --arg apply-refact false
-    --arg fourmolu false
-    --arg hlint false
-    --arg hls false
-    --arg ormolu false
-    $cmd"
-
-  if [[ $verbose == 1 ]]; then
-    echo "Running: $cmd_str"
-  fi
-
-  $cmd_str
-}
-
-load_ghc9101 () {
-  cmd_str="nix-shell -A default
-    --argstr ghc-vers $1
-    --arg apply-refact false
-    $fourmolu
-    --arg hlint false
-    $ormolu
-    $cmd"
-
-  if [[ $verbose == 1 ]]; then
-    echo "Running: $cmd_str"
-  fi
-
-  $cmd_str
-}
-
 succeeded_str="Succeeded:"
 failed_str="Failed:"
 any_failed=0
 for ghc_vers in $ghc_versions; do
-  echo "*** TESTING $ghc_vers ***"
+  echo "*** load_shell.sh: Testing ghc $ghc_vers ***"
 
-  if [[ $ghc_vers == "ghc981" ]]; then
-    load_ghc981 $ghc_vers
-  elif [[ $ghc_vers == "ghc983" ]]; then
-    load_ghc983 $ghc_vers
-  elif [[ $ghc_vers == "ghc9101" ]]; then
-    load_ghc9101 $ghc_vers
-  else
-    load_all $ghc_vers
-  fi
+  start_ts=$(curr_timestamp)
 
+  load $ghc_vers
   exit_code=$?
+
+  end_ts=$(curr_timestamp)
+
+  diff_sec=$(( $end_ts - $start_ts ))
+
   if [[ $exit_code -ne 0 ]]; then
-    echo "*** $ghc_vers FAILED ***"
+    echo "*** load_shell.sh: $ghc_vers Failed ($diff_sec seconds) ***"
     failed_str+=" $ghc_vers"
     any_failed=1
   else
-    echo "*** $ghc_vers SUCCEEDED ***"
+    echo "*** load_shell.sh: $ghc_vers Succeeded ($diff_sec seconds) ***"
     succeeded_str+=" $ghc_vers"
   fi
 

@@ -8,7 +8,8 @@ let
       hash,
       versName,
       overrides ? _: _: { },
-      poorToolCache ? false,
+      poorGhcCache ? false,
+      poorToolCache ? [ ],
       unstableHash ? false,
       unsupported ? [ ],
       warnings ? [ ],
@@ -21,7 +22,14 @@ let
       # list of warnings.
       allWarnings =
         let
-          poorToolCacheWarnMsg = if poorToolCache then "Tools have poor caching." else null;
+          poorGhcCacheMsg = if poorGhcCache then "This GHC has poor caching." else null;
+
+          poorToolCacheWarnMsg =
+            if poorToolCache == [ ] then
+              null
+            else
+              "Tool(s) have poor caching: " + builtins.concatStringsSep ", " poorToolCache;
+
           unstableHashWarnMsg =
             if unstableHash then "The hash is unstable i.e. this may change in the future." else null;
 
@@ -40,6 +48,7 @@ let
         in
         composeWarnings (
           [
+            poorGhcCacheMsg
             poorToolCacheWarnMsg
             unstableHashWarnMsg
             unsupportedWarnings
@@ -138,7 +147,7 @@ in
   ghc944 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc944";
-    poorToolCache = true;
+    poorGhcCache = true;
   };
 
   ghc945 = mkSet {
@@ -180,7 +189,7 @@ in
         } { }
       );
     };
-    poorToolCache = true;
+    poorGhcCache = true;
   };
 
   ghc962 = mkSet {
@@ -232,7 +241,13 @@ in
     };
 
     unsupported = [ "apply-refact" ];
-    poorToolCache = true;
+
+    poorToolCache = [
+      "fourmolu"
+      "hlint"
+      "hls"
+      "ormolu"
+    ];
   };
 
   ghc982 = mkSet {
@@ -247,7 +262,7 @@ in
   };
 
   ghc983 = mkSet {
-    hash = "76612b17c0ce71689921ca12d9ffdc9c23ce40b2";
+    hash = "5e4fbfb6b3de1aa2872b76d49fafc942626e2add";
     versName = "ghc983";
     overrides = _: prev: {
       apply-refact = prev.apply-refact_0_14_0_0;
@@ -256,25 +271,12 @@ in
       ormolu = prev.ormolu_0_7_4_0;
     };
 
-    # NOTE: [GHC 9.8.3 Tools]
-    #
-    # GHC 9.8.3 currently does not work with any tools. For whatever reason,
-    # libs like ghc-lib-parser are not cached, and CI tries building them
-    # itself. This leads to an ambiguity error between Control.DeepSeq.Unit
-    # and GHC.Unit.Types.Unit.
-    #
-    # Also note that we're trying to build ghc-lib-parser-9.8.2 rather than
-    # ghc-lib-parser-9.8.3, but that's not necessarily fatal in and of itself.
-    #
-    # In any case, these tools do not currently work, so they are disabled.
-    unsupported = [
+    poorToolCache = [
       "apply-refact"
       "fourmolu"
       "hlint"
-      "hls"
       "ormolu"
     ];
-    unstableHash = true;
   };
 
   ghc9101 = mkSet {

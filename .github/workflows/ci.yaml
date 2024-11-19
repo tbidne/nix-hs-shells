@@ -63,13 +63,14 @@ jobs:
       # allows. For now, we are able to load all tools except hls, so that is
       # what we do. But we may need to further pare it down in the future.
       - name: Load shell
-        run: |
-          ./test/load_shell.sh \
-            --ghc ${{ matrix.ghc }} \
-            --hls false \
-            --verbose
+        run: ./test/ci.sh --ghc ${{ matrix.ghc }}
 
-  # It turns out we _do_ have enough storage to load hls by itself.
+  # It turns out we _do_ have enough storage to load hls by itself. This has
+  # to be separate from the other CI job, however.
+  #
+  # TODO: Actually, it would be nice to investigate that i.e. try to combine
+  # the two jobs. Now that we're removing all jobs that are not cached,
+  # running hls with everything else might be feasible.
   hls:
     strategy:
       fail-fast: false
@@ -80,9 +81,9 @@ jobs:
           - "ghc964"
           - "ghc965"
           - "ghc966"
-          # - "ghc981" # disabled because caching is poor
+          # - "ghc981" # poor caching
           - "ghc982"
-          - "ghc983"
+          # - "ghc983" # poor caching
           - "ghc9101"
     runs-on: ubuntu-latest
     steps:
