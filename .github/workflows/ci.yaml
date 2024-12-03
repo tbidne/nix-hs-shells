@@ -46,15 +46,12 @@ jobs:
       fail-fast: false
       matrix:
         ghc:
-          - "ghc962"
-          - "ghc963"
-          - "ghc964"
-          - "ghc965"
-          - "ghc966"
           - "ghc981"
           - "ghc982"
           - "ghc983"
+          - "ghc984"
           - "ghc9101"
+          - "ghc9121"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

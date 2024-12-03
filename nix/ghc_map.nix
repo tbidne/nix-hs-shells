@@ -281,6 +281,21 @@ in
     unstableHash = true;
   };
 
+  ghc984 = mkSet {
+    hash = "ed4a395ea001367c1f13d34b1e01aa10290f67d6";
+    versName = "ghc984";
+
+    unsupported = [
+      "apply-refact"
+      "fourmolu"
+      "hlint"
+      "hls"
+      "ormolu"
+    ];
+
+    unstableHash = true;
+  };
+
   ghc9101 = mkSet {
     hash = "5633bcff0c6162b9e4b5f1264264611e950c8ec7";
     versName = "ghc9101";
@@ -288,6 +303,20 @@ in
     unsupported = [
       "apply-refact"
       "hlint"
+    ];
+    unstableHash = true;
+  };
+
+  ghc9121 = mkSet {
+    hash = "ed4a395ea001367c1f13d34b1e01aa10290f67d6";
+    versName = "ghc9121";
+
+    unsupported = [
+      "apply-refact"
+      "fourmolu"
+      "hlint"
+      "hls"
+      "ormolu"
     ];
     unstableHash = true;
   };

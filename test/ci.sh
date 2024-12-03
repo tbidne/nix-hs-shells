@@ -14,23 +14,38 @@ export LANG="C.UTF-8"
 # ghc_map.nix.
 declare -A tool_map
 tool_map[default,bare]="bare"
-tool_map[default,hls]="true"
-tool_map[ghc981,hls]="false" # poor caching
-tool_map[ghc983,hls]="false" # poor caching
-tool_map[default,ormolu]="true"
-tool_map[ghc981,ormolu]="false" # poor caching
-tool_map[ghc983,ormolu]="false" # poor caching
-tool_map[default,fourmolu]="true"
-tool_map[ghc981,fourmolu]="false" # poor caching
-tool_map[ghc983,fourmolu]="false" # poor caching
 tool_map[default,apply-refact]="true"
-tool_map[ghc981,apply-refact]="false" # unsupported
-tool_map[ghc983,apply-refact]="false" # poor caching
-tool_map[ghc9101,apply-refact]="false" # unsupported
+tool_map[default,fourmolu]="true"
 tool_map[default,hlint]="true"
+tool_map[default,hls]="true"
+tool_map[default,ormolu]="true"
+
+tool_map[ghc981,apply-refact]="false" # unsupported
+tool_map[ghc981,fourmolu]="false" # poor caching
 tool_map[ghc981,hlint]="false" # poor caching
+tool_map[ghc981,hls]="false" # poor caching
+tool_map[ghc981,ormolu]="false" # poor caching
+
+tool_map[ghc983,apply-refact]="false" # poor caching
+tool_map[ghc983,fourmolu]="false" # poor caching
 tool_map[ghc983,hlint]="false" # poor caching
+tool_map[ghc983,hls]="false" # poor caching
+tool_map[ghc983,ormolu]="false" # poor caching
+
+tool_map[ghc984,apply-refact]="false" # unsupported
+tool_map[ghc984,fourmolu]="false" # unsupported
+tool_map[ghc984,hlint]="false" # unsupported
+tool_map[ghc984,hls]="false" # unsupported
+tool_map[ghc984,ormolu]="false" # unsupported
+
+tool_map[ghc9101,apply-refact]="false" # unsupported
 tool_map[ghc9101,hlint]="false" # unsupported
+
+tool_map[ghc9121,apply-refact]="false" # unsupported
+tool_map[ghc9121,fourmolu]="false" # unsupported
+tool_map[ghc9121,hlint]="false" # unsupported
+tool_map[ghc9121,hls]="false" # unsupported
+tool_map[ghc9121,ormolu]="false" # unsupported
 
 ghc_version=""
 tool_list="bare hls ormolu fourmolu hlint apply-refact"
