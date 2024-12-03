@@ -262,7 +262,7 @@ in
   };
 
   ghc983 = mkSet {
-    hash = "5e4fbfb6b3de1aa2872b76d49fafc942626e2add";
+    hash = "3566ab7246670a43abd2ffa913cc62dad9cdf7d5";
     versName = "ghc983";
     overrides = _: prev: {
       apply-refact = prev.apply-refact_0_14_0_0;
