@@ -32,9 +32,6 @@ tool_map[ghc983,hlint]="false" # poor caching
 tool_map[ghc983,hls]="false" # poor caching
 tool_map[ghc983,ormolu]="false" # poor caching
 
-tool_map[ghc984,apply-refact]="false" # unsupported
-tool_map[ghc984,hlint]="false" # unsupported
-
 tool_map[ghc9101,apply-refact]="false" # unsupported
 tool_map[ghc9101,hlint]="false" # unsupported
 

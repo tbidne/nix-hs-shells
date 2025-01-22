@@ -285,11 +285,6 @@ in
     hash = "9e4d5190a9482a1fb9d18adf0bdb83c6e506eaab";
     versName = "ghc984";
 
-    unsupported = [
-      "apply-refact"
-      "hlint"
-    ];
-
     unstableHash = true;
   };
 
