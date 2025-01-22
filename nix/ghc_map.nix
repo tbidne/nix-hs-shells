@@ -282,15 +282,12 @@ in
   };
 
   ghc984 = mkSet {
-    hash = "ed4a395ea001367c1f13d34b1e01aa10290f67d6";
+    hash = "9e4d5190a9482a1fb9d18adf0bdb83c6e506eaab";
     versName = "ghc984";
 
     unsupported = [
       "apply-refact"
-      "fourmolu"
       "hlint"
-      "hls"
-      "ormolu"
     ];
 
     unstableHash = true;
