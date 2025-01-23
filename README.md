@@ -35,7 +35,7 @@ GHC versions that support all tools and have fast caching are bolded. In the int
 | 9.8.1      |      🌕 |           🌑 |       🌓 |    🌓 |  🌓 |     🌓 |
 | **9.8.2**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | 9.8.3      |      🌕 |           🌓 |       🌓 |    🌓 |  🌓 |     🌓 |
-| 9.8.4      |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
+| **9.8.4**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | 9.10.1     |      🌕 |           🌑 |       🌕 |    🌑 |  🌕 |     🌕 |
 | 9.12.1     |      🌕 |           🌑 |       🌑 |    🌑 |  🌑 |     🌑 |
 
@@ -88,7 +88,7 @@ The default ghc is the latest version that works with every tool and has decent 
 
 * `apply-refact`
 * `fourmolu`
-* `ghc-vers` (`ghc982`)
+* `ghc-vers` (`ghc984`)
 * `hlint`
 * `hls`
 * `ormolu`

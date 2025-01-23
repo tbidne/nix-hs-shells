@@ -13,7 +13,7 @@ in
     {
       apply-refact ? false,
       fourmolu ? false,
-      ghc-vers ? "ghc982",
+      ghc-vers ? "ghc984",
       hlint ? false,
       hls ? false,
       ormolu ? false,
