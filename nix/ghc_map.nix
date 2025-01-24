@@ -275,6 +275,7 @@ in
       "apply-refact"
       "fourmolu"
       "hlint"
+      "hls"
       "ormolu"
     ];
 
