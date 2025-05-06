@@ -113,6 +113,13 @@ in
   # some tool.
   #
   # These hashes should come from nixos-unstable for caching purposes.
+  #
+  # Regarding hash stability, a hash should only be unstable when it has some
+  # deficiency (e.g. caching, some tool doesn't work), and we have a good
+  # reason to expect that will be improved in the future. Therefore there may
+  # be shells that doesn't work as well as we like, but they might still be
+  # considered stable if they are unlikely to improve (e.g. they are old
+  # and nixpkgs is unlikely to ever offer a better one).
 
   ghc8107 = mkSet {
     hash = "6d28139e80dd2976650c6356269db942202e7c90";
@@ -278,8 +285,6 @@ in
       "hls"
       "ormolu"
     ];
-
-    unstableHash = true;
   };
 
   ghc984 = mkSet {

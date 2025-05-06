@@ -28,17 +28,17 @@ The below matrix shows how well a particular GHC version is supported. Legend:
 - 🌓: Support exists with poor caching.
 - 🌑: Support does not exist.
 
-GHC versions that support all tools and have fast caching are bolded. In the interest of brevity, only the latest 3 major versions are listed. Older versions are listed in the collapsed table below.
+GHC shells that are stable (i.e. the hash is not expected to change) are bolded. In the interest of brevity, only the latest 3 major versions are listed. Older versions are listed in the collapsed table below.
 
 | GHC        | Caching | apply-refact | fourmolu | hlint | hls | ormolu |
 |:-----------|--------:|-------------:|---------:|------:|----:|-------:|
 | **9.12.2** |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
-| 9.12.1     |      🌕 |           🌑 |       🌑 |    🌑 |  🌑 |     🌑 |
-| 9.10.1     |      🌕 |           🌑 |       🌕 |    🌑 |  🌕 |     🌕 |
+| **9.12.1** |      🌕 |           🌑 |       🌑 |    🌑 |  🌑 |     🌑 |
+| **9.10.1** |      🌕 |           🌑 |       🌕 |    🌑 |  🌕 |     🌕 |
 | **9.8.4**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
-| 9.8.3      |      🌕 |           🌓 |       🌓 |    🌓 |  🌓 |     🌓 |
+| **9.8.3**  |      🌕 |           🌓 |       🌓 |    🌓 |  🌓 |     🌓 |
 | **9.8.2**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
-| 9.8.1      |      🌕 |           🌑 |       🌓 |    🌓 |  🌓 |     🌓 |
+| **9.8.1**  |      🌕 |           🌑 |       🌓 |    🌓 |  🌓 |     🌓 |
 
 <details>
 <summary>Click to expand legacy versions</summary>
@@ -50,12 +50,12 @@ GHC versions that support all tools and have fast caching are bolded. In the int
 | **9.6.4**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.6.3**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.6.2**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
-| 9.6.1      |      🌓 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
+| **9.6.1**  |      🌓 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.4.8**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.4.7**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.4.6**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.4.5**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
-| 9.4.4      |      🌓 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
+| **9.4.4**  |      🌓 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.2.8**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.2.7**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.2.5**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
