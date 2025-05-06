@@ -295,7 +295,6 @@ in
       "apply-refact"
       "hlint"
     ];
-    unstableHash = true;
   };
 
   ghc9121 = mkSet {
@@ -309,6 +308,10 @@ in
       "hls"
       "ormolu"
     ];
-    unstableHash = true;
+  };
+
+  ghc9122 = mkSet {
+    hash = "3730d8a308f94996a9ba7c7138ede69c1b9ac4ae";
+    versName = "ghc9122";
   };
 }
