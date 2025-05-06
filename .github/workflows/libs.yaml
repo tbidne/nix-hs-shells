@@ -59,7 +59,7 @@ jobs:
 
       - name: Build
         run: |
-          nix-shell . -A default --argstr ghc-vers ghc9101 --run '
+          nix-shell . -A default --argstr ghc-vers ghc9122 --run '
             cd ./cabal-build \
               && cabal update \
               && cabal build cabal-install'
