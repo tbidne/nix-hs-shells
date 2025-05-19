@@ -302,6 +302,16 @@ in
     ];
   };
 
+  ghc9102 = mkSet {
+    hash = "292fa7d4f6519c074f0a50394dbbe69859bb6043";
+    versName = "ghc9102";
+
+    unsupported = [
+      "apply-refact"
+      "hlint"
+    ];
+  };
+
   ghc9121 = mkSet {
     hash = "ed4a395ea001367c1f13d34b1e01aa10290f67d6";
     versName = "ghc9121";
