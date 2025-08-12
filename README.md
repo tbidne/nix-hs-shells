@@ -90,7 +90,7 @@ The default ghc is the latest version that works with every tool and has decent 
 
 * `apply-refact`
 * `fourmolu`
-* `ghc-vers` (`ghc984`)
+* `ghc-vers`
 * `hlint`
 * `hls`
 * `ormolu`
