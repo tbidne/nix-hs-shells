@@ -4,8 +4,7 @@ let
     import (fetchTarball { url = "https://github.com/NixOS/nixpkgs/archive/${hash}.tar.gz"; }) { };
 
   mkSet =
-    {
-      hash,
+    { hash,
       versName,
       overrides ? _: _: { },
       poorGhcCache ? false,
@@ -232,6 +231,11 @@ in
   ghc966 = mkSet {
     hash = "d04953086551086b44b6f3c6b7eeb26294f207da";
     versName = "ghc966";
+  };
+
+  ghc967 = mkSet {
+    hash = "b599843bad24621dcaa5ab60dac98f9b0eb1cabe";
+    versName = "ghc967";
   };
 
   # NOTE: We could upgrade this hash to 25865a40d14b3f9cf19f19b924e2ab4069b09588

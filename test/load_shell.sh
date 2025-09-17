@@ -51,6 +51,7 @@ export all_cached_ghc_versions="
    ghc964
    ghc965
    ghc966
+   ghc967
    ghc981
    ghc982
    ghc983
