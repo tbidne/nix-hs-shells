@@ -101,6 +101,7 @@ while [ $# -gt 0 ]; do
       echo ""
       echo "Available options:"
       echo -e "  -a,--all                       Runs all ghc versions.\n"
+      echo -e "  --all-tools                    Enables all tools.\n"
       echo -e "  --apply-refact (true | false)  Enables apply-refact tool.\n"
       echo -e "  -d,--dry-run                   Runs with --dry-run i.e. does not build"
       echo -e "                                 anything.\n"
@@ -115,6 +116,13 @@ while [ $# -gt 0 ]; do
       ;;
     "-a" | "--all")
       ghc_versions=$all_cached_ghc_versions
+      ;;
+    "--all-tools")
+      apply_refact="--arg apply-refact true"
+      fourmolu="--arg fourmolu true"
+      hlint="--arg hlint true"
+      hls="--arg hls true"
+      ormolu="--arg ormolu true"
       ;;
     "--apply-refact")
       apply_refact=$(parse_bool "apply-refact" $2)
