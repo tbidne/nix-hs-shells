@@ -36,7 +36,13 @@ tool_map[ghc9101,apply-refact]="false" # unsupported
 tool_map[ghc9101,hlint]="false" # unsupported
 
 tool_map[ghc9102,apply-refact]="false" # unsupported
+tool_map[ghc9102,fourmolu]="false" # poor caching
 tool_map[ghc9102,hlint]="false" # unsupported
+tool_map[ghc9102,hls]="false" # poor caching
+tool_map[ghc9102,ormolu]="false" # poor caching
+
+tool_map[ghc9103,apply-refact]="false" # unsupported
+tool_map[ghc9103,hlint]="false" # unsupported
 
 tool_map[ghc9121,apply-refact]="false" # unsupported
 tool_map[ghc9121,fourmolu]="false" # unsupported

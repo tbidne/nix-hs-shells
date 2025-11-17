@@ -4,7 +4,8 @@ let
     import (fetchTarball { url = "https://github.com/NixOS/nixpkgs/archive/${hash}.tar.gz"; }) { };
 
   mkSet =
-    { hash,
+    {
+      hash,
       versName,
       overrides ? _: _: { },
       poorGhcCache ? false,
@@ -307,8 +308,24 @@ in
   };
 
   ghc9102 = mkSet {
-    hash = "292fa7d4f6519c074f0a50394dbbe69859bb6043";
+    hash = "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a";
     versName = "ghc9102";
+
+    poorToolCache = [
+      "fourmolu"
+      "hls"
+      "ormolu"
+    ];
+
+    unsupported = [
+      "apply-refact"
+      "hlint"
+    ];
+  };
+
+  ghc9103 = mkSet {
+    hash = "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a";
+    versName = "ghc9103";
 
     unsupported = [
       "apply-refact"

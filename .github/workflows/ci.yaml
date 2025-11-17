@@ -51,6 +51,8 @@ jobs:
           - "ghc983"
           - "ghc984"
           - "ghc9101"
+          - "ghc9102"
+          - "ghc9103"
           - "ghc9121"
           - "ghc9122"
     runs-on: ubuntu-latest

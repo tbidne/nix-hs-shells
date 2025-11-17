@@ -58,6 +58,7 @@ export all_cached_ghc_versions="
    ghc983
    ghc9101
    ghc9102
+   ghc9103
    ghc9121
    ghc9122
    "
@@ -71,6 +72,7 @@ export current_cached_ghc_versions="
    ghc984
    ghc9101
    ghc9102
+   ghc9103
    ghc9121
    ghc9122
    "
