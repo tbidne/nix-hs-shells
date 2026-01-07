@@ -7,7 +7,7 @@ let
     {
       hash,
       versName,
-      overrides ? _: _: { },
+      overrides ? _: _: _: { },
       poorGhcCache ? false,
       poorToolCache ? [ ],
       unstableHash ? false,
@@ -64,7 +64,7 @@ let
           # compose inherited overrides w/ custom set below
           overrides =
             final: prev:
-            (overrides final prev)
+            (overrides hlib final prev)
             // {
               # Conundrum: This package had failing tests on CI for GHC 9.4.4.
               # On the one hand, GHC 9.4.4 is not a priority as its caching is
@@ -183,7 +183,7 @@ in
     # overrride it manually e.g. with callHackage.
     hash = "1c9db9710cb23d60570ad4d7ab829c2d34403de3";
     versName = "ghc961";
-    overrides = final: prev: {
+    overrides = _: final: prev: {
       apply-refact = prev.apply-refact_0_13_0_0;
       fourmolu = prev.fourmolu_0_12_0_0;
       ormolu = prev.ormolu_0_7_1_0;
@@ -202,7 +202,7 @@ in
   ghc962 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc962";
-    overrides = _: prev: {
+    overrides = _: _: prev: {
       fourmolu = prev.fourmolu_0_13_1_0;
       hlint = prev.hlint_3_6_1;
       ormolu = prev.ormolu_0_7_2_0;
@@ -212,7 +212,7 @@ in
   ghc963 = mkSet {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc963";
-    overrides = _: prev: {
+    overrides = _: _: prev: {
       fourmolu = prev.fourmolu_0_13_1_0;
       hlint = prev.hlint_3_6_1;
       ormolu = prev.ormolu_0_7_2_0;
@@ -246,7 +246,7 @@ in
   ghc981 = mkSet {
     hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
     versName = "ghc981";
-    overrides = _: prev: {
+    overrides = _: _: prev: {
       fourmolu = prev.fourmolu_0_14_1_0;
       hlint = prev.hlint_3_8;
       ormolu = prev.ormolu_0_7_3_0;
@@ -265,7 +265,7 @@ in
   ghc982 = mkSet {
     hash = "25865a40d14b3f9cf19f19b924e2ab4069b09588";
     versName = "ghc982";
-    overrides = _: prev: {
+    overrides = _: _: prev: {
       apply-refact = prev.apply-refact_0_14_0_0;
       fourmolu = prev.fourmolu_0_15_0_0;
       hlint = prev.hlint_3_8;
@@ -276,7 +276,7 @@ in
   ghc983 = mkSet {
     hash = "5e4fbfb6b3de1aa2872b76d49fafc942626e2add";
     versName = "ghc983";
-    overrides = _: prev: {
+    overrides = _: _: prev: {
       apply-refact = prev.apply-refact_0_14_0_0;
       fourmolu = prev.fourmolu_0_15_0_0;
       hlint = prev.hlint_3_8;
@@ -349,5 +349,38 @@ in
   ghc9122 = mkSet {
     hash = "3730d8a308f94996a9ba7c7138ede69c1b9ac4ae";
     versName = "ghc9122";
+  };
+
+  ghc9123 = mkSet {
+    hash = "5912c1772a44e31bf1c63c0390b90501e5026886";
+    versName = "ghc9123";
+
+    # These fail because ghc-lib-parser is not updated to 9.12.3 yet.
+    # Apply-refact actually works, but for now disable it since there is little
+    # point when hlint fails.
+    unsupported = [
+      "apply-refact"
+      "fourmolu"
+      "hlint"
+      "hls"
+      "ormolu"
+    ];
+
+    unstableHash = true;
+  };
+
+  ghc9141 = mkSet {
+    hash = "5912c1772a44e31bf1c63c0390b90501e5026886";
+    versName = "ghc9141";
+
+    unsupported = [
+      "apply-refact"
+      "fourmolu"
+      "hlint"
+      "hls"
+      "ormolu"
+    ];
+
+    unstableHash = true;
   };
 }

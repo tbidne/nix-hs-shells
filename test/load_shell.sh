@@ -55,26 +55,26 @@ export all_cached_ghc_versions="
    ghc981
    ghc982
    ghc983
-   ghc983
-   ghc9101
-   ghc9102
-   ghc9103
-   ghc9121
-   ghc9122
-   "
-
-# This is a subset of all_cached_ghc_versions i.e. the last 3 major releases that
-# we do not exclude for other reasons e.g. poor caching.
-export current_cached_ghc_versions="
-   ghc981
-   ghc982
-   ghc983
    ghc984
    ghc9101
    ghc9102
    ghc9103
    ghc9121
    ghc9122
+   ghc9123
+   ghc9141
+   "
+
+# This is a subset of all_cached_ghc_versions i.e. the last 3 major releases that
+# we do not exclude for other reasons e.g. poor caching.
+export current_cached_ghc_versions="
+   ghc9101
+   ghc9102
+   ghc9103
+   ghc9121
+   ghc9122
+   ghc9123
+   ghc9141
    "
 
 cmd="--command exit"
