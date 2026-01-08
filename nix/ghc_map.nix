@@ -86,15 +86,7 @@ let
         }
       );
     };
-in
-# NOTE: We do not always need to override tools even though the default is
-# not what we want.
-#
-# For example, the current ghc 9.4 nixpkgs hash we use has the default
-# hlint-3.4 (ghc 9.2) whereas we want hlint-3.5. We could explicitly
-# override this, but in fact this is already done in nixpkgs in
-# configuration-ghc-9.4.x.nix.
-{
+
   # In general, the hash for ghc vers N should be a commit C where N has
   # good caching for every tool. The best candidates are commits where N is
   # the default ghc.
@@ -123,63 +115,127 @@ in
   # considered stable if they are unlikely to improve (e.g. they are old
   # and nixpkgs is unlikely to ever offer a better one).
 
-  ghc8107 = mkSet {
+  # NOTE: We do not always need to override tools even though the default is
+  # not what we want.
+  #
+  # For example, the current ghc 9.4 nixpkgs hash we use has the default
+  # hlint-3.4 (ghc 9.2) whereas we want hlint-3.5. We could explicitly
+  # override this, but in fact this is already done in nixpkgs in
+  # configuration-ghc-9.4.x.nix.
+
+  # ######################################################################### #
+  #                                   GHC 8                                   #
+  # ######################################################################### #
+
+  # NOTE: [GHC Aliases]
+  #
+  # Aliases should refer to the latest "good" compiler, where good means it has
+  # fast caching with all tools, if possible. In general, aliases are only
+  # considered stable when no further GHC releases are planned in that series.
+  #
+  # https://gitlab.haskell.org/ghc/ghc/-/wikis/GHC%20Status
+  #
+  # When an alias is updated, we need to update ci.sh.
+  ghc8Set = ghc810Set;
+
+  # ######################################################################### #
+  #                                  GHC 8.10                                 #
+  # ######################################################################### #
+
+  ghc810Set = ghc8107Set;
+
+  ghc8107Set = {
     hash = "6d28139e80dd2976650c6356269db942202e7c90";
     versName = "ghc8107";
   };
 
-  ghc902 = mkSet {
+  # ######################################################################### #
+  #                                   GHC 9                                   #
+  # ######################################################################### #
+
+  # TODO: Switch when ghc912 / ghc914 improves.
+  #
+  # See NOTE: [GHC Aliases]
+  ghc9Set = ghc912Set // {
+    unstableHash = true;
+  };
+
+  # ######################################################################### #
+  #                                  GHC 9.0                                  #
+  # ######################################################################### #
+
+  ghc90Set = ghc902Set;
+
+  ghc902Set = {
     hash = "a7855f2235a1876f97473a76151fec2afa02b287";
     versName = "ghc902";
   };
 
-  ghc925 = mkSet {
+  # ######################################################################### #
+  #                                  GHC 9.2                                  #
+  # ######################################################################### #
+
+  ghc92Set = ghc928Set;
+
+  ghc925Set = {
     hash = "d0d55259081f0b97c828f38559cad899d351cad1";
     versName = "ghc925";
   };
 
-  ghc926 = mkSet {
+  ghc926Set = {
     hash = "d0d55259081f0b97c828f38559cad899d351cad1";
     versName = "ghc926";
   };
 
-  ghc927 = mkSet {
+  ghc927Set = {
     hash = "3c5319ad3aa51551182ac82ea17ab1c6b0f0df89";
     versName = "ghc927";
   };
 
-  ghc928 = mkSet {
+  ghc928Set = {
     hash = "75a5ebf473cd60148ba9aec0d219f72e5cf52519";
     versName = "ghc928";
   };
 
-  ghc944 = mkSet {
+  # ######################################################################### #
+  #                                  GHC 9.4                                  #
+  # ######################################################################### #
+
+  ghc94Set = ghc948Set;
+
+  ghc944Set = {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc944";
     poorGhcCache = true;
   };
 
-  ghc945 = mkSet {
+  ghc945Set = {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc945";
   };
 
-  ghc946 = mkSet {
+  ghc946Set = {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc946";
   };
 
-  ghc947 = mkSet {
+  ghc947Set = {
     hash = "85f1ba3e51676fa8cc604a3d863d729026a6b8eb";
     versName = "ghc947";
   };
 
-  ghc948 = mkSet {
+  ghc948Set = {
     hash = "5a09cb4b393d58f9ed0d9ca1555016a8543c2ac8";
     versName = "ghc948";
   };
 
-  ghc961 = mkSet {
+  # ######################################################################### #
+  #                                  GHC 9.6                                  #
+  # ######################################################################### #
+
+  ghc96Set = ghc967Set;
+
+  ghc961Set = {
     # Older hash as newer hash does not contain ghc961. Sadly this means we
     # cannot use hlint as this nixpkgs does not have hlint_3_6. We need to
     # overrride it manually e.g. with callHackage.
@@ -201,7 +257,7 @@ in
     poorGhcCache = true;
   };
 
-  ghc962 = mkSet {
+  ghc962Set = {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc962";
     overrides = _: _: prev: {
@@ -211,7 +267,7 @@ in
     };
   };
 
-  ghc963 = mkSet {
+  ghc963Set = {
     hash = "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
     versName = "ghc963";
     overrides = _: _: prev: {
@@ -221,31 +277,37 @@ in
     };
   };
 
-  ghc964 = mkSet {
+  ghc964Set = {
     hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
     versName = "ghc964";
   };
 
-  ghc965 = mkSet {
+  ghc965Set = {
     hash = "25865a40d14b3f9cf19f19b924e2ab4069b09588";
     versName = "ghc965";
   };
 
-  ghc966 = mkSet {
+  ghc966Set = {
     hash = "d04953086551086b44b6f3c6b7eeb26294f207da";
     versName = "ghc966";
   };
 
-  ghc967 = mkSet {
+  ghc967Set = {
     hash = "b599843bad24621dcaa5ab60dac98f9b0eb1cabe";
     versName = "ghc967";
   };
+
+  # ######################################################################### #
+  #                                  GHC 9.8                                  #
+  # ######################################################################### #
+
+  ghc98Set = ghc984Set;
 
   # NOTE: We could upgrade this hash to 25865a40d14b3f9cf19f19b924e2ab4069b09588
   # -- what ghc982 currently uses -- and then we'd get apply-refact.
   # However ghc981's caching is terrible with that hash, so we judge that the
   # better caching is worth giving up apply-refact.
-  ghc981 = mkSet {
+  ghc981Set = {
     hash = "2726f127c15a4cc9810843b96cad73c7eb39e443";
     versName = "ghc981";
     overrides = _: _: prev: {
@@ -264,7 +326,7 @@ in
     ];
   };
 
-  ghc982 = mkSet {
+  ghc982Set = {
     hash = "25865a40d14b3f9cf19f19b924e2ab4069b09588";
     versName = "ghc982";
     overrides = _: _: prev: {
@@ -275,7 +337,7 @@ in
     };
   };
 
-  ghc983 = mkSet {
+  ghc983Set = {
     hash = "5e4fbfb6b3de1aa2872b76d49fafc942626e2add";
     versName = "ghc983";
     overrides = _: _: prev: {
@@ -294,12 +356,23 @@ in
     ];
   };
 
-  ghc984 = mkSet {
+  ghc984Set = {
     hash = "9e4d5190a9482a1fb9d18adf0bdb83c6e506eaab";
     versName = "ghc984";
   };
 
-  ghc9101 = mkSet {
+  # ######################################################################### #
+  #                                  GHC 9.10                                 #
+  # ######################################################################### #
+
+  # TODO: GHC 9.10.4 is planned.
+  #
+  # See NOTE: [GHC Aliases]
+  ghc910Set = ghc9103Set // {
+    unstableHash = true;
+  };
+
+  ghc9101Set = {
     hash = "5633bcff0c6162b9e4b5f1264264611e950c8ec7";
     versName = "ghc9101";
 
@@ -309,7 +382,7 @@ in
     ];
   };
 
-  ghc9102 = mkSet {
+  ghc9102Set = {
     hash = "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a";
     versName = "ghc9102";
 
@@ -325,7 +398,7 @@ in
     ];
   };
 
-  ghc9103 = mkSet {
+  ghc9103Set = {
     hash = "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a";
     versName = "ghc9103";
 
@@ -335,7 +408,18 @@ in
     ];
   };
 
-  ghc9121 = mkSet {
+  # ######################################################################### #
+  #                                  GHC 9.12                                 #
+  # ######################################################################### #
+
+  # TODO: Switch if ghc9123 tools are fixed.
+  #
+  # See NOTE: [GHC Aliases]
+  ghc912Set = ghc9122Set // {
+    unstableHash = true;
+  };
+
+  ghc9121Set = {
     hash = "ed4a395ea001367c1f13d34b1e01aa10290f67d6";
     versName = "ghc9121";
 
@@ -348,12 +432,12 @@ in
     ];
   };
 
-  ghc9122 = mkSet {
+  ghc9122Set = {
     hash = "3730d8a308f94996a9ba7c7138ede69c1b9ac4ae";
     versName = "ghc9122";
   };
 
-  ghc9123 = mkSet {
+  ghc9123Set = {
     hash = "5912c1772a44e31bf1c63c0390b90501e5026886";
     versName = "ghc9123";
 
@@ -371,7 +455,18 @@ in
     unstableHash = true;
   };
 
-  ghc9141 = mkSet {
+  # ######################################################################### #
+  #                                  GHC 9.14                                 #
+  # ######################################################################### #
+
+  # TODO: Switch if better ghc comes out.
+  #
+  # See NOTE: [GHC Aliases]
+  ghc914Set = ghc9141Set // {
+    unstableHash = true;
+  };
+
+  ghc9141Set = {
     hash = "5912c1772a44e31bf1c63c0390b90501e5026886";
     versName = "ghc9141";
 
@@ -385,4 +480,67 @@ in
 
     unstableHash = true;
   };
+in
+{
+  # GHC 8
+  ghc8 = mkSet ghc8Set;
+
+  ## GHC 8.10
+  ghc810 = mkSet ghc810Set;
+  ghc8107 = mkSet ghc8107Set;
+
+  # GHC 9
+  ghc9 = mkSet ghc9Set;
+
+  ## GHC 9.0
+  ghc90 = mkSet ghc90Set;
+  ghc902 = mkSet ghc902Set;
+
+  ## GHC 9.2
+  ghc92 = mkSet ghc92Set;
+  ghc925 = mkSet ghc925Set;
+  ghc926 = mkSet ghc926Set;
+  ghc927 = mkSet ghc927Set;
+  ghc928 = mkSet ghc928Set;
+
+  ## GHC 9.4
+  ghc94 = mkSet ghc94Set;
+  ghc944 = mkSet ghc944Set;
+  ghc945 = mkSet ghc945Set;
+  ghc946 = mkSet ghc946Set;
+  ghc947 = mkSet ghc947Set;
+  ghc948 = mkSet ghc948Set;
+
+  ## GHC 9.6
+  ghc96 = mkSet ghc96Set;
+  ghc961 = mkSet ghc961Set;
+  ghc962 = mkSet ghc962Set;
+  ghc963 = mkSet ghc963Set;
+  ghc964 = mkSet ghc964Set;
+  ghc965 = mkSet ghc965Set;
+  ghc966 = mkSet ghc966Set;
+  ghc967 = mkSet ghc967Set;
+
+  ## GHC 9.8
+  ghc98 = mkSet ghc98Set;
+  ghc981 = mkSet ghc981Set;
+  ghc982 = mkSet ghc982Set;
+  ghc983 = mkSet ghc983Set;
+  ghc984 = mkSet ghc984Set;
+
+  ## GHC 9.10
+  ghc910 = mkSet ghc910Set;
+  ghc9101 = mkSet ghc9101Set;
+  ghc9102 = mkSet ghc9102Set;
+  ghc9103 = mkSet ghc9103Set;
+
+  ## GHC 9.12
+  ghc912 = mkSet ghc912Set;
+  ghc9121 = mkSet ghc9121Set;
+  ghc9122 = mkSet ghc9122Set;
+  ghc9123 = mkSet ghc9123Set;
+
+  ## GHC 9.14
+  ghc914 = mkSet ghc914Set;
+  ghc9141 = mkSet ghc9141Set;
 }

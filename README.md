@@ -69,6 +69,8 @@ GHC shells that are stable (i.e. the hash is not expected to change) are bolded.
 
 </details>
 
+We also provide less granular aliases e.g. `ghc912`, `ghc9`, which point to the latest compiler in that series that has fast caching with as many tools as possible.
+
 # Shells
 
 This section lists the provided shells. For shells with arguments, the default value (if any) is listed in parentheses.

@@ -23,6 +23,7 @@ tool_map[default,ormolu]="true"
 tool_map[ghc9101,apply-refact]="false" # unsupported
 tool_map[ghc9101,hlint]="false" # unsupported
 
+
 tool_map[ghc9102,apply-refact]="false" # unsupported
 tool_map[ghc9102,fourmolu]="false" # poor caching
 tool_map[ghc9102,hlint]="false" # unsupported
@@ -31,6 +32,13 @@ tool_map[ghc9102,ormolu]="false" # poor caching
 
 tool_map[ghc9103,apply-refact]="false" # unsupported
 tool_map[ghc9103,hlint]="false" # unsupported
+
+# NOTE: ALIAS: ghc910 -> ghc9103
+tool_map[ghc910,apply-refact]=${tool_map[ghc9103,apply-refact]}
+tool_map[ghc910,fourmolu]=${tool_map[ghc9103,fourmolu]}
+tool_map[ghc910,hlint]=${tool_map[ghc9103,hlint]}
+tool_map[ghc910,hls]=${tool_map[ghc9103,hls]}
+tool_map[ghc910,ormolu]=${tool_map[ghc9103,ormolu]}
 
 tool_map[ghc9121,apply-refact]="false" # unsupported
 tool_map[ghc9121,fourmolu]="false" # unsupported
@@ -44,11 +52,28 @@ tool_map[ghc9123,hlint]="false" # unsupported
 tool_map[ghc9123,hls]="false" # unsupported
 tool_map[ghc9123,ormolu]="false" # unsupported
 
+# NOTE: ALIAS: ghc912 -> ghc9122. Since ghc9122 requires no special casing,
+# neither does ghc912.
+
 tool_map[ghc9141,apply-refact]="false" # unsupported
 tool_map[ghc9141,fourmolu]="false" # unsupported
 tool_map[ghc9141,hlint]="false" # unsupported
 tool_map[ghc9141,hls]="false" # unsupported
 tool_map[ghc9141,ormolu]="false" # unsupported
+
+# NOTE: ALIAS: ghc914 -> ghc9141
+tool_map[ghc914,apply-refact]=${tool_map[ghc9141,apply-refact]}
+tool_map[ghc914,fourmolu]=${tool_map[ghc9141,hlint]}
+tool_map[ghc914,hlint]=${tool_map[ghc9141,hlint]}
+tool_map[ghc914,hls]=${tool_map[ghc9141,hls]}
+tool_map[ghc914,ormolu]=${tool_map[ghc9141,ormolu]}
+
+# NOTE: ALIAS: ghc9 -> ghc912
+tool_map[ghc9,apply-refact]=${tool_map[ghc912,apply-refact]}
+tool_map[ghc9,fourmolu]=${tool_map[ghc912,fourmolu]}
+tool_map[ghc9,hlint]=${tool_map[ghc912,hlint]}
+tool_map[ghc9,hls]=${tool_map[ghc912,hls]}
+tool_map[ghc9,ormolu]=${tool_map[ghc912,ormolu]}
 
 ghc_version=""
 tool_list="bare hls ormolu fourmolu hlint apply-refact"
