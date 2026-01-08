@@ -49,10 +49,14 @@ jobs:
           - "ghc9101"
           - "ghc9102"
           - "ghc9103"
+          - "ghc910"
           - "ghc9121"
           - "ghc9122"
           - "ghc9123"
+          - "ghc912"
           - "ghc9141"
+          - "ghc914"
+          - "ghc9"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
