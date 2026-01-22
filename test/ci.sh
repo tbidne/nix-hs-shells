@@ -57,7 +57,7 @@ tool_map[ghc9123,ormolu]="false" # unsupported
 tool_map[ghc9141,apply-refact]="false" # unsupported
 tool_map[ghc9141,fourmolu]="false" # unsupported
 tool_map[ghc9141,hlint]="false" # unsupported
-tool_map[ghc9141,hls]="false" # unsupported
+#tool_map[ghc9141,hls]="false" # unsupported
 tool_map[ghc9141,ormolu]="false" # unsupported
 
 # NOTE: ALIAS: ghc914 -> ghc9141

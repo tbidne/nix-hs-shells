@@ -467,14 +467,37 @@ let
   };
 
   ghc9141Attrs = {
-    hash = "5912c1772a44e31bf1c63c0390b90501e5026886";
+    hash = "88d3861acdd3d2f0e361767018218e51810df8a1";
     versName = "ghc9141";
+
+    overrides = hlib: final: prev: {
+      # base
+      assoc = hlib.doJailbreak prev.assoc;
+      boring = hlib.doJailbreak prev.boring;
+      generically = hlib.doJailbreak prev.generically;
+      ghc-trace-events = hlib.doJailbreak prev.ghc-trace-events;
+      hie-compat = hlib.doJailbreak prev.hie-compat;
+      indexed-traversable = hlib.doJailbreak prev.indexed-traversable;
+      inspection-testing = hlib.dontCheck (hlib.doJailbreak prev.inspection-testing);
+      parallel = hlib.doJailbreak prev.parallel;
+      some = hlib.doJailbreak prev.some;
+      # containers
+      Cabal-syntax_3_14_2_0 = hlib.doJailbreak prev.Cabal-syntax_3_14_2_0;
+      data-default = hlib.doJailbreak prev.data-default;
+      regex-pcre-builtin = hlib.doJailbreak prev.regex-pcre-builtin;
+      # template-haskell
+      tagged = hlib.doJailbreak prev.tagged;
+      # time
+      test-framework = hlib.doJailbreak prev.test-framework;
+      # Tests
+      call-stack = hlib.dontCheck prev.call-stack;
+    };
 
     unsupported = [
       "apply-refact"
       "fourmolu"
       "hlint"
-      "hls"
+      #"hls"
       "ormolu"
     ];
 
