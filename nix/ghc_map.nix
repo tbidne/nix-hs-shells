@@ -423,6 +423,11 @@ let
     hash = "ed4a395ea001367c1f13d34b1e01aa10290f67d6";
     versName = "ghc9121";
 
+    overrides = hlib: _: prev: {
+      # These are unreliable, apparently.
+      hlint = hlib.dontCheck prev.hlint;
+    };
+
     unsupported = [
       "apply-refact"
       "fourmolu"
@@ -438,19 +443,17 @@ let
   };
 
   ghc9123Attrs = {
-    hash = "5912c1772a44e31bf1c63c0390b90501e5026886";
+    hash = "2fc6539b481e1d2569f25f8799236694180c0993";
     versName = "ghc9123";
 
-    # These fail because ghc-lib-parser is not updated to 9.12.3 yet.
-    # Apply-refact actually works, but for now disable it since there is little
-    # point when hlint fails.
-    unsupported = [
+    poorToolCache = [
       "apply-refact"
       "fourmolu"
       "hlint"
-      "hls"
       "ormolu"
     ];
+
+    unsupported = [ "hls" ];
 
     unstableHash = true;
   };
