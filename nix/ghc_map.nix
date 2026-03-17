@@ -546,4 +546,6 @@ in
   ## GHC 9.14
   ghc914 = mkSet ghc914Attrs;
   ghc9141 = mkSet ghc9141Attrs;
+
+  latest = mkSet ghc9141Attrs;
 }

@@ -63,6 +63,7 @@ GHC shells that are stable (i.e. the hash is not expected to change) are bolded.
 | **9.4.4**  |      🌓 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.2.8**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.2.7**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
+| **9.2.6**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.2.5**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.0.2**  |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **8.10.7** |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
@@ -127,4 +128,16 @@ nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A default 
 
 ```
 nix-shell http://github.com/tbidne/hs-nix-shells/archive/main.tar.gz -A liquidhaskell
+```
+
+## Help
+
+**Attr:** `help`
+
+**Description:** Nix expression that prints out a list of all GHCs.
+
+**Usage:**
+
+```
+$(nix-build -A help --no-out-link)/bin/help
 ```
