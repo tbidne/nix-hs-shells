@@ -443,7 +443,7 @@ let
   };
 
   ghc9123Attrs = {
-    hash = "2fc6539b481e1d2569f25f8799236694180c0993";
+    hash = "6201e203d09599479a3b3450ed24fa81537ebc4e";
     versName = "ghc9123";
 
     poorToolCache = [
@@ -452,8 +452,6 @@ let
       "hlint"
       "ormolu"
     ];
-
-    unsupported = [ "hls" ];
 
     unstableHash = true;
   };
