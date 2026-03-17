@@ -470,15 +470,15 @@ let
   };
 
   ghc9141Attrs = {
-    hash = "5912c1772a44e31bf1c63c0390b90501e5026886";
+    hash = "6201e203d09599479a3b3450ed24fa81537ebc4e";
     versName = "ghc9141";
 
     unsupported = [
       "apply-refact"
       "fourmolu"
       "hlint"
-      "hls"
-      "ormolu"
+      #"hls"
+      #"ormolu"
     ];
 
     unstableHash = true;
