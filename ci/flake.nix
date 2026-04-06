@@ -22,8 +22,13 @@
               name = "nixfmt";
               drv = pkgs.writeShellApplication {
                 inherit name;
-                text = "nixfmt .";
-                runtimeInputs = [ pkgs.nixfmt-rfc-style ];
+                text = ''
+                  fd . . -e nix | xargs nixfmt
+                '';
+                runtimeInputs = [
+                  pkgs.fd
+                  pkgs.nixfmt
+                ];
               };
             in
             {

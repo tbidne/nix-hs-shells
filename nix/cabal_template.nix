@@ -21,7 +21,10 @@ let
       compiler.ghc
       pkgs.cabal-install
       pkgs.zlib
-    ] ++ (lib.mkDev devTools ghcSet) ++ (extraInputs pkgs) ++ (extraGhcInputs compiler);
+    ]
+    ++ (lib.mkDev devTools ghcSet)
+    ++ (extraInputs pkgs)
+    ++ (extraGhcInputs compiler);
   };
 in
 (wrapper pkgs) shell

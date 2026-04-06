@@ -66,7 +66,7 @@ in
       echo -e "- \e[32m8.10.7\e[0m"
     '';
 
-    runtimeInputs = [];
+    runtimeInputs = [ ];
   };
 
   liquidhaskell =
