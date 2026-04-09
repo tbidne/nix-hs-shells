@@ -412,7 +412,7 @@ let
   #                                  GHC 9.12                                 #
   # ######################################################################### #
 
-  # TODO: Switch if ghc9123 tools are fixed.
+  # TODO: Switch if ghc9123 or ghc9124 tools are fixed.
   #
   # See NOTE: [GHC Aliases]
   ghc912Attrs = ghc9122Attrs // {
@@ -445,6 +445,22 @@ let
   ghc9123Attrs = {
     hash = "2fc6539b481e1d2569f25f8799236694180c0993";
     versName = "ghc9123";
+
+    poorToolCache = [
+      "apply-refact"
+      "fourmolu"
+      "hlint"
+      "ormolu"
+    ];
+
+    unsupported = [ "hls" ];
+
+    unstableHash = true;
+  };
+
+  ghc9124Attrs = {
+    hash = "68d8aa3d661f0e6bd5862291b5bb263b2a6595c9";
+    versName = "ghc9124";
 
     poorToolCache = [
       "apply-refact"
@@ -542,6 +558,7 @@ in
   ghc9121 = mkSet ghc9121Attrs;
   ghc9122 = mkSet ghc9122Attrs;
   ghc9123 = mkSet ghc9123Attrs;
+  ghc9124 = mkSet ghc9124Attrs;
 
   ## GHC 9.14
   ghc914 = mkSet ghc914Attrs;

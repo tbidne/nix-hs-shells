@@ -53,7 +53,7 @@ in
 
       echo -e "\e[34mCurrent GHCs:\e[0m"
       echo -e "- \e[31m9.14.1\e[0m"
-      echo -e "- \e[33m9.12.1\e[0m, \e[32m9.12.2\e[0m, \e[31m9.12.3\e[0m"
+      echo -e "- \e[33m9.12.1\e[0m, \e[32m9.12.2\e[0m, \e[31m9.12.3\e[0m, \e[31m9.12.4\e[0m"
       echo -e "- \e[33m9.10.1\e[0m, \e[33m9.10.2\e[0m, \e[33m9.10.3\e[0m"
       echo ""
 

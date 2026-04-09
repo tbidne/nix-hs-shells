@@ -51,6 +51,12 @@ tool_map[ghc9123,hlint]="false" # poor caching
 tool_map[ghc9123,hls]="false" # unsupported
 tool_map[ghc9123,ormolu]="false" # poor caching
 
+tool_map[ghc9124,apply-refact]="false" # poor caching
+tool_map[ghc9124,fourmolu]="false" # poor caching
+tool_map[ghc9124,hlint]="false" # unsupported
+tool_map[ghc9124,hls]="false" # poor caching
+tool_map[ghc9124,ormolu]="false" # poor caching
+
 # NOTE: ALIAS: ghc912 -> ghc9122. Since ghc9122 requires no special casing,
 # neither does ghc912.
 

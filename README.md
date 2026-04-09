@@ -33,6 +33,7 @@ GHC shells that are stable (i.e. the hash is not expected to change) are bolded.
 | GHC        | Caching | apply-refact | fourmolu | hlint | hls | ormolu |
 |:-----------|--------:|-------------:|---------:|------:|----:|-------:|
 | 9.14.1     |      🌕 |           🌑 |       🌑 |    🌑 |  🌑 |     🌑 |
+| 9.12.4     |      🌕 |           🌓 |       🌓 |    🌓 |  🌑 |     🌓 |
 | 9.12.3     |      🌕 |           🌓 |       🌓 |    🌓 |  🌑 |     🌓 |
 | **9.12.2** |      🌕 |           🌕 |       🌕 |    🌕 |  🌕 |     🌕 |
 | **9.12.1** |      🌕 |           🌑 |       🌑 |    🌑 |  🌑 |     🌑 |
