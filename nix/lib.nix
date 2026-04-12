@@ -2,6 +2,25 @@
 
 let
   ghcMap = import ./ghc_map.nix;
+  ghcKeys = ''
+
+    - latest
+
+    - ghc9
+    - ghc914, ghc9141
+    - ghc912, ghc9121, ghc9122, ghc9123, ghc9124
+    - ghc910, ghc9101, ghc9102, ghc9103
+
+    - ghc98, ghc981, ghc982, ghc983, ghc984
+    - ghc96, ghc961, ghc962, ghc963, ghc964, ghc965, ghc966, ghc967
+    - ghc94, ghc944, ghc945, ghc946, ghc947, ghc948
+    - ghc92, ghc925, ghc926, ghc927, ghc928
+    - ghc90, ghc902
+
+    - ghc8
+    - ghc810, ghc8107
+  '';
+
   showKeys =
     attrs:
     let
@@ -11,11 +30,11 @@ let
   member = y: xs: builtins.foldl' (acc: x: if x == y then true else acc) false xs;
 
   lookupOrDie =
-    mp: key: keyName:
+    mp: key: keyName: allKeys:
     if mp ? ${key} then
       mp.${key}
     else
-      throw "Invalid ${keyName}: '${key}'; valid keys are ${showKeys mp}.";
+      throw "Invalid ${keyName}: '${key}'; valid keys are ${allKeys}";
 
   # Returns a list of dev tools, depending on the arguments.
   mkDev =
@@ -63,7 +82,7 @@ in
 {
   inherit mkDev;
 
-  getGhcSet = ghc-vers: lookupOrDie ghcMap ghc-vers "ghc-vers";
+  getGhcSet = ghc-vers: lookupOrDie ghcMap ghc-vers "ghc-vers" ghcKeys;
 
   emptyDevTools = {
     apply-refact = false;
