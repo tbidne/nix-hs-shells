@@ -447,8 +447,9 @@ let
     versName = "ghc9123";
   };
 
+  # See FIXME: [Unstable]
   ghc9124Attrs = {
-    hash = "68d8aa3d661f0e6bd5862291b5bb263b2a6595c9";
+    hash = newHash;
     versName = "ghc9124";
 
     poorToolCache = [
@@ -458,7 +459,7 @@ let
       "ormolu"
     ];
 
-    unsupported = [ "hls" ];
+    # unsupported = [ "hls" ];
 
     unstableHash = true;
   };
@@ -474,20 +475,34 @@ let
     unstableHash = true;
   };
 
+  # See FIXME: [Unstable]
   ghc9141Attrs = {
-    hash = "5912c1772a44e31bf1c63c0390b90501e5026886";
+    hash = newHash;
     versName = "ghc9141";
 
     unsupported = [
-      "apply-refact"
-      "fourmolu"
-      "hlint"
-      "hls"
-      "ormolu"
+      #"apply-refact"
+      #"fourmolu"
+      #"hlint"
+      #"hls"
+      #"ormolu"
     ];
 
     unstableHash = true;
   };
+
+  newHash = "15f4ee454b1dce334612fa6843b3e05cf546efab";
+
+  # FIXME: [Unstable]
+  #
+  # The unstables branch is meant for testing current unstable hashes
+  # to see if they have gotten any better with more recent hashes e.g.
+  # more tool support or better caching.
+  #
+  # Current branches:
+  #
+  #   - ghc9124: Testing if hls works, (hlint | ormolu) has better caching
+  #   - ghc9141: Testing if (hls | hlint | ormolu) works.
 in
 {
   # GHC 8

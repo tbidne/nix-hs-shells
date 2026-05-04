@@ -45,20 +45,20 @@ tool_map[ghc9121,hlint]="false" # unsupported
 tool_map[ghc9121,hls]="false" # unsupported
 tool_map[ghc9121,ormolu]="false" # unsupported
 
-tool_map[ghc9124,apply-refact]="false" # poor caching
-tool_map[ghc9124,fourmolu]="false" # poor caching
-tool_map[ghc9124,hlint]="false" # unsupported
-tool_map[ghc9124,hls]="false" # poor caching
-tool_map[ghc9124,ormolu]="false" # poor caching
+tool_map[ghc9124,apply-refact]="true" # poor caching
+tool_map[ghc9124,fourmolu]="true" # poor caching
+tool_map[ghc9124,hlint]="true" # poor caching
+tool_map[ghc9124,hls]="true" # unsupported
+tool_map[ghc9124,ormolu]="true" # poor caching
 
 # NOTE: ALIAS: ghc912 -> ghc9123. Since ghc9123 requires no special casing,
 # neither does ghc912.
 
-tool_map[ghc9141,apply-refact]="false" # unsupported
-tool_map[ghc9141,fourmolu]="false" # unsupported
-tool_map[ghc9141,hlint]="false" # unsupported
-tool_map[ghc9141,hls]="false" # unsupported
-tool_map[ghc9141,ormolu]="false" # unsupported
+tool_map[ghc9141,apply-refact]="true" # unsupported
+tool_map[ghc9141,fourmolu]="true" # unsupported
+tool_map[ghc9141,hlint]="true" # unsupported
+tool_map[ghc9141,hls]="true" # unsupported
+tool_map[ghc9141,ormolu]="true" # unsupported
 
 # NOTE: ALIAS: ghc914 -> ghc9141
 tool_map[ghc914,apply-refact]=${tool_map[ghc9141,apply-refact]}
