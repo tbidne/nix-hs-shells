@@ -412,10 +412,10 @@ let
   #                                  GHC 9.12                                 #
   # ######################################################################### #
 
-  # TODO: Switch if ghc9123 or ghc9124 tools are fixed.
+  # TODO: Switch if ghc9124 tools are fixed.
   #
   # See NOTE: [GHC Aliases]
-  ghc912Attrs = ghc9122Attrs // {
+  ghc912Attrs = ghc9123Attrs // {
     unstableHash = true;
   };
 
@@ -443,19 +443,8 @@ let
   };
 
   ghc9123Attrs = {
-    hash = "2fc6539b481e1d2569f25f8799236694180c0993";
+    hash = "15f4ee454b1dce334612fa6843b3e05cf546efab";
     versName = "ghc9123";
-
-    poorToolCache = [
-      "apply-refact"
-      "fourmolu"
-      "hlint"
-      "ormolu"
-    ];
-
-    unsupported = [ "hls" ];
-
-    unstableHash = true;
   };
 
   ghc9124Attrs = {
