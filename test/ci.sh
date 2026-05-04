@@ -107,6 +107,7 @@ while [ $# -gt 0 ]; do
 
 set +e
 
+skipped_str="Skipped:"
 succeeded_str="Succeeded:"
 failed_str="Failed:"
 any_failed=0
@@ -154,6 +155,7 @@ for tool in $tool_list; do
   elif [[ $val == "false" ]]; then
     echo "*** ci.sh: Skipping ($ghc_version, $tool) ***"
     exit_code=0
+    skipped_str+=" ($ghc_version, $tool)"
   else
     echo "*** ci.sh: Error, unexpected value: $val ***"
     exit 1
@@ -170,5 +172,6 @@ for tool in $tool_list; do
 done
 
 echo $succeeded_str
+echo $skipped_str
 echo $failed_str
 exit $any_failed
