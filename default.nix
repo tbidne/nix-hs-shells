@@ -53,9 +53,8 @@ in
       echo -e "    \e[32m- Supports all tools with good caching\e[0m"
       echo -e "    \e[33m- Supports hls with good caching\e[0m"
       echo -e "    \e[31m- Other\e[0m"
-      echo ""
-      echo "    - Faint text indicates that the hash is unstable."
-      echo "    - An underline indicates that this GHC is the default for that series."
+      echo -e "    \e[2m- Faint text indicates that the hash is unstable.\e[0m"
+      echo -e "    \e[4m- An underline indicates that this GHC is the default for that series.\e[0m"
 
       table="
         ┌────────┬─────────┬───────────┬──────────────┬──────────┬───────┬─────┬────────┐
