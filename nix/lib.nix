@@ -31,10 +31,7 @@ let
 
   lookupOrDie =
     mp: key: keyName: allKeys:
-    if mp ? ${key} then
-      mp.${key}
-    else
-      throw "Invalid ${keyName}: '${key}'; valid keys are ${allKeys}";
+    if mp ? ${key} then mp.${key} else throw "Invalid ${keyName}: '${key}'; valid keys are ${allKeys}";
 
   # Returns a list of dev tools, depending on the arguments.
   mkDev =
