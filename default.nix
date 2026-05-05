@@ -14,7 +14,7 @@ in
     {
       apply-refact ? false,
       fourmolu ? false,
-      ghc-vers ? "ghc9122",
+      ghc-vers ? "default",
       hlint ? false,
       hls ? false,
       ormolu ? false,

@@ -5,6 +5,7 @@ let
   ghcKeys = ''
 
     - latest
+    - default
 
     - ghc9
     - ghc914, ghc9141

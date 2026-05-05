@@ -553,5 +553,9 @@ in
   ghc914 = mkSet ghc914Attrs;
   ghc9141 = mkSet ghc9141Attrs;
 
+  ## Latest compiler that has good caching with all tools.
+  default = mkSet ghc912Attrs;
+
+  ## Latest compiler.
   latest = mkSet ghc9141Attrs;
 }
