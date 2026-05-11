@@ -4,6 +4,29 @@ set -e
 
 export LANG="C.UTF-8"
 
+curr_timestamp () {
+  date '+%s'
+}
+
+pad2 () {
+  len=${#1}
+  if [[ $len < 2 ]]; then
+    echo "0$1"
+  else
+    echo $1
+  fi
+}
+
+sec_to_display () {
+  total_sec=$1
+  min=$(( $total_sec / 60))
+  sec=$(( $total_sec - ($min * 60) ))
+
+  min_f=$(pad2 $min)
+  sec_f=$(pad2 $sec)
+  echo "$min_f:$sec_f"
+}
+
 # NOTE: [CI exclusions]
 #
 # Used for CI. Runs the given version and each tool individually, so we can
@@ -76,6 +99,7 @@ tool_map[ghc9,ormolu]=${tool_map[ghc912,ormolu]}
 
 ghc_version=""
 tool_list="bare hls ormolu fourmolu hlint apply-refact"
+load_threshold_sec=100
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -104,6 +128,7 @@ set +e
 skipped_str="Skipped:"
 succeeded_str="Succeeded:"
 failed_str="Failed:"
+bad_caching_str="Poor caching:"
 any_failed=0
 
 if [[ -z $ghc_version ]]; then
@@ -125,6 +150,8 @@ for tool in $tool_list; do
   fi
 
   exit_code=0
+  skipped=0
+  start_ts=$(curr_timestamp)
   if [[ $val == "bare" ]]; then
     echo "*** ci.sh: Testing ($ghc_version, $tool) ***"
 
@@ -149,23 +176,38 @@ for tool in $tool_list; do
   elif [[ $val == "false" ]]; then
     echo "*** ci.sh: Skipping ($ghc_version, $tool) ***"
     exit_code=0
+    skipped=1
     skipped_str+=" ($ghc_version, $tool)"
   else
     echo "*** ci.sh: Error, unexpected value: $val ***"
     exit 1
   fi
+  end_ts=$(curr_timestamp)
 
+  diff_sec=$(( $end_ts - $start_ts ))
+  diff_display=$(sec_to_display $diff_sec)
+
+  # command failed
   if [[ $exit_code -ne 0 ]]; then
-    echo "*** ci.sh: ($ghc_version, $tool) Failed ***"
+    echo "*** ci.sh: ($ghc_version, $tool) Failed ($diff_display) ***"
     failed_str+=" ($ghc_version, $tool)"
     any_failed=1
-  else
-    echo "*** ci.sh: ($ghc_version, $tool) Succeeded ***"
+  # command succeeded and was not skipped
+  elif [[ $skipped -ne 1 ]]; then
+    echo "*** ci.sh: ($ghc_version, $tool) Succeeded ($diff_display) ***"
     succeeded_str+=" ($ghc_version, $tool)"
+
+    if [[ $diff_sec -gt $load_threshold_sec ]]; then
+      echo "*** ci.sh: ($ghc_version, $tool) has poor caching ***"
+      bad_caching_str+=" ($ghc_version, $tool)"
+      any_failed=1
+    fi
   fi
+
 done
 
 echo $succeeded_str
 echo $skipped_str
 echo $failed_str
+echo $bad_caching_str
 exit $any_failed
