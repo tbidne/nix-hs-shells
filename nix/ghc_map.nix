@@ -449,7 +449,7 @@ let
 
   # See FIXME: [Unstable]
   ghc9124Attrs = {
-    hash = newHash;
+    hash = "68d8aa3d661f0e6bd5862291b5bb263b2a6595c9";
     versName = "ghc9124";
 
     poorToolCache = [
@@ -477,7 +477,7 @@ let
 
   # See FIXME: [Unstable]
   ghc9141Attrs = {
-    hash = newHash;
+    hash = "5912c1772a44e31bf1c63c0390b90501e5026886";
     versName = "ghc9141";
 
     unsupported = [
