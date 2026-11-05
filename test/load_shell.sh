@@ -63,6 +63,7 @@ export all_cached_ghc_versions="
    ghc9122
    ghc9123
    ghc9141
+   ghc9142
    "
 
 # This is a subset of all_cached_ghc_versions i.e. the last 3 major releases that
@@ -75,6 +76,7 @@ export current_cached_ghc_versions="
    ghc9122
    ghc9123
    ghc9141
+   ghc9142
    "
 
 cmd="--command exit"

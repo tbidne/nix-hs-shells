@@ -449,7 +449,7 @@ let
 
   # See FIXME: [Unstable]
   ghc9124Attrs = {
-    hash = "68d8aa3d661f0e6bd5862291b5bb263b2a6595c9";
+    hash = newHash;
     versName = "ghc9124";
 
     poorToolCache = [
@@ -471,13 +471,13 @@ let
   # TODO: Switch if better ghc comes out.
   #
   # See NOTE: [GHC Aliases]
-  ghc914Attrs = ghc9141Attrs // {
+  ghc914Attrs = ghc9142Attrs // {
     unstableHash = true;
   };
 
   # See FIXME: [Unstable]
   ghc9141Attrs = {
-    hash = "5912c1772a44e31bf1c63c0390b90501e5026886";
+    hash = newHash;
     versName = "ghc9141";
 
     unsupported = [
@@ -491,7 +491,22 @@ let
     unstableHash = true;
   };
 
-  newHash = "549bd84d6279f9852cae6225e372cc67fb91a4c1";
+  ghc9142Attrs = {
+    hash = newHash;
+    versName = "ghc9142";
+
+    unsupported = [
+      #"apply-refact"
+      #"fourmolu"
+      #"hlint"
+      #"hls"
+      #"ormolu"
+    ];
+
+    unstableHash = true;
+  };
+
+  newHash = "1d060086d60cb76a40cf37109f979d88a5bd6396";
 
   # FIXME: [Unstable]
   #
@@ -567,10 +582,11 @@ in
   ## GHC 9.14
   ghc914 = mkSet ghc914Attrs;
   ghc9141 = mkSet ghc9141Attrs;
+  ghc9142 = mkSet ghc9142Attrs;
 
   ## Latest compiler that has good caching with all tools.
   default = mkSet ghc912Attrs;
 
   ## Latest compiler.
-  latest = mkSet ghc9141Attrs;
+  latest = mkSet ghc9142Attrs;
 }

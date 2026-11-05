@@ -83,12 +83,18 @@ tool_map[ghc9141,hlint]="true" # unsupported
 tool_map[ghc9141,hls]="true" # unsupported
 tool_map[ghc9141,ormolu]="true" # unsupported
 
+tool_map[ghc9142,apply-refact]="true" # unsupported
+tool_map[ghc9142,fourmolu]="true" # unsupported
+tool_map[ghc9142,hlint]="true" # unsupported
+tool_map[ghc9142,hls]="true" # unsupported
+tool_map[ghc9142,ormolu]="true" # unsupported
+
 # NOTE: ALIAS: ghc914 -> ghc9141
-tool_map[ghc914,apply-refact]=${tool_map[ghc9141,apply-refact]}
-tool_map[ghc914,fourmolu]=${tool_map[ghc9141,hlint]}
-tool_map[ghc914,hlint]=${tool_map[ghc9141,hlint]}
-tool_map[ghc914,hls]=${tool_map[ghc9141,hls]}
-tool_map[ghc914,ormolu]=${tool_map[ghc9141,ormolu]}
+tool_map[ghc914,apply-refact]=${tool_map[ghc9142,apply-refact]}
+tool_map[ghc914,fourmolu]=${tool_map[ghc9142,hlint]}
+tool_map[ghc914,hlint]=${tool_map[ghc9142,hlint]}
+tool_map[ghc914,hls]=${tool_map[ghc9142,hls]}
+tool_map[ghc914,ormolu]=${tool_map[ghc9142,ormolu]}
 
 # NOTE: ALIAS: ghc9 -> ghc912
 tool_map[ghc9,apply-refact]=${tool_map[ghc912,apply-refact]}
